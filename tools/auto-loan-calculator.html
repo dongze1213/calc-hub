@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Auto Loan Calculator | Car Payment & Interest Calculator</title>
+  <meta name="description" content="Calculate your car loan monthly payment, total interest, and total cost. Includes down payment, trade-in value, sales tax, and full amortization schedule.">
+  <link rel="canonical" href="https://calchub.vercel.app/tools/auto-loan-calculator.html">
+  <meta property="og:title" content="Free Auto Loan Calculator | Car Payment & Interest Calculator">
+  <meta property="og:description" content="Calculate your car loan monthly payment, total interest, and total cost. Includes full amortization schedule.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Auto Loan Calculator">
+  <meta name="twitter:description" content="Calculate your car loan monthly payment, total interest, and total cost.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialProduct",
+    "name": "Auto Loan Calculator",
+    "description": "Free auto loan calculator that helps you determine monthly car payments, total interest, and total loan cost.",
+    "brand": {
+      "@type": "Brand",
+      "name": "CalcHub"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo"><span class="logo-icon">💰</span><span>CalcHub</span></a>
+      <nav class="nav">
+        <a href="../index.html#tools" data-i18n="nav_tools">Calculators</a>
+        <a href="../index.html#about" data-i18n="nav_about">About</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container tool-page">
+    <div class="tool-header">
+      <a href="../index.html" class="back-link" data-i18n="back">← Back</a>
+      <h1 data-i18n="title">Auto Loan Calculator</h1>
+      <span class="privacy-note" data-i18n="local_processing">🔒 100% Private Calculations</span>
+    </div>
+    <div class="calc-layout">
+      <div class="calc-input-panel">
+        <div class="input-group">
+          <label for="vehiclePrice" data-i18n="vehicle_price_label">Vehicle Price ($)</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="number" id="vehiclePrice" class="input-field" value="35000" min="0" step="100">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="downPayment" data-i18n="down_payment_label">Down Payment ($)</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="number" id="downPayment" class="input-field" value="5000" min="0" step="100">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="tradeIn" data-i18n="trade_in_label">Trade-in Value ($)</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="number" id="tradeIn" class="input-field" value="0" min="0" step="100">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="salesTax" data-i18n="sales_tax_label">Sales Tax (%)</label>
+          <div class="input-row">
+            <input type="number" id="salesTax" class="input-field" value="6" min="0" max="20" step="0.1">
+            <span class="input-suffix">%</span>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="interestRate" data-i18n="interest_rate_label">Interest Rate (%)</label>
+          <div class="input-row">
+            <input type="number" id="interestRate" class="input-field" value="6.9" min="0" max="30" step="0.1">
+            <span class="input-suffix">%</span>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="loanTerm" data-i18n="loan_term_label">Loan Term</label>
+          <select id="loanTerm" class="input-field">
+            <option value="24" data-i18n="term_24">24 months</option>
+            <option value="36" data-i18n="term_36">36 months</option>
+            <option value="48" data-i18n="term_48">48 months</option>
+            <option value="60" selected data-i18n="term_60">60 months</option>
+            <option value="72" data-i18n="term_72">72 months</option>
+            <option value="84" data-i18n="term_84">84 months</option>
+          </select>
+        </div>
+      </div>
+      <div class="calc-results-panel" id="results">
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">🚗</div>
+          <p>Enter values and calculate</p>
+        </div>
+        <div id="resultContent" style="display:none">
+          <div class="result-summary">
+            <div class="result-item highlight">
+              <div class="result-label" data-i18n="monthly_payment_label">Monthly Payment</div>
+              <div class="result-value" id="monthlyPayment">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label" data-i18n="loan_amount_label">Loan Amount</div>
+              <div class="result-value small" id="loanAmount">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label" data-i18n="total_interest_label">Total Interest</div>
+              <div class="result-value small" id="totalInterest">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label" data-i18n="total_cost_label">Total Cost</div>
+              <div class="result-value small" id="totalCost">$0.00</div>
+            </div>
+          </div>
+          <div class="result-summary" style="margin-top:16px;">
+            <div class="result-item">
+              <div class="result-label" data-i18n="taxable_amount_label">Taxable Amount (Price - Trade-in)</div>
+              <div class="result-value small" id="taxableAmount">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label" data-i18n="sales_tax_amount_label">Sales Tax Amount</div>
+              <div class="result-value small" id="salesTaxAmount">$0.00</div>
+            </div>
+          </div>
+          <button class="amort-toggle" id="toggleAmort">
+            <span class="arrow">▶</span>
+            <span data-i18n="show_amortization">Show Amortization Schedule</span>
+          </button>
+          <div class="amort-table-wrap" id="amortWrap">
+            <table class="amort-table" id="amortTable">
+              <thead>
+                <tr>
+                  <th data-i18n="month_col">Month</th>
+                  <th data-i18n="payment_col">Payment</th>
+                  <th data-i18n="principal_col">Principal</th>
+                  <th data-i18n="interest_col">Interest</th>
+                  <th data-i18n="balance_col">Balance</th>
+                </tr>
+              </thead>
+              <tbody id="amortBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tool-about">
+      <h2 data-i18n="about_title">About Auto Loan Calculator</h2>
+      <p data-i18n="about_desc">Our free auto loan calculator helps you understand the true cost of buying a car on finance. By entering the vehicle price, down payment, trade-in value, sales tax, interest rate, and loan term, you can see your estimated monthly payment, total interest paid, and the complete amortization schedule showing how each payment is split between principal and interest.</p>
+
+      <h3 data-i18n="how_works_title">How Auto Loan Calculations Work</h3>
+      <p data-i18n="how_works_desc">Auto loans work by borrowing money to purchase a vehicle and repaying it over time with interest. The loan amount is calculated as the vehicle price minus your down payment and trade-in value, plus applicable sales tax on the taxable portion. The monthly payment is determined using standard amortization formulas, where each payment covers the interest for that period plus a portion of the principal balance. Early in the loan term, more of each payment goes toward interest, while later payments contribute more to the principal.</p>
+
+      <h3 data-i18n="factors_title">Factors That Affect Your Auto Loan</h3>
+      <p data-i18n="factors_desc">Several factors influence your auto loan payment and total cost. The vehicle price is the starting point, but your down payment and trade-in value reduce the amount you need to finance. Sales tax is typically applied to the purchase price minus any trade-in allowance in most states, though this varies by location. Your credit score significantly impacts the interest rate you qualify for - borrowers with excellent credit typically receive the lowest rates. The loan term also matters: longer terms mean lower monthly payments but more total interest paid over time.</p>
+
+      <h3 data-i18n="tips_title">Smart Car Buying Tips</h3>
+      <ul>
+        <li data-i18n="tip1">Make a larger down payment to reduce your loan amount and avoid being underwater on your loan</li>
+        <li data-i18n="tip2">Consider a shorter loan term to save money on interest, even if the monthly payment is higher</li>
+        <li data-i18n="tip2b">Check your credit score before shopping and take steps to improve it if needed</li>
+        <li data-i18n="tip3">Compare rates from multiple lenders, including banks, credit unions, and online lenders</li>
+        <li data-i18n="tip4">Factor in additional costs like insurance, maintenance, registration, and fuel</li>
+        <li data-i18n="tip5">Use the amortization schedule to understand how much interest you pay early in the loan</li>
+      </ul>
+
+      <h3 data-i18n="understanding_title">Understanding Your Amortization Schedule</h3>
+      <p data-i18n="understanding_desc">The amortization schedule shows exactly how your loan balance decreases over time. Each row represents a monthly payment and breaks it down into the interest portion, principal portion, and remaining balance. Watching the principal portion grow while the interest portion shrinks demonstrates the benefit of making extra payments - even small additional payments early in the loan can significantly reduce total interest paid. The schedule also helps you see exactly when you will own your vehicle free and clear.</p>
+    </div>
+  </main>
+  <footer class="footer"><div class="container"><p>&copy; 2025 CalcHub. <span data-i18n="footer_text">Free financial calculators for smarter decisions.</span> <a href="../privacy.html" data-i18n="privacy_policy">Privacy Policy</a></p></div></footer>
+  <script>window.I18N_PAGE_ID = 'auto-loan-calculator';</script>
+  <script src="../translations.js"></script>
+  <script src="../i18n.js"></script>
+  <script>
+    (function() {
+      var vehiclePriceInput = document.getElementById('vehiclePrice');
+      var downPaymentInput = document.getElementById('downPayment');
+      var tradeInInput = document.getElementById('tradeIn');
+      var salesTaxInput = document.getElementById('salesTax');
+      var interestRateInput = document.getElementById('interestRate');
+      var loanTermSelect = document.getElementById('loanTerm');
+      var emptyState = document.getElementById('emptyState');
+      var resultContent = document.getElementById('resultContent');
+      var monthlyPaymentEl = document.getElementById('monthlyPayment');
+      var loanAmountEl = document.getElementById('loanAmount');
+      var totalInterestEl = document.getElementById('totalInterest');
+      var totalCostEl = document.getElementById('totalCost');
+      var taxableAmountEl = document.getElementById('taxableAmount');
+      var salesTaxAmountEl = document.getElementById('salesTaxAmount');
+      var amortBody = document.getElementById('amortBody');
+      var toggleAmort = document.getElementById('toggleAmort');
+      var amortWrap = document.getElementById('amortWrap');
+
+      function formatCurrency(num) {
+        return '$' + num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+
+      function calculate() {
+        var vehiclePrice = parseFloat(vehiclePriceInput.value) || 0;
+        var downPayment = parseFloat(downPaymentInput.value) || 0;
+        var tradeIn = parseFloat(tradeInInput.value) || 0;
+        var salesTaxRate = parseFloat(salesTaxInput.value) || 0;
+        var annualRate = parseFloat(interestRateInput.value) || 0;
+        var termMonths = parseInt(loanTermSelect.value) || 60;
+
+        if (vehiclePrice <= 0) {
+          emptyState.style.display = 'block';
+          resultContent.style.display = 'none';
+          return;
+        }
+
+        emptyState.style.display = 'none';
+        resultContent.style.display = 'block';
+
+        var taxableAmount = Math.max(0, vehiclePrice - tradeIn);
+        var salesTaxAmount = taxableAmount * (salesTaxRate / 100);
+        var loanAmount = vehiclePrice - downPayment - tradeIn + salesTaxAmount;
+
+        var monthlyRate = (annualRate / 100) / 12;
+        var monthlyPayment;
+        if (monthlyRate === 0) {
+          monthlyPayment = loanAmount / termMonths;
+        } else {
+          monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, termMonths)) / (Math.pow(1 + monthlyRate, termMonths) - 1);
+        }
+
+        var totalPaid = monthlyPayment * termMonths;
+        var totalInterest = totalPaid - loanAmount;
+        var totalCost = vehiclePrice + (tradeIn > 0 ? 0 : 0) + totalInterest + salesTaxAmount;
+
+        monthlyPaymentEl.textContent = formatCurrency(monthlyPayment);
+        loanAmountEl.textContent = formatCurrency(loanAmount);
+        totalInterestEl.textContent = formatCurrency(totalInterest);
+        totalCostEl.textContent = formatCurrency(vehiclePrice + totalInterest + salesTaxAmount - downPayment);
+        taxableAmountEl.textContent = formatCurrency(taxableAmount);
+        salesTaxAmountEl.textContent = formatCurrency(salesTaxAmount);
+
+        amortBody.innerHTML = '';
+        var balance = loanAmount;
+        for (var m = 1; m <= termMonths; m++) {
+          var interestPayment = balance * monthlyRate;
+          var principalPayment = monthlyPayment - interestPayment;
+          balance = Math.max(0, balance - principalPayment);
+
+          var row = document.createElement('tr');
+          row.innerHTML =
+            '<td>' + m + '</td>' +
+            '<td>' + formatCurrency(monthlyPayment) + '</td>' +
+            '<td>' + formatCurrency(principalPayment) + '</td>' +
+            '<td>' + formatCurrency(interestPayment) + '</td>' +
+            '<td>' + formatCurrency(balance) + '</td>';
+          amortBody.appendChild(row);
+        }
+      }
+
+      var inputs = [vehiclePriceInput, downPaymentInput, tradeInInput, salesTaxInput, interestRateInput, loanTermSelect];
+      inputs.forEach(function(input) {
+        input.addEventListener('input', calculate);
+        input.addEventListener('change', calculate);
+      });
+
+      toggleAmort.addEventListener('click', function() {
+        toggleAmort.classList.toggle('open');
+        amortWrap.classList.toggle('show');
+      });
+
+      calculate();
+    })();
+  </script>
+
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Savings Calculator | See Your Savings Grow Over Time</title>
+  <meta name="description" content="Calculate how your savings grow with regular deposits and compound interest. See year-by-year growth, total deposits, and interest earned. Free, instant, 100% private.">
+  <meta name="keywords" content="savings calculator, compound interest savings, savings growth calculator, regular deposit calculator, savings goal calculator">
+  <link rel="canonical" href="https://calchub.vercel.app/tools/savings-calculator.html">
+  <meta property="og:url" content="https://calchub.vercel.app/tools/savings-calculator.html">
+  <meta property="og:title" content="Free Savings Calculator | See Your Savings Grow Over Time">
+  <meta property="og:description" content="Calculate how your savings grow with regular deposits and compound interest. Free, instant, and 100% private.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://calchub.vercel.app/img/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Savings Calculator | See Your Savings Grow Over Time">
+  <meta name="twitter:description" content="Calculate how your savings grow with regular deposits and compound interest.">
+  <meta name="twitter:image" content="https://calchub.vercel.app/img/og-image.png">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialProduct",
+    "name": "Savings Calculator",
+    "description": "Free savings calculator to see how your savings grow over time with regular deposits and compound interest",
+    "brand": { "@type": "Brand", "name": "CalcHub" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo">
+        <span class="logo-icon">💰</span>
+        <span>CalcHub</span>
+      </a>
+      <nav class="nav">
+        <a href="../index.html#tools" data-i18n="nav_tools">Calculators</a>
+        <a href="../index.html#about" data-i18n="nav_about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container tool-page">
+    <div class="tool-header">
+      <a href="../index.html" class="back-link" data-i18n="back">&larr; Back</a>
+      <h1 data-i18n="title">Savings Calculator</h1>
+      <span class="privacy-note" data-i18n="local_processing">🔒 100% Private Calculations</span>
+    </div>
+
+    <div class="calc-layout">
+      <!-- Input Panel -->
+      <div class="calc-input-panel">
+        <div class="input-group">
+          <label for="initialDeposit" data-i18n="initial_deposit">Initial Deposit</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="text" id="initialDeposit" class="input-field" value="5,000" placeholder="5000">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="monthlyDeposit" data-i18n="monthly_deposit">Monthly Deposit</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="text" id="monthlyDeposit" class="input-field" value="200" placeholder="200">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="interestRate" data-i18n="interest_rate">Interest Rate</label>
+          <div class="input-row">
+            <input type="number" id="interestRate" class="input-field" value="4.5" min="0" max="30" step="0.1">
+            <span class="input-suffix">%</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="period" data-i18n="period">Period</label>
+          <div class="input-row">
+            <input type="number" id="period" class="input-field" value="5" min="1" max="50" step="1">
+            <span class="input-suffix" data-i18n="years">years</span>
+          </div>
+        </div>
+
+        <button class="btn-calculate" onclick="calculate()" data-i18n="calculate">Calculate</button>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="calc-results-panel" id="results">
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">🧮</div>
+          <p>Enter your values and click Calculate</p>
+        </div>
+        <div id="resultContent" style="display:none">
+          <div class="result-summary">
+            <div class="result-item highlight">
+              <div class="result-label" data-i18n="total_savings">Total Savings</div>
+              <div class="result-value" id="totalSavings">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label" data-i18n="total_deposits">Total Deposits</div>
+              <div class="result-value small" id="totalDeposits">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label" data-i18n="interest_earned">Interest Earned</div>
+              <div class="result-value small" id="interestEarned">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label" data-i18n="interest_portion">Interest Portion</div>
+              <div class="result-value small" id="interestPortion">0%</div>
+            </div>
+          </div>
+
+          <button class="amort-toggle" id="amortToggle" onclick="toggleSchedule()">
+            <span class="arrow">▶</span>
+            <span data-i18n="show_schedule">Show Year-by-Year Schedule</span>
+          </button>
+          <div class="amort-table-wrap" id="amortTableWrap">
+            <table class="amort-table">
+              <thead>
+                <tr>
+                  <th data-i18n="year">Year</th>
+                  <th data-i18n="deposits_col">Deposits</th>
+                  <th data-i18n="interest_col">Interest</th>
+                  <th data-i18n="balance_col">Balance</th>
+                </tr>
+              </thead>
+              <tbody id="scheduleBody">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="tool-about">
+      <h2 data-i18n="about_title">About Savings Calculator</h2>
+      <p data-i18n="about_desc">Our free savings calculator helps you visualize how your savings will grow over time with regular monthly deposits and compound interest. Whether you are building an emergency fund, saving for a down payment, or planning for a major purchase, this tool gives you a clear picture of your financial future. Simply enter your initial deposit, monthly contribution, interest rate, and time period to see your projected savings growth.</p>
+
+      <h3 data-i18n="features_title">Features</h3>
+      <ul>
+        <li data-i18n="feat1">Calculate total savings with initial deposit and monthly contributions</li>
+        <li data-i18n="feat2">View year-by-year breakdown showing deposits, interest earned, and running balance</li>
+        <li data-i18n="feat3">See exactly how much of your total savings comes from interest versus your own deposits</li>
+        <li data-i18n="feat4">100% client-side — your financial data never leaves your browser</li>
+      </ul>
+
+      <h3 data-i18n="what_title">How Does Compound Interest Work for Savings?</h3>
+      <p data-i18n="what_desc">Compound interest means you earn interest on both your original deposit and on previously earned interest. The more frequently interest is compounded, the faster your savings grow. This calculator uses monthly compounding, which is standard for most savings accounts. Over time, the compounding effect becomes more powerful — your interest starts earning interest, creating a snowball effect that accelerates your savings growth significantly compared to simple interest.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 CalcHub. <span data-i18n="footer_text">Free financial calculators for smarter decisions.</span> <a href="../privacy.html" data-i18n="privacy_policy">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+  <script>window.I18N_PAGE_ID = 'savings-calculator';</script>
+  <script src="../translations.js"></script>
+  <script src="../i18n.js"></script>
+  <script>
+    function parseNumber(str) {
+      if (!str) return 0;
+      return parseFloat(str.replace(/,/g, '')) || 0;
+    }
+
+    function formatCurrency(num) {
+      if (isNaN(num) || !isFinite(num)) return '$0.00';
+      return '$' + num.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    function escapeHtml(text) {
+      var div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function formatNumberInput(input) {
+      var value = parseNumber(input.value);
+      if (value > 0) {
+        input.value = value.toLocaleString('en-US');
+      }
+    }
+
+    function toggleSchedule() {
+      var wrap = document.getElementById('amortTableWrap');
+      var toggle = document.getElementById('amortToggle');
+      var span = toggle.querySelector('span:last-child');
+      var arrow = toggle.querySelector('.arrow');
+
+      if (wrap.classList.contains('show')) {
+        wrap.classList.remove('show');
+        toggle.classList.remove('open');
+        arrow.textContent = '\u25B6';
+        span.textContent = '\u00A0\u00A0' + (window.i18nDict && window.i18nDict['show_schedule'] || 'Show Year-by-Year Schedule');
+      } else {
+        wrap.classList.add('show');
+        toggle.classList.add('open');
+        arrow.textContent = '\u25BC';
+        span.textContent = '\u00A0\u00A0' + (window.i18nDict && window.i18nDict['hide_schedule'] || 'Hide Year-by-Year Schedule');
+      }
+    }
+
+    function calculate() {
+      var initialDeposit = parseNumber(document.getElementById('initialDeposit').value);
+      var monthlyDeposit = parseNumber(document.getElementById('monthlyDeposit').value);
+      var interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
+      var period = parseInt(document.getElementById('period').value, 10) || 0;
+
+      if (initialDeposit < 0) {
+        alert('Initial deposit cannot be negative.');
+        return;
+      }
+      if (monthlyDeposit < 0) {
+        alert('Monthly deposit cannot be negative.');
+        return;
+      }
+      if (interestRate < 0 || interestRate > 30) {
+        alert('Please enter a valid interest rate between 0% and 30%.');
+        return;
+      }
+      if (period <= 0 || period > 50) {
+        alert('Please enter a period between 1 and 50 years.');
+        return;
+      }
+
+      var monthlyRate = interestRate / 100 / 12;
+      var totalMonths = period * 12;
+      var totalDeposits = initialDeposit + (monthlyDeposit * totalMonths);
+
+      // Calculate month by month for schedule
+      var balance = initialDeposit;
+      var yearData = [];
+      var yearDeposits = initialDeposit;
+      var yearInterest = 0;
+
+      for (var month = 1; month <= totalMonths; month++) {
+        var interest = balance * monthlyRate;
+        yearInterest += interest;
+        balance = balance + interest + monthlyDeposit;
+        yearDeposits += monthlyDeposit;
+
+        if (month % 12 === 0) {
+          yearData.push({
+            year: month / 12,
+            deposits: yearDeposits,
+            interest: yearInterest,
+            balance: balance
+          });
+          yearDeposits = 0;
+          yearInterest = 0;
+        }
+      }
+
+      var totalSavings = balance;
+      var interestEarned = totalSavings - totalDeposits;
+      var interestPct = totalSavings > 0 ? (interestEarned / totalSavings * 100) : 0;
+
+      document.getElementById('totalSavings').textContent = formatCurrency(totalSavings);
+      document.getElementById('totalDeposits').textContent = formatCurrency(totalDeposits);
+      document.getElementById('interestEarned').textContent = formatCurrency(interestEarned);
+      document.getElementById('interestPortion').textContent = interestPct.toFixed(1) + '%';
+
+      // Build schedule table
+      var tbody = document.getElementById('scheduleBody');
+      var rows = '';
+      for (var i = 0; i < yearData.length; i++) {
+        var d = yearData[i];
+        rows += '<tr>' +
+          '<td>' + escapeHtml(String(d.year)) + '</td>' +
+          '<td>' + escapeHtml(formatCurrency(d.deposits)) + '</td>' +
+          '<td>' + escapeHtml(formatCurrency(d.interest)) + '</td>' +
+          '<td>' + escapeHtml(formatCurrency(d.balance)) + '</td>' +
+          '</tr>';
+      }
+      tbody.innerHTML = rows;
+
+      document.getElementById('emptyState').style.display = 'none';
+      document.getElementById('resultContent').style.display = 'block';
+    }
+
+    var i18nDict = null;
+    function updateI18nDict() {
+      if (window.I18N_ALL && window.I18N_GET) {
+        var lang = localStorage.getItem('calchub-lang') || 'en';
+        i18nDict = window.I18N_GET('savings-calculator', lang);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      updateI18nDict();
+
+      var currencyInputs = ['initialDeposit', 'monthlyDeposit'];
+      for (var i = 0; i < currencyInputs.length; i++) {
+        var el = document.getElementById(currencyInputs[i]);
+        el.addEventListener('blur', function() {
+          formatNumberInput(this);
+        });
+      }
+
+      var inputs = document.querySelectorAll('.calc-input-panel .input-field');
+      for (var i = 0; i < inputs.length; i++) {
+        inputs[i].addEventListener('input', function() {
+          if (document.getElementById('resultContent').style.display !== 'none') {
+            calculate();
+          }
+        });
+      }
+
+      calculate();
+    });
+  </script>
+
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

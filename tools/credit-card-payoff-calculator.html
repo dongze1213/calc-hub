@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Credit Card Payoff Calculator | Debt Payoff Timeline</title>
+  <meta name="description" content="Calculate how long it will take to pay off your credit card debt. See your payoff timeline, total interest, and total payments. Free, instant, and 100% private.">
+  <meta name="keywords" content="credit card payoff calculator, debt payoff calculator, credit card interest calculator, payoff timeline, credit card payment calculator, debt free calculator">
+  <link rel="canonical" href="https://calchub.vercel.app/tools/credit-card-payoff-calculator.html">
+  <meta property="og:url" content="https://calchub.vercel.app/tools/credit-card-payoff-calculator.html">
+  <meta property="og:title" content="Free Credit Card Payoff Calculator | Debt Payoff Timeline">
+  <meta property="og:description" content="Calculate how long it will take to pay off your credit card debt. See your payoff timeline, total interest, and total payments.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://calchub.vercel.app/img/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Credit Card Payoff Calculator | Debt Payoff Timeline">
+  <meta name="twitter:description" content="Calculate how long it will take to pay off your credit card debt. See your payoff timeline, total interest, and total payments.">
+  <meta name="twitter:image" content="https://calchub.vercel.app/img/og-image.png">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialProduct",
+    "name": "Credit Card Payoff Calculator",
+    "description": "Free credit card payoff calculator to determine how long it will take to pay off your credit card debt",
+    "brand": { "@type": "Brand", "name": "CalcHub" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo">
+        <span class="logo-icon">💰</span>
+        <span>CalcHub</span>
+      </a>
+      <nav class="nav">
+        <a href="../index.html#tools" data-i18n="nav_tools">Calculators</a>
+        <a href="../index.html#about" data-i18n="nav_about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container tool-page">
+    <div class="tool-header">
+      <a href="../index.html" class="back-link" data-i18n="back">&larr; Back</a>
+      <h1 data-i18n="title">Credit Card Payoff Calculator</h1>
+      <span class="privacy-note" data-i18n="local_processing">🔒 100% Private Calculations</span>
+    </div>
+
+    <div class="calc-layout">
+      <!-- Input Panel -->
+      <div class="calc-input-panel">
+        <div class="input-group">
+          <label for="balance" data-i18n="credit_card_balance">Credit Card Balance</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="text" id="balance" class="input-field" value="5,000" placeholder="5000">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="interestRate" data-i18n="annual_interest_rate">Annual Interest Rate (APR)</label>
+          <div class="input-row">
+            <input type="text" id="interestRate" class="input-field" value="24.99" placeholder="24.99">
+            <span class="input-suffix">%</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="monthlyPayment" data-i18n="monthly_payment">Monthly Payment</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="text" id="monthlyPayment" class="input-field" value="200" placeholder="200">
+          </div>
+        </div>
+
+        <button class="btn-calculate" onclick="calculate()" data-i18n="calculate">Calculate</button>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="calc-results-panel" id="results">
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">🧮</div>
+          <p>Enter your values and click Calculate</p>
+        </div>
+        <div id="resultContent" style="display:none">
+          <div class="result-summary">
+            <div class="result-item highlight">
+              <div class="result-label" data-i18n="months_to_payoff">Months to Pay Off</div>
+              <div class="result-value" id="monthsToPayoff">0</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label" data-i18n="total_interest">Total Interest Paid</div>
+              <div class="result-value small" id="totalInterest">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label" data-i18n="total_paid">Total Amount Paid</div>
+              <div class="result-value small" id="totalPaid">$0.00</div>
+            </div>
+            <div class="result-item" id="savingsRow">
+              <div class="result-label" data-i18n="total_savings">Total Savings vs Minimum</div>
+              <div class="result-value small" id="totalSavings">$0.00</div>
+            </div>
+          </div>
+
+          <!-- Amortization Schedule -->
+          <div class="amortization-section">
+            <button class="amort-toggle" id="amortToggle" onclick="toggleAmortization()">
+              <span data-i18n="view_schedule">View Amortization Schedule</span> <span class="toggle-arrow">▼</span>
+            </button>
+            <div class="amort-table-wrapper" id="amortWrapper" style="display:none">
+              <table class="amort-table" id="amortTable">
+                <thead>
+                  <tr>
+                    <th data-i18n="month">Month</th>
+                    <th data-i18n="payment">Payment</th>
+                    <th data-i18n="principal">Principal</th>
+                    <th data-i18n="interest">Interest</th>
+                    <th data-i18n="balance">Balance</th>
+                  </tr>
+                </thead>
+                <tbody id="amortBody">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="tool-about">
+      <h2 data-i18n="about_title">About Credit Card Payoff Calculator</h2>
+      <p data-i18n="about_desc">Our free credit card payoff calculator helps you determine how long it will take to become debt-free. By entering your current credit card balance, annual interest rate (APR), and monthly payment amount, you can see your complete payoff timeline, total interest costs, and how much you could save by paying more than the minimum payment. Credit card interest compounds monthly, which means paying only the minimum can result in paying significantly more than you originally owed.</p>
+
+      <h3 data-i18n="features_title">Features</h3>
+      <ul>
+        <li data-i18n="feat1">Calculate exact months to pay off your credit card balance</li>
+        <li data-i18n="feat2">See total interest paid over the life of your debt</li>
+        <li data-i18n="feat3">Compare your payment to minimum payment to see potential savings</li>
+        <li data-i18n="feat4">View complete amortization schedule showing principal vs interest each month</li>
+        <li data-i18n="feat5">100% client-side — your financial data never leaves your browser</li>
+      </ul>
+
+      <h3 data-i18n="what_title">What is Credit Card Payoff?</h3>
+      <p data-i18n="what_desc">Credit card payoff calculation determines how long it takes to eliminate your credit card debt given a fixed monthly payment. The calculation works by first converting the annual interest rate (APR) to a monthly rate by dividing by 12. Each month, interest is calculated on the remaining balance (Balance x Monthly Rate), and the principal paid is the difference between your payment and the interest charge. As you pay down the principal, less interest accrues each month, accelerating your payoff. For example, with a $5,000 balance at 24.99% APR and $200 monthly payment, the monthly interest rate is 24.99/12 = 2.0825%. In month one, interest = $5,000 x 0.020825 = $104.13, principal = $200 - $104.13 = $95.87, and new balance = $5,000 - $95.87 = $4,904.13. This process repeats until the balance reaches zero.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 CalcHub. <span data-i18n="footer_text">Free financial calculators for smarter decisions.</span> <a href="../privacy.html" data-i18n="privacy_policy">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+  <script>window.I18N_PAGE_ID = 'credit-card-payoff-calculator';</script>
+  <script src="../translations.js"></script>
+  <script src="../i18n.js"></script>
+  <script>
+    function escapeHtml(text) {
+      var div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function parseNumber(str) {
+      if (!str) return 0;
+      return parseFloat(str.replace(/,/g, '')) || 0;
+    }
+
+    function formatCurrency(num) {
+      if (isNaN(num) || !isFinite(num)) return '$0.00';
+      return '$' + num.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    function formatNumberInput(input) {
+      var value = parseNumber(input.value);
+      if (value > 0) {
+        input.value = value.toLocaleString('en-US');
+      }
+    }
+
+    function toggleAmortization() {
+      var wrapper = document.getElementById('amortWrapper');
+      var toggle = document.getElementById('amortToggle');
+      if (wrapper.style.display === 'none') {
+        wrapper.style.display = 'block';
+        toggle.querySelector('.toggle-arrow').textContent = '▲';
+      } else {
+        wrapper.style.display = 'none';
+        toggle.querySelector('.toggle-arrow').textContent = '▼';
+      }
+    }
+
+    function calculate() {
+      var balance = parseNumber(document.getElementById('balance').value);
+      var annualRate = parseNumber(document.getElementById('interestRate').value);
+      var monthlyPayment = parseNumber(document.getElementById('monthlyPayment').value);
+
+      if (balance <= 0) {
+        alert('Please enter a valid credit card balance greater than zero.');
+        return;
+      }
+      if (annualRate <= 0) {
+        alert('Please enter a valid annual interest rate greater than zero.');
+        return;
+      }
+      if (monthlyPayment <= 0) {
+        alert('Please enter a valid monthly payment greater than zero.');
+        return;
+      }
+
+      var monthlyRate = annualRate / 100 / 12;
+      var monthlyInterest = balance * monthlyRate;
+
+      if (monthlyPayment <= monthlyInterest) {
+        alert('Your monthly payment is less than the monthly interest. Increase your payment to pay off this debt.');
+        return;
+      }
+
+      // Calculate months to payoff and generate amortization schedule
+      var schedule = [];
+      var currentBalance = balance;
+      var totalInterest = 0;
+      var totalPaid = 0;
+      var months = 0;
+      var maxMonths = 600;
+
+      while (currentBalance > 0.01 && months < maxMonths) {
+        months++;
+        var interestThisMonth = currentBalance * monthlyRate;
+        var principalThisMonth = monthlyPayment - interestThisMonth;
+        var actualPayment = Math.min(monthlyPayment, currentBalance + interestThisMonth);
+
+        if (principalThisMonth > currentBalance) {
+          principalThisMonth = currentBalance;
+          actualPayment = currentBalance + interestThisMonth;
+        }
+
+        totalInterest += interestThisMonth;
+        totalPaid += actualPayment;
+        currentBalance -= principalThisMonth;
+
+        schedule.push({
+          month: months,
+          payment: actualPayment,
+          principal: principalThisMonth,
+          interest: interestThisMonth,
+          balance: Math.max(0, currentBalance)
+        });
+      }
+
+      // Calculate minimum payment (interest only + 1% of balance)
+      var minPayment = monthlyInterest + (balance * 0.01);
+      var minPaySchedule = [];
+      var minCurrentBalance = balance;
+      var minTotalInterest = 0;
+      var minTotalPaid = 0;
+      var minMonths = 0;
+
+      while (minCurrentBalance > 0.01 && minMonths < maxMonths) {
+        minMonths++;
+        var interestThisMonth = minCurrentBalance * monthlyRate;
+        var principalThisMonth = minPayment - interestThisMonth;
+        var actualPayment = Math.min(minPayment, minCurrentBalance + interestThisMonth);
+
+        if (principalThisMonth > minCurrentBalance) {
+          principalThisMonth = minCurrentBalance;
+          actualPayment = minCurrentBalance + interestThisMonth;
+        }
+
+        minTotalInterest += interestThisMonth;
+        minTotalPaid += actualPayment;
+        minCurrentBalance -= principalThisMonth;
+
+        minPaySchedule.push({
+          month: minMonths,
+          payment: actualPayment,
+          principal: principalThisMonth,
+          interest: interestThisMonth,
+          balance: Math.max(0, minCurrentBalance)
+        });
+      }
+
+      var totalSavings = minTotalPaid - totalPaid;
+
+      // Update results
+      document.getElementById('monthsToPayoff').textContent = months;
+      document.getElementById('totalInterest').textContent = formatCurrency(totalInterest);
+      document.getElementById('totalPaid').textContent = formatCurrency(totalPaid);
+
+      // Show/hide savings based on whether they exceed minimum
+      var savingsRow = document.getElementById('savingsRow');
+      if (totalSavings > 0) {
+        savingsRow.style.display = 'flex';
+        document.getElementById('totalSavings').textContent = formatCurrency(totalSavings);
+        document.getElementById('totalSavings').style.color = 'var(--green)';
+      } else {
+        savingsRow.style.display = 'none';
+      }
+
+      // Build amortization table
+      var amortBody = document.getElementById('amortBody');
+      amortBody.innerHTML = '';
+      for (var i = 0; i < schedule.length; i++) {
+        var row = schedule[i];
+        var tr = document.createElement('tr');
+        tr.innerHTML = '<td>' + escapeHtml(String(row.month)) + '</td>' +
+          '<td>' + escapeHtml(formatCurrency(row.payment)) + '</td>' +
+          '<td>' + escapeHtml(formatCurrency(row.principal)) + '</td>' +
+          '<td>' + escapeHtml(formatCurrency(row.interest)) + '</td>' +
+          '<td>' + escapeHtml(formatCurrency(row.balance)) + '</td>';
+        amortBody.appendChild(tr);
+      }
+
+      document.getElementById('emptyState').style.display = 'none';
+      document.getElementById('resultContent').style.display = 'block';
+    }
+
+    var i18nDict = null;
+    function updateI18nDict() {
+      if (window.I18N_ALL && window.I18N_GET) {
+        var lang = localStorage.getItem('calchub-lang') || 'en';
+        i18nDict = window.I18N_GET('credit-card-payoff-calculator', lang);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      updateI18nDict();
+
+      var currencyInputs = ['balance', 'monthlyPayment'];
+      for (var i = 0; i < currencyInputs.length; i++) {
+        var el = document.getElementById(currencyInputs[i]);
+        el.addEventListener('blur', function() {
+          formatNumberInput(this);
+        });
+      }
+
+      var inputs = document.querySelectorAll('.calc-input-panel .input-field');
+      for (var i = 0; i < inputs.length; i++) {
+        inputs[i].addEventListener('input', function() {
+          if (document.getElementById('resultContent').style.display !== 'none') {
+            calculate();
+          }
+        });
+      }
+
+      calculate();
+    });
+  </script>
+
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

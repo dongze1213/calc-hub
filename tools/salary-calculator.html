@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Salary Calculator | Take-Home Pay After Tax</title>
+  <meta name="description" content="Calculate your take-home pay after federal and state taxes. See your paycheck breakdown with federal income tax, Social Security, Medicare, and state tax deductions. Free, accurate, 100% private.">
+  <meta name="keywords" content="salary calculator, take-home pay calculator, paycheck calculator, federal tax calculator, income tax calculator, net pay calculator, after tax income">
+  <link rel="canonical" href="https://calchub.vercel.app/tools/salary-calculator.html">
+  <meta property="og:url" content="https://calchub.vercel.app/tools/salary-calculator.html">
+  <meta property="og:title" content="Free Salary Calculator | Take-Home Pay After Tax">
+  <meta property="og:description" content="Calculate your take-home pay after federal and state taxes. See your paycheck breakdown instantly. Free, accurate, 100% private.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://calchub.vercel.app/img/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Salary Calculator | Take-Home Pay After Tax">
+  <meta name="twitter:description" content="Calculate your take-home pay after federal and state taxes. See your paycheck breakdown instantly.">
+  <meta name="twitter:image" content="https://calchub.vercel.app/img/og-image.png">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialProduct",
+    "name": "Salary Calculator",
+    "description": "Free salary calculator to estimate take-home pay after federal income tax, state tax, Social Security, and Medicare deductions",
+    "brand": { "@type": "Brand", "name": "CalcHub" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo">
+        <span class="logo-icon">💰</span>
+        <span>CalcHub</span>
+      </a>
+      <nav class="nav">
+        <a href="../index.html#tools" data-i18n="nav_tools">Calculators</a>
+        <a href="../index.html#about" data-i18n="nav_about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container tool-page">
+    <div class="tool-header">
+      <a href="../index.html" class="back-link" data-i18n="back">&larr; Back</a>
+      <h1 data-i18n="title">Salary Calculator</h1>
+      <span class="privacy-note" data-i18n="local_processing">🔒 100% Private Calculations</span>
+    </div>
+
+    <div class="calc-layout">
+      <!-- Input Panel -->
+      <div class="calc-input-panel">
+        <div class="input-group">
+          <label for="annualSalary" data-i18n="annual_salary">Annual Gross Salary</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="text" id="annualSalary" class="input-field" value="75,000" placeholder="75000">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="payFrequency" data-i18n="pay_frequency">Pay Frequency</label>
+          <div class="input-row">
+            <select id="payFrequency" class="input-field">
+              <option value="annual">Annual</option>
+              <option value="monthly" selected>Monthly</option>
+              <option value="biweekly">Bi-Weekly</option>
+              <option value="weekly">Weekly</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="filingStatus" data-i18n="filing_status">Filing Status</label>
+          <div class="input-row">
+            <select id="filingStatus" class="input-field">
+              <option value="single" selected>Single</option>
+              <option value="married">Married Filing Jointly</option>
+              <option value="hoh">Head of Household</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="pretaxDeductions" data-i18n="pretax_deductions">Pre-tax Deductions (401k, HSA, etc.)</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="text" id="pretaxDeductions" class="input-field" value="0" placeholder="0">
+          </div>
+        </div>
+
+        <button class="btn-calculate" onclick="calculate()" data-i18n="calculate">Calculate</button>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="calc-results-panel" id="results">
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">🧮</div>
+          <p>Enter your salary details and click Calculate</p>
+        </div>
+        <div id="resultContent" style="display:none">
+          <div class="result-summary">
+            <div class="result-item highlight">
+              <div class="result-label" id="takeHomeLabel">Monthly Take-Home Pay</div>
+              <div class="result-value" id="takeHomePay">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label">Annual Take-Home Pay</div>
+              <div class="result-value small" id="annualTakeHome">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label">Federal Income Tax</div>
+              <div class="result-value small" id="federalTax">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label">State Income Tax</div>
+              <div class="result-value small" id="stateTax">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label">Social Security Tax</div>
+              <div class="result-value small" id="socialSecurityTax">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label">Medicare Tax</div>
+              <div class="result-value small" id="medicareTax">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label">Effective Tax Rate</div>
+              <div class="result-value small" id="effectiveTaxRate">0%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tax Breakdown -->
+    <div class="calc-layout" id="breakdownSection" style="display:none">
+      <div class="amort-toggle" onclick="toggleBreakdown()">
+        <span>Tax Breakdown</span>
+        <span id="breakdownArrow">&#9660;</span>
+      </div>
+      <div class="amort-table" id="breakdownTable" style="display:none">
+        <table>
+          <thead>
+            <tr><th>Item</th><th>Amount</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Gross Income</td><td id="bdGross">$0.00</td></tr>
+            <tr><td>Pre-tax Deductions</td><td id="bdPretax">-$0.00</td></tr>
+            <tr><td>Taxable Income</td><td id="bdTaxable">$0.00</td></tr>
+            <tr><td>Federal Income Tax</td><td id="bdFederal">$0.00</td></tr>
+            <tr><td>State Income Tax (avg 4.6%)</td><td id="bdState">$0.00</td></tr>
+            <tr><td>Social Security (6.2%)</td><td id="bdSS">$0.00</td></tr>
+            <tr><td>Medicare (1.45%)</td><td id="bdMedicare">$0.00</td></tr>
+            <tr><td><strong>Total Taxes</strong></td><td id="bdTotalTax"><strong>$0.00</strong></td></tr>
+            <tr><td><strong>Take-Home Pay</strong></td><td id="bdTakeHome"><strong>$0.00</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="tool-about">
+      <h2 data-i18n="about_title">About Salary Calculator</h2>
+      <p data-i18n="about_desc">Our free salary calculator helps you estimate your take-home pay after federal and state taxes. Enter your annual salary, select your filing status, and see exactly how much of your gross income you get to keep. This tool uses 2024 US federal income tax brackets and standard FICA tax rates to provide an accurate paycheck estimate.</p>
+
+      <h3 data-i18n="features_title">Features</h3>
+      <ul>
+        <li data-i18n="feat1">Estimates take-home pay based on 2024 federal tax brackets</li>
+        <li data-i18n="feat2">Supports Single, Married Filing Jointly, and Head of Household filing statuses</li>
+        <li data-i18n="feat3">Shows pay per period — annual, monthly, bi-weekly, or weekly</li>
+        <li data-i18n="feat4">100% client-side — your salary data never leaves your browser</li>
+      </ul>
+
+      <h3 data-i18n="what_title">How Are Paycheck Taxes Calculated?</h3>
+      <p data-i18n="what_desc">Your take-home pay is calculated by subtracting several taxes from your gross income. Federal income tax uses a progressive bracket system — each portion of your income is taxed at a different rate. For 2024, the brackets for Single filers are 10% on income up to $11,600, 12% up to $47,150, 22% up to $100,525, 24% up to $191,950, 32% up to $243,725, 35% up to $609,350, and 37% on income above that. FICA taxes include Social Security at 6.2% on income up to $168,600 and Medicare at 1.45% on all income (plus an additional 0.9% on income above $200,000 for Single filers). State income taxes vary widely by state; this calculator uses an average flat rate of 4.6%. Pre-tax deductions like 401(k) contributions and HSA contributions reduce your taxable income, which can lower your overall tax burden.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 CalcHub. <span data-i18n="footer_text">Free financial calculators for smarter decisions.</span> <a href="../privacy.html" data-i18n="privacy_policy">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+  <script>window.I18N_PAGE_ID = 'salary-calculator';</script>
+  <script src="../translations.js"></script>
+  <script src="../i18n.js"></script>
+  <script>
+    function parseNumber(str) {
+      if (!str) return 0;
+      return parseFloat(str.replace(/,/g, '')) || 0;
+    }
+
+    function formatCurrency(num) {
+      if (isNaN(num) || !isFinite(num)) return '$0.00';
+      return '$' + num.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    function formatNumberInput(input) {
+      var value = parseNumber(input.value);
+      if (value > 0) {
+        input.value = value.toLocaleString('en-US');
+      }
+    }
+
+    function escapeHtml(str) {
+      var div = document.createElement('div');
+      div.appendChild(document.createTextNode(str));
+      return div.innerHTML;
+    }
+
+    var taxBrackets = {
+      single:   { limits: [11600, 47150, 100525, 191950, 243725, 609350], rates: [0.10, 0.12, 0.22, 0.24, 0.32, 0.35, 0.37] },
+      married:  { limits: [23200, 94300, 201050, 383900, 487450, 731200], rates: [0.10, 0.12, 0.22, 0.24, 0.32, 0.35, 0.37] },
+      hoh:      { limits: [16550, 63100, 100500, 191950, 243700, 609350], rates: [0.10, 0.12, 0.22, 0.24, 0.32, 0.35, 0.37] }
+    };
+
+    var ssWageBase = 168600;
+    var ssRate = 0.062;
+    var medicareRate = 0.0145;
+    var additionalMedicareThreshold = 200000;
+    var additionalMedicareRate = 0.009;
+    var avgStateRate = 0.046;
+
+    function computeFederalTax(taxableIncome, status) {
+      var brackets = taxBrackets[status];
+      var limits = brackets.limits;
+      var rates = brackets.rates;
+      var tax = 0;
+      var prevLimit = 0;
+
+      for (var i = 0; i < limits.length; i++) {
+        if (taxableIncome <= prevLimit) break;
+        var bracketAmount = Math.min(taxableIncome, limits[i]) - prevLimit;
+        if (bracketAmount > 0) {
+          tax += bracketAmount * rates[i];
+        }
+        prevLimit = limits[i];
+      }
+
+      if (taxableIncome > limits[limits.length - 1]) {
+        tax += (taxableIncome - limits[limits.length - 1]) * rates[rates.length - 1];
+      }
+
+      return tax;
+    }
+
+    function computeSocialSecurity(grossIncome) {
+      return Math.min(grossIncome, ssWageBase) * ssRate;
+    }
+
+    function computeMedicare(grossIncome, status) {
+      var medicare = grossIncome * medicareRate;
+      var threshold = additionalMedicareThreshold;
+      if (status === 'married') threshold = 250000;
+      if (grossIncome > threshold) {
+        medicare += (grossIncome - threshold) * additionalMedicareRate;
+      }
+      return medicare;
+    }
+
+    function getPayPeriods(frequency) {
+      switch (frequency) {
+        case 'annual':  return 1;
+        case 'monthly': return 12;
+        case 'biweekly': return 26;
+        case 'weekly':  return 52;
+        default: return 12;
+      }
+    }
+
+    function getPayPeriodLabel(frequency) {
+      switch (frequency) {
+        case 'annual':  return 'Annual Take-Home Pay';
+        case 'monthly': return 'Monthly Take-Home Pay';
+        case 'biweekly': return 'Bi-Weekly Take-Home Pay';
+        case 'weekly':  return 'Weekly Take-Home Pay';
+        default: return 'Take-Home Pay';
+      }
+    }
+
+    function calculate() {
+      var grossIncome = parseNumber(document.getElementById('annualSalary').value);
+      var frequency = document.getElementById('payFrequency').value;
+      var status = document.getElementById('filingStatus').value;
+      var pretaxDeductions = parseNumber(document.getElementById('pretaxDeductions').value);
+
+      if (grossIncome <= 0) {
+        alert('Please enter a valid annual salary greater than zero.');
+        return;
+      }
+      if (pretaxDeductions < 0) {
+        alert('Pre-tax deductions cannot be negative.');
+        return;
+      }
+
+      var taxableIncome = Math.max(0, grossIncome - pretaxDeductions);
+
+      var federalTax = computeFederalTax(taxableIncome, status);
+      var stateTax = taxableIncome * avgStateRate;
+      var socialSecurity = computeSocialSecurity(grossIncome);
+      var medicare = computeMedicare(grossIncome, status);
+
+      var totalTaxes = federalTax + stateTax + socialSecurity + medicare;
+      var annualTakeHome = grossIncome - pretaxDeductions - totalTaxes;
+      var effectiveRate = grossIncome > 0 ? (totalTaxes / grossIncome) * 100 : 0;
+
+      var periods = getPayPeriods(frequency);
+      var perPeriodTakeHome = annualTakeHome / periods;
+
+      document.getElementById('takeHomeLabel').textContent = getPayPeriodLabel(frequency);
+      document.getElementById('takeHomePay').textContent = formatCurrency(perPeriodTakeHome);
+      document.getElementById('annualTakeHome').textContent = formatCurrency(annualTakeHome);
+      document.getElementById('federalTax').textContent = formatCurrency(federalTax);
+      document.getElementById('stateTax').textContent = formatCurrency(stateTax);
+      document.getElementById('socialSecurityTax').textContent = formatCurrency(socialSecurity);
+      document.getElementById('medicareTax').textContent = formatCurrency(medicare);
+      document.getElementById('effectiveTaxRate').textContent = effectiveRate.toFixed(2) + '%';
+
+      // Tax breakdown table
+      document.getElementById('bdGross').textContent = formatCurrency(grossIncome);
+      document.getElementById('bdPretax').textContent = '-' + formatCurrency(pretaxDeductions);
+      document.getElementById('bdTaxable').textContent = formatCurrency(taxableIncome);
+      document.getElementById('bdFederal').textContent = formatCurrency(federalTax);
+      document.getElementById('bdState').textContent = formatCurrency(stateTax);
+      document.getElementById('bdSS').textContent = formatCurrency(socialSecurity);
+      document.getElementById('bdMedicare').textContent = formatCurrency(medicare);
+      document.getElementById('bdTotalTax').innerHTML = '<strong>' + escapeHtml(formatCurrency(totalTaxes)) + '</strong>';
+      document.getElementById('bdTakeHome').innerHTML = '<strong>' + escapeHtml(formatCurrency(annualTakeHome)) + '</strong>';
+
+      document.getElementById('emptyState').style.display = 'none';
+      document.getElementById('resultContent').style.display = 'block';
+      document.getElementById('breakdownSection').style.display = 'block';
+    }
+
+    function toggleBreakdown() {
+      var table = document.getElementById('breakdownTable');
+      var arrow = document.getElementById('breakdownArrow');
+      if (table.style.display === 'none') {
+        table.style.display = 'block';
+        arrow.innerHTML = '&#9650;';
+      } else {
+        table.style.display = 'none';
+        arrow.innerHTML = '&#9660;';
+      }
+    }
+
+    var i18nDict = null;
+    function updateI18nDict() {
+      if (window.I18N_ALL && window.I18N_GET) {
+        var lang = localStorage.getItem('calchub-lang') || 'en';
+        i18nDict = window.I18N_GET('salary-calculator', lang);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      updateI18nDict();
+
+      var currencyInputs = ['annualSalary', 'pretaxDeductions'];
+      for (var i = 0; i < currencyInputs.length; i++) {
+        var el = document.getElementById(currencyInputs[i]);
+        el.addEventListener('blur', function() {
+          formatNumberInput(this);
+        });
+      }
+
+      var inputs = document.querySelectorAll('.calc-input-panel .input-field');
+      for (var i = 0; i < inputs.length; i++) {
+        inputs[i].addEventListener('input', function() {
+          if (document.getElementById('resultContent').style.display !== 'none') {
+            calculate();
+          }
+        });
+      }
+
+      calculate();
+    });
+  </script>
+
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

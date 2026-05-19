@@ -1,0 +1,440 @@
+:root {
+  --bg: #0a0f0a;
+  --bg2: #111611;
+  --bg3: #1a1f1a;
+  --text: #e4e8e4;
+  --text2: #a1aaa1;
+  --text3: #717a71;
+  --accent: #10b981;
+  --accent2: #059669;
+  --accent-glow: rgba(16,185,129,0.15);
+  --green: #22c55e;
+  --red: #ef4444;
+  --yellow: #eab308;
+  --border: #1f2a1f;
+  --radius: 12px;
+  --gold: #f59e0b;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent2); }
+
+/* Header */
+.header {
+  border-bottom: 1px solid var(--border);
+  background: var(--bg2);
+  position: sticky; top: 0; z-index: 100;
+}
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px;
+}
+.logo {
+  display: flex; align-items: center; gap: 8px;
+  font-weight: 700; font-size: 18px; color: var(--text);
+}
+.logo-icon { font-size: 24px; }
+.nav { display: flex; gap: 24px; align-items: center; }
+.nav a { color: var(--text2); font-size: 14px; font-weight: 500; }
+.nav a:hover { color: var(--text); }
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 80px 24px 60px;
+}
+.hero h1 {
+  font-size: 48px; font-weight: 800;
+  background: linear-gradient(135deg, #10b981, #f59e0b);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 16px;
+}
+.hero-sub {
+  font-size: 20px; color: var(--text2); margin-bottom: 24px;
+}
+.trust-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(16,185,129,0.1); color: var(--accent);
+  padding: 8px 20px; border-radius: 999px; font-size: 14px; font-weight: 500;
+  border: 1px solid rgba(16,185,129,0.2);
+}
+.badge-icon { font-size: 16px; }
+
+/* Tools Grid */
+.tools-section { padding: 60px 0; }
+.tools-section h2 { font-size: 28px; margin-bottom: 32px; }
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+.tool-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: all 0.2s;
+  position: relative;
+  display: block; color: var(--text);
+}
+.tool-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(16,185,129,0.1);
+  color: var(--text);
+}
+.tool-icon {
+  font-size: 28px; font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 12px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.tool-card h3 { font-size: 16px; margin-bottom: 8px; }
+.tool-card p { font-size: 13px; color: var(--text2); line-height: 1.5; }
+.tool-tag {
+  position: absolute; top: 12px; right: 12px;
+  background: var(--accent-glow); color: var(--accent);
+  font-size: 11px; font-weight: 600; padding: 2px 8px;
+  border-radius: 4px; text-transform: uppercase;
+}
+.tool-tag.gold {
+  background: rgba(245,158,11,0.15); color: var(--gold);
+}
+
+/* About */
+.about-section { padding: 60px 0; border-top: 1px solid var(--border); }
+.about-section h2 { font-size: 28px; margin-bottom: 32px; text-align: center; }
+.features-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 24px;
+}
+.feature {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+.feature h3 { font-size: 16px; margin-bottom: 8px; }
+.feature p { font-size: 13px; color: var(--text2); }
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 0;
+  text-align: center;
+  color: var(--text3);
+  font-size: 13px;
+}
+
+/* ===== Calculator Page Styles ===== */
+
+.tool-page {
+  padding: 32px 0 80px;
+}
+.tool-header {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 24px; flex-wrap: wrap;
+}
+.tool-header h1 { font-size: 28px; font-weight: 700; }
+.tool-header .back-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  color: var(--text3); font-size: 14px;
+}
+.tool-header .back-link:hover { color: var(--accent); }
+.privacy-note {
+  display: flex; align-items: center; gap: 6px;
+  color: var(--accent); font-size: 13px;
+  margin-left: auto;
+}
+
+.calc-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+@media (max-width: 768px) {
+  .calc-layout { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 32px; }
+}
+
+/* Calculator Input Panel */
+.calc-input-panel {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+.input-group:last-child {
+  margin-bottom: 0;
+}
+.input-group label {
+  display: block; font-size: 13px; font-weight: 500;
+  color: var(--text2); margin-bottom: 6px;
+}
+.input-row {
+  display: flex; align-items: center; gap: 8px;
+}
+.input-prefix, .input-suffix {
+  font-size: 14px; color: var(--text2); font-weight: 500;
+  white-space: nowrap;
+}
+.input-field {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.input-field:focus {
+  border-color: var(--accent);
+}
+.input-field::placeholder {
+  color: var(--text3);
+  font-weight: 400;
+}
+
+select.input-field {
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%23717a71'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+
+.range-slider {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--bg3);
+  outline: none;
+  margin-top: 8px;
+}
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  border: 2px solid var(--bg2);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.range-slider::-moz-range-thumb {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  border: 2px solid var(--bg2);
+}
+
+.btn-calculate {
+  width: 100%;
+  padding: 14px;
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 20px;
+}
+.btn-calculate:hover { background: var(--accent2); }
+
+.btn-group {
+  display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0;
+}
+.btn {
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg2);
+  color: var(--text);
+  font-size: 13px; font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Calculator Results Panel */
+.calc-results-panel {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.result-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.result-item {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+}
+.result-item.highlight {
+  border-color: var(--accent);
+  background: rgba(16,185,129,0.05);
+}
+.result-label {
+  font-size: 12px;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+.result-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.result-value.small {
+  font-size: 18px;
+}
+.result-item.highlight .result-value {
+  color: var(--accent);
+}
+
+/* Amortization Schedule */
+.amort-toggle {
+  display: flex; align-items: center; gap: 8px;
+  color: var(--accent); font-size: 13px; font-weight: 500;
+  cursor: pointer; background: none; border: none;
+  padding: 8px 0; margin-bottom: 12px;
+}
+.amort-toggle:hover { color: var(--accent2); }
+.amort-toggle .arrow {
+  transition: transform 0.2s;
+  display: inline-block;
+}
+.amort-toggle.open .arrow {
+  transform: rotate(90deg);
+}
+
+.amort-table-wrap {
+  display: none;
+  max-height: 400px;
+  overflow: auto;
+}
+.amort-table-wrap.show { display: block; }
+
+.amort-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.amort-table th {
+  position: sticky; top: 0;
+  background: var(--bg3);
+  color: var(--text2);
+  font-weight: 600;
+  text-align: right;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.amort-table th:first-child { text-align: left; }
+.amort-table td {
+  padding: 6px 12px;
+  text-align: right;
+  border-bottom: 1px solid var(--border);
+  color: var(--text2);
+}
+.amort-table td:first-child { text-align: left; color: var(--text3); }
+.amort-table tr:hover td { background: var(--bg3); }
+
+/* Chart area */
+.chart-container {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 16px;
+}
+.chart-container canvas {
+  width: 100% !important;
+  max-height: 200px;
+}
+
+/* About section on tool pages */
+.tool-about {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+.tool-about h2 {
+  font-size: 22px; margin-bottom: 16px;
+}
+.tool-about h3 {
+  font-size: 16px; margin: 20px 0 8px; color: var(--accent);
+}
+.tool-about p {
+  font-size: 14px; color: var(--text2); line-height: 1.7;
+  margin-bottom: 12px;
+}
+.tool-about ul {
+  padding-left: 20px; color: var(--text2);
+  font-size: 14px; line-height: 1.8;
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text3);
+}
+.empty-state .empty-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+.empty-state p {
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero { padding: 60px 16px 40px; }
+  .hero h1 { font-size: 32px; }
+  .hero-sub { font-size: 16px; }
+  .tools-grid { grid-template-columns: 1fr; }
+  .result-summary { grid-template-columns: 1fr; }
+  .input-row { flex-wrap: wrap; }
+}
+
+/* Print styles for amortization schedules */
+@media print {
+  .header, .footer, .calc-input-panel, .btn-calculate { display: none; }
+  body { background: #fff; color: #000; }
+  .calc-results-panel { border: 1px solid #ccc; }
+}

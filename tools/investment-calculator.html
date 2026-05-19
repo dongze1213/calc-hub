@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Investment Calculator | Project Your Portfolio Growth</title>
+  <meta name="description" content="Free investment calculator to project your portfolio growth. Calculate future value with initial investment, monthly contributions, and compound returns over time.">
+  <meta name="keywords" content="investment calculator, portfolio calculator, compound interest, investment growth, future value calculator, retirement planning">
+  <link rel="canonical" href="https://calchub.vercel.app/tools/investment-calculator.html">
+  <meta property="og:url" content="https://calchub.vercel.app/tools/investment-calculator.html">
+  <meta property="og:title" content="Free Investment Calculator | Project Your Portfolio Growth">
+  <meta property="og:description" content="Calculate your investment growth with our free tool. See how your money grows with compound interest and regular contributions.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://calchub.vercel.app/img/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Investment Calculator">
+  <meta name="twitter:description" content="Project your investment portfolio growth with compound returns.">
+  <meta name="twitter:image" content="https://calchub.vercel.app/img/og-image.png">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Investment Calculator",
+    "description": "Free investment calculator to project portfolio growth with compound interest and regular contributions",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo">
+        <span class="logo-icon">💰</span>
+        <span>CalcHub</span>
+      </a>
+      <nav class="nav">
+        <a href="../index.html#tools" data-i18n="nav_tools">Calculators</a>
+        <a href="#about" data-i18n="nav_about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="tool-page">
+    <div class="container">
+      <div class="tool-header">
+        <a href="../index.html" class="back-link">← <span data-i18n="back">Back</span></a>
+        <h1 data-i18n="title">Investment Calculator</h1>
+        <div class="privacy-note">
+          <span>🔒</span>
+          <span data-i18n="local_processing">100% Private Calculations</span>
+        </div>
+      </div>
+
+      <div class="calc-layout">
+        <div class="calc-input-panel">
+          <div class="input-group">
+            <label for="initialInvestment" data-i18n="initial_investment">Initial Investment</label>
+            <div class="input-row">
+              <span class="input-prefix">$</span>
+              <input type="number" id="initialInvestment" class="input-field" value="10000" min="0" step="100" data-i18n-placeholder="initial_investment">
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="monthlyContribution" data-i18n="monthly_contribution">Monthly Contribution</label>
+            <div class="input-row">
+              <span class="input-prefix">$</span>
+              <input type="number" id="monthlyContribution" class="input-field" value="500" min="0" step="50" data-i18n-placeholder="monthly_contribution">
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="annualReturn" data-i18n="annual_return">Annual Return Rate</label>
+            <div class="input-row">
+              <input type="number" id="annualReturn" class="input-field" value="8" min="0" max="100" step="0.1" data-i18n-placeholder="annual_return">
+              <span class="input-suffix">%</span>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="investmentPeriod" data-i18n="investment_period">Investment Period</label>
+            <div class="input-row">
+              <input type="number" id="investmentPeriod" class="input-field" value="20" min="1" max="50" step="1" data-i18n-placeholder="investment_period">
+              <span class="input-suffix" data-i18n="years">years</span>
+            </div>
+          </div>
+
+          <button class="btn-calculate" id="calculateBtn" data-i18n="calculate">Calculate</button>
+        </div>
+
+        <div class="calc-results-panel" id="resultsPanel">
+          <div class="empty-state" id="emptyState">
+            <div class="empty-icon">📊</div>
+            <p data-i18n="enter_values">Enter your investment details to see projections</p>
+          </div>
+
+          <div id="resultsContent" style="display: none;">
+            <div class="result-summary">
+              <div class="result-item highlight">
+                <div class="result-label" data-i18n="future_value">Future Value</div>
+                <div class="result-value" id="futureValue">$0.00</div>
+              </div>
+              <div class="result-item">
+                <div class="result-label" data-i18n="total_contributions">Total Contributions</div>
+                <div class="result-value small" id="totalContributions">$0.00</div>
+              </div>
+              <div class="result-item">
+                <div class="result-label" data-i18n="investment_returns">Investment Returns</div>
+                <div class="result-value small" id="investmentReturns">$0.00</div>
+              </div>
+              <div class="result-item">
+                <div class="result-label" data-i18n="total_months">Total Months</div>
+                <div class="result-value small" id="totalMonths">0</div>
+              </div>
+            </div>
+
+            <button class="amort-toggle" id="toggleTable">
+              <span class="arrow">▶</span>
+              <span data-i18n="show_table">Show Year-by-Year Breakdown</span>
+            </button>
+
+            <div class="amort-table-wrap" id="tableWrap">
+              <table class="amort-table">
+                <thead>
+                  <tr>
+                    <th data-i18n="year_col">Year</th>
+                    <th data-i18n="contrib_col">Contributions</th>
+                    <th data-i18n="returns_col">Returns</th>
+                    <th data-i18n="balance_col">Balance</th>
+                  </tr>
+                </thead>
+                <tbody id="yearlyTableBody">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="tool-about" id="about">
+        <h2 data-i18n="about_title">About Investment Calculator</h2>
+
+        <h3 data-i18n="what_title">What is an Investment Calculator?</h3>
+        <p data-i18n="what_desc1">An investment calculator is a powerful financial tool that helps you project how your money will grow over time. Whether you're saving for retirement, a major purchase, or building wealth, understanding compound interest and regular contributions is essential for achieving your financial goals.</p>
+        <p data-i18n="what_desc2">Our free investment calculator uses the time-tested compound interest formula to show you exactly how your initial investment and monthly contributions will grow. The power of compound interest means your money earns returns, and those returns earn their own returns, creating exponential growth over time.</p>
+
+        <h3 data-i18n="how_title">How to Use This Calculator</h3>
+        <p data-i18n="how_desc">Simply enter your initial investment amount, how much you plan to contribute monthly, your expected annual return rate, and how long you intend to invest. The calculator will instantly show you your projected future value, total contributions, and the investment returns earned through compound interest.</p>
+
+        <h3 data-i18n="formula_title">The Investment Formula</h3>
+        <p data-i18n="formula_desc">The calculator uses the future value of an annuity formula: FV = P(1+r)^n + PMT×[((1+r)^n - 1)/r], where P is your initial investment, r is the monthly interest rate, n is the total number of months, and PMT is your monthly contribution. This formula accounts for compound interest on both your initial investment and your recurring contributions.</p>
+
+        <h3 data-i18n="tips_title">Investment Planning Tips</h3>
+        <ul>
+          <li data-i18n="tip1">Start early: The earlier you begin investing, the more time your money has to compound.</li>
+          <li data-i18n="tip2">Be consistent: Regular monthly contributions, even small ones, add up significantly over time.</li>
+          <li data-i18n="tip3">Diversify: Don't put all your eggs in one basket. Spread investments across different asset classes.</li>
+          <li data-i18n="tip4">Review regularly: Reassess your investments periodically to ensure they align with your goals.</li>
+          <li data-i18n="tip5">Consider inflation: Remember that inflation reduces purchasing power over long periods.</li>
+        </ul>
+
+        <h3 data-i18n="benefits_title">Benefits of Compound Interest</h3>
+        <p data-i18n="benefits_desc">Albert Einstein reportedly called compound interest the eighth wonder of the world. With an 8% annual return, your money doubles approximately every 9 years. Our calculator shows you the dramatic difference between your total contributions and your actual returns, highlighting the wealth-building power of compound interest.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 CalcHub. <span data-i18n="footer_text">Free financial calculators for smarter decisions.</span> <a href="../privacy.html" data-i18n="privacy_policy">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+  <script>window.I18N_PAGE_ID = "investment-calculator";</script>
+  <script src="../translations.js"></script>
+  <script src="../i18n.js"></script>
+  <script>
+    (function() {
+      var initialInput = document.getElementById('initialInvestment');
+      var monthlyInput = document.getElementById('monthlyContribution');
+      var annualReturnInput = document.getElementById('annualReturn');
+      var periodInput = document.getElementById('investmentPeriod');
+      var calculateBtn = document.getElementById('calculateBtn');
+      var emptyState = document.getElementById('emptyState');
+      var resultsContent = document.getElementById('resultsContent');
+      var futureValueEl = document.getElementById('futureValue');
+      var totalContribEl = document.getElementById('totalContributions');
+      var investmentReturnsEl = document.getElementById('investmentReturns');
+      var totalMonthsEl = document.getElementById('totalMonths');
+      var yearlyTableBody = document.getElementById('yearlyTableBody');
+      var toggleTableBtn = document.getElementById('toggleTable');
+      var tableWrap = document.getElementById('tableWrap');
+      var tableOpen = false;
+
+      function formatCurrency(num) {
+        var str = Math.abs(num).toFixed(2);
+        var parts = str.split('.');
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        return (num < 0 ? '-' : '') + '$' + parts.join('.');
+      }
+
+      function calculate() {
+        var P = parseFloat(initialInput.value) || 0;
+        var PMT = parseFloat(monthlyInput.value) || 0;
+        var annualRate = parseFloat(annualReturnInput.value) || 0;
+        var years = parseFloat(periodInput.value) || 0;
+
+        if (P < 0 || PMT < 0 || annualRate < 0 || years <= 0) {
+          emptyState.style.display = 'block';
+          resultsContent.style.display = 'none';
+          return;
+        }
+
+        var r = annualRate / 100 / 12;
+        var n = years * 12;
+
+        var futureValue;
+        if (r === 0) {
+          futureValue = P + PMT * n;
+        } else {
+          futureValue = P * Math.pow(1 + r, n) + PMT * ((Math.pow(1 + r, n) - 1) / r);
+        }
+
+        var totalContributions = P + PMT * n;
+        var investmentReturns = futureValue - totalContributions;
+
+        emptyState.style.display = 'none';
+        resultsContent.style.display = 'block';
+
+        futureValueEl.textContent = formatCurrency(futureValue);
+        totalContribEl.textContent = formatCurrency(totalContributions);
+        investmentReturnsEl.textContent = formatCurrency(investmentReturns);
+        totalMonthsEl.textContent = n.toLocaleString();
+
+        yearlyTableBody.innerHTML = '';
+        for (var year = 1; year <= years; year++) {
+          var yearN = year * 12;
+          var yearFV;
+          if (r === 0) {
+            yearFV = P + PMT * yearN;
+          } else {
+            yearFV = P * Math.pow(1 + r, yearN) + PMT * ((Math.pow(1 + r, yearN) - 1) / r);
+          }
+          var yearContrib = P + PMT * yearN;
+          var yearReturns = yearFV - yearContrib;
+
+          var row = document.createElement('tr');
+          row.innerHTML =
+            '<td>' + year + '</td>' +
+            '<td>' + formatCurrency(yearContrib) + '</td>' +
+            '<td>' + formatCurrency(yearReturns) + '</td>' +
+            '<td>' + formatCurrency(yearFV) + '</td>';
+          yearlyTableBody.appendChild(row);
+        }
+      }
+
+      calculateBtn.addEventListener('click', calculate);
+
+      initialInput.addEventListener('input', calculate);
+      monthlyInput.addEventListener('input', calculate);
+      annualReturnInput.addEventListener('input', calculate);
+      periodInput.addEventListener('input', calculate);
+
+      toggleTableBtn.addEventListener('click', function() {
+        tableOpen = !tableOpen;
+        if (tableOpen) {
+          tableWrap.classList.add('show');
+          toggleTableBtn.querySelector('.arrow').textContent = '▼';
+          toggleTableBtn.querySelector('span:last-child').textContent = document.querySelector('[data-i18n="hide_table"]') ? document.querySelector('[data-i18n="hide_table"]').textContent : 'Hide Year-by-Year Breakdown';
+        } else {
+          tableWrap.classList.remove('show');
+          toggleTableBtn.querySelector('.arrow').textContent = '▶';
+          toggleTableBtn.querySelector('span:last-child').textContent = document.querySelector('[data-i18n="show_table"]') ? document.querySelector('[data-i18n="show_table"]').textContent : 'Show Year-by-Year Breakdown';
+        }
+      });
+
+      calculate();
+    })();
+  </script>
+
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

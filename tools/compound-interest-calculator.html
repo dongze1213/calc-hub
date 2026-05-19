@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Compound Interest Calculator | See How Your Money Grows</title>
+  <meta name="description" content="Calculate compound interest and see your investment grow over time. Supports daily, monthly, quarterly, semi-annual, and annual compounding with year-by-year breakdown.">
+  <link rel="canonical" href="https://calchub.vercel.app/tools/compound-interest-calculator.html">
+  <meta property="og:title" content="Free Compound Interest Calculator | See How Your Money Grows">
+  <meta property="og:description" content="Calculate compound interest and see your investment grow over time. Supports daily, monthly, quarterly, semi-annual, and annual compounding.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Compound Interest Calculator">
+  <meta name="twitter:description" content="Calculate compound interest and see your investment grow over time.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialProduct",
+    "name": "Compound Interest Calculator",
+    "description": "Free compound interest calculator that helps you see how your money grows over time with compound interest.",
+    "brand": {
+      "@type": "Brand",
+      "name": "CalcHub"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo"><span class="logo-icon">💰</span><span>CalcHub</span></a>
+      <nav class="nav">
+        <a href="../index.html#tools" data-i18n="nav_tools">Calculators</a>
+        <a href="../index.html#about" data-i18n="nav_about">About</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container tool-page">
+    <div class="tool-header">
+      <a href="../index.html" class="back-link" data-i18n="back">← Back</a>
+      <h1 data-i18n="title">Compound Interest Calculator</h1>
+      <span class="privacy-note" data-i18n="local_processing">🔒 100% Private Calculations</span>
+    </div>
+    <div class="calc-layout">
+      <div class="calc-input-panel">
+        <div class="input-group">
+          <label for="principal" data-i18n="principal_label">Initial Principal ($)</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="number" id="principal" class="input-field" value="10000" min="0" step="100">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="monthlyContribution" data-i18n="monthly_contrib_label">Monthly Contribution ($)</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="number" id="monthlyContribution" class="input-field" value="500" min="0" step="50">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="interestRate" data-i18n="rate_label">Annual Interest Rate (%)</label>
+          <div class="input-row">
+            <input type="number" id="interestRate" class="input-field" value="7" min="0" max="100" step="0.1">
+            <span class="input-suffix">%</span>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="years" data-i18n="years_label">Investment Period (years)</label>
+          <div class="input-row">
+            <input type="number" id="years" class="input-field" value="10" min="1" max="50" step="1">
+            <span class="input-suffix" data-i18n="years_suffix">years</span>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="frequency" data-i18n="frequency_label">Compounding Frequency</label>
+          <select id="frequency" class="input-field">
+            <option value="1" data-i18n="freq_annual">Annually</option>
+            <option value="2" data-i18n="freq_semi">Semi-Annually</option>
+            <option value="4" data-i18n="freq_quarterly">Quarterly</option>
+            <option value="12" selected data-i18n="freq_monthly">Monthly</option>
+            <option value="365" data-i18n="freq_daily">Daily</option>
+          </select>
+        </div>
+      </div>
+      <div class="calc-results-panel" id="results">
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">🧮</div>
+          <p>Enter values and calculate</p>
+        </div>
+        <div id="resultContent" style="display:none">
+          <div class="result-summary">
+            <div class="result-item highlight">
+              <div class="result-label" data-i18n="future_value_label">Future Value</div>
+              <div class="result-value" id="futureValue">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label" data-i18n="total_contrib_label">Total Contributions</div>
+              <div class="result-value small" id="totalContributions">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label" data-i18n="total_interest_label">Total Interest Earned</div>
+              <div class="result-value small" id="totalInterest">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label" data-i18n="principal_label">Initial Principal</div>
+              <div class="result-value small" id="principalDisplay">$0.00</div>
+            </div>
+          </div>
+          <button class="amort-toggle" id="toggleSchedule">
+            <span class="arrow">▶</span>
+            <span data-i18n="show_breakdown">Year-by-Year Breakdown</span>
+          </button>
+          <div class="amort-table-wrap" id="scheduleWrap">
+            <table class="amort-table" id="breakdownTable">
+              <thead>
+                <tr>
+                  <th data-i18n="year_col">Year</th>
+                  <th data-i18n="contrib_col">Contributions</th>
+                  <th data-i18n="interest_col">Interest</th>
+                  <th data-i18n="balance_col">Balance</th>
+                </tr>
+              </thead>
+              <tbody id="breakdownBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tool-about">
+      <h2 data-i18n="about_title">About Compound Interest Calculator</h2>
+      <p data-i18n="about_desc">Our free compound interest calculator helps you visualize how your money can grow over time through the power of compound interest. Whether you are saving for retirement, a major purchase, or building wealth, understanding compound interest is essential for making informed financial decisions. This calculator supports multiple compounding frequencies including daily, monthly, quarterly, semi-annual, and annual compounding.</p>
+
+      <h3 data-i18n="how_works_title">How Compound Interest Works</h3>
+      <p data-i18n="how_works_desc">Compound interest is often called the "eighth wonder of the world" because it allows your money to grow exponentially over time. Unlike simple interest, which is calculated only on the initial principal, compound interest is calculated on the accumulated balance, including both your principal and previously earned interest. This means your money grows faster as the interest you earn begins to earn its own interest.</p>
+
+      <h3 data-i18n="formula_title">The Formula</h3>
+      <p data-i18n="formula_desc">The compound interest formula accounts for both your initial investment and regular contributions. For the principal: A = P(1 + r/n)^(nt), where P is your initial principal, r is the annual interest rate, n is the number of compounding periods per year, and t is the number of years. For regular contributions, we use a modified formula that accounts for the timing of each payment.</p>
+
+      <h3 data-i18n="features_title">Features of This Calculator</h3>
+      <ul>
+        <li data-i18n="feat1">Multiple compounding frequency options: daily, monthly, quarterly, semi-annual, and annual</li>
+        <li data-i18n="feat2">Year-by-year breakdown showing contributions, interest earned, and total balance</li>
+        <li data-i18n="feat3">Real-time calculations that update as you type</li>
+        <li data-i18n="feat4">Clear display of total contributions versus interest earned</li>
+        <li data-i18n="feat5">100% client-side calculation - your financial information stays private</li>
+      </ul>
+
+      <h3 data-i18n="tips_title">Financial Planning Tips</h3>
+      <p data-i18n="tips_desc">Starting early is one of the most powerful ways to maximize compound interest. Even small monthly contributions can grow into substantial amounts over decades. The Rule of 72 is a quick way to estimate how long it takes for your investment to double - simply divide 72 by your annual interest rate. For example, at 7% annual return, your money would double approximately every 10 years.</p>
+    </div>
+  </main>
+  <footer class="footer"><div class="container"><p>&copy; 2025 CalcHub. <span data-i18n="footer_text">Free financial calculators for smarter decisions.</span> <a href="../privacy.html" data-i18n="privacy_policy">Privacy Policy</a></p></div></footer>
+  <script>window.I18N_PAGE_ID = 'compound-interest-calculator';</script>
+  <script src="../translations.js"></script>
+  <script src="../i18n.js"></script>
+  <script>
+    (function() {
+      var principalInput = document.getElementById('principal');
+      var monthlyContribInput = document.getElementById('monthlyContribution');
+      var interestRateInput = document.getElementById('interestRate');
+      var yearsInput = document.getElementById('years');
+      var frequencySelect = document.getElementById('frequency');
+      var emptyState = document.getElementById('emptyState');
+      var resultContent = document.getElementById('resultContent');
+      var futureValueEl = document.getElementById('futureValue');
+      var totalContributionsEl = document.getElementById('totalContributions');
+      var totalInterestEl = document.getElementById('totalInterest');
+      var principalDisplayEl = document.getElementById('principalDisplay');
+      var breakdownBody = document.getElementById('breakdownBody');
+      var toggleSchedule = document.getElementById('toggleSchedule');
+      var scheduleWrap = document.getElementById('scheduleWrap');
+
+      function formatCurrency(num) {
+        return '$' + num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+
+      function calculate() {
+        var principal = parseFloat(principalInput.value) || 0;
+        var monthlyContrib = parseFloat(monthlyContribInput.value) || 0;
+        var annualRate = parseFloat(interestRateInput.value) || 0;
+        var years = parseFloat(yearsInput.value) || 0;
+        var n = parseInt(frequencySelect.value) || 12;
+        var r = annualRate / 100;
+
+        if (principal <= 0 && monthlyContrib <= 0) {
+          emptyState.style.display = 'block';
+          resultContent.style.display = 'none';
+          return;
+        }
+
+        emptyState.style.display = 'none';
+        resultContent.style.display = 'block';
+
+        var totalContributions = principal;
+        var balance = principal;
+        var yearlyData = [];
+
+        for (var y = 1; y <= years; y++) {
+          var yearContribs = 0;
+          for (var m = 1; m <= 12; m++) {
+            var periodsPerMonth = n / 12;
+            balance = balance * Math.pow(1 + r / periodsPerMonth, periodsPerMonth);
+            if (monthlyContrib > 0) {
+              var contribWithInterest = monthlyContrib * Math.pow(1 + r / periodsPerMonth, periodsPerMonth);
+              balance += contribWithInterest;
+              yearContribs += monthlyContrib;
+            }
+          }
+          totalContributions += yearContribs;
+
+          yearlyData.push({
+            year: y,
+            contributions: yearContribs + (y === 1 ? principal : 0),
+            balance: balance
+          });
+        }
+
+        var totalInterest = balance - totalContributions;
+
+        futureValueEl.textContent = formatCurrency(balance);
+        totalContributionsEl.textContent = formatCurrency(totalContributions);
+        totalInterestEl.textContent = formatCurrency(totalInterest);
+        principalDisplayEl.textContent = formatCurrency(principal);
+
+        breakdownBody.innerHTML = '';
+        yearlyData.forEach(function(data) {
+          var row = document.createElement('tr');
+          row.innerHTML =
+            '<td>' + data.year + '</td>' +
+            '<td>' + formatCurrency(data.contributions) + '</td>' +
+            '<td>' + formatCurrency(data.balance - data.contributions) + '</td>' +
+            '<td>' + formatCurrency(data.balance) + '</td>';
+          breakdownBody.appendChild(row);
+        });
+      }
+
+      var inputs = [principalInput, monthlyContribInput, interestRateInput, yearsInput, frequencySelect];
+      inputs.forEach(function(input) {
+        input.addEventListener('input', calculate);
+        input.addEventListener('change', calculate);
+      });
+
+      toggleSchedule.addEventListener('click', function() {
+        toggleSchedule.classList.toggle('open');
+        scheduleWrap.classList.toggle('show');
+      });
+
+      calculate();
+    })();
+  </script>
+
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

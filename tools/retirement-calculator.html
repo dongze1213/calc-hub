@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Retirement Calculator | Plan Your Financial Future</title>
+  <meta name="description" content="Free retirement calculator to plan your financial future. Calculate total savings at retirement, inflation-adjusted value, and monthly income using the 4% rule.">
+  <meta name="keywords" content="retirement calculator, retirement planning, retirement savings, 4% rule, retirement income, financial planning, pension calculator">
+  <link rel="canonical" href="https://calchub.vercel.app/tools/retirement-calculator.html">
+  <meta property="og:url" content="https://calchub.vercel.app/tools/retirement-calculator.html">
+  <meta property="og:title" content="Free Retirement Calculator | Plan Your Financial Future">
+  <meta property="og:description" content="Plan your retirement with our free calculator. See your projected savings, inflation-adjusted value, and estimated monthly income.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://calchub.vercel.app/img/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Retirement Calculator">
+  <meta name="twitter:description" content="Plan your retirement savings and see your future monthly income.">
+  <meta name="twitter:image" content="https://calchub.vercel.app/img/og-image.png">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Retirement Calculator",
+    "description": "Free retirement calculator to plan your financial future. Calculate savings at retirement, inflation-adjusted value, and monthly income.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo">
+        <span class="logo-icon">💰</span>
+        <span>CalcHub</span>
+      </a>
+      <nav class="nav">
+        <a href="../index.html#tools" data-i18n="nav_tools">Calculators</a>
+        <a href="#about" data-i18n="nav_about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="tool-page">
+    <div class="container">
+      <div class="tool-header">
+        <a href="../index.html" class="back-link">← <span data-i18n="back">Back</span></a>
+        <h1 data-i18n="title">Retirement Calculator</h1>
+        <div class="privacy-note">
+          <span>🔒</span>
+          <span data-i18n="local_processing">100% Private Calculations</span>
+        </div>
+      </div>
+
+      <div class="calc-layout">
+        <div class="calc-input-panel">
+          <div class="input-group">
+            <label for="currentAge" data-i18n="current_age">Current Age</label>
+            <div class="input-row">
+              <input type="number" id="currentAge" class="input-field" value="30" min="18" max="100" step="1" data-i18n-placeholder="current_age">
+              <span class="input-suffix" data-i18n="years_old">years old</span>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="retirementAge" data-i18n="retirement_age">Retirement Age</label>
+            <div class="input-row">
+              <input type="number" id="retirementAge" class="input-field" value="65" min="30" max="100" step="1" data-i18n-placeholder="retirement_age">
+              <span class="input-suffix" data-i18n="years_old">years old</span>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="currentSavings" data-i18n="current_savings">Current Savings</label>
+            <div class="input-row">
+              <span class="input-prefix">$</span>
+              <input type="number" id="currentSavings" class="input-field" value="50000" min="0" step="1000" data-i18n-placeholder="current_savings">
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="monthlyContribution" data-i18n="monthly_contribution">Monthly Contribution</label>
+            <div class="input-row">
+              <span class="input-prefix">$</span>
+              <input type="number" id="monthlyContribution" class="input-field" value="1000" min="0" step="50" data-i18n-placeholder="monthly_contribution">
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="expectedReturn" data-i18n="expected_return">Expected Annual Return</label>
+            <div class="input-row">
+              <input type="number" id="expectedReturn" class="input-field" value="7" min="0" max="30" step="0.1" data-i18n-placeholder="expected_return">
+              <span class="input-suffix">%</span>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="inflationRate" data-i18n="inflation_rate">Expected Inflation</label>
+            <div class="input-row">
+              <input type="number" id="inflationRate" class="input-field" value="3" min="0" max="15" step="0.1" data-i18n-placeholder="inflation_rate">
+              <span class="input-suffix">%</span>
+            </div>
+          </div>
+
+          <button class="btn-calculate" id="calculateBtn" data-i18n="calculate">Calculate</button>
+        </div>
+
+        <div class="calc-results-panel" id="resultsPanel">
+          <div class="empty-state" id="emptyState">
+            <div class="empty-icon">🏖️</div>
+            <p data-i18n="enter_values">Enter your details to see retirement projections</p>
+          </div>
+
+          <div id="resultsContent" style="display: none;">
+            <div class="result-summary">
+              <div class="result-item highlight">
+                <div class="result-label" data-i18n="total_at_retirement">Total at Retirement</div>
+                <div class="result-value" id="totalAtRetirement">$0.00</div>
+              </div>
+              <div class="result-item">
+                <div class="result-label" data-i18n="total_contributions">Total Contributions</div>
+                <div class="result-value small" id="totalContributions">$0.00</div>
+              </div>
+              <div class="result-item">
+                <div class="result-label" data-i18n="investment_growth">Investment Growth</div>
+                <div class="result-value small" id="investmentGrowth">$0.00</div>
+              </div>
+              <div class="result-item">
+                <div class="result-label" data-i18n="inflation_adjusted">Inflation-Adjusted Value</div>
+                <div class="result-value small" id="inflationAdjusted">$0.00</div>
+              </div>
+            </div>
+
+            <div class="result-summary" style="grid-template-columns: 1fr;">
+              <div class="result-item highlight">
+                <div class="result-label" data-i18n="monthly_income">Monthly Income in Retirement (4% Rule)</div>
+                <div class="result-value" id="monthlyIncome">$0.00</div>
+              </div>
+            </div>
+
+            <button class="amort-toggle" id="toggleTable">
+              <span class="arrow">▶</span>
+              <span data-i18n="show_table">Show Year-by-Year Growth</span>
+            </button>
+
+            <div class="amort-table-wrap" id="tableWrap">
+              <table class="amort-table">
+                <thead>
+                  <tr>
+                    <th data-i18n="age_col">Age</th>
+                    <th data-i18n="contrib_col">Contributions</th>
+                    <th data-i18n="growth_col">Growth</th>
+                    <th data-i18n="balance_col">Balance</th>
+                  </tr>
+                </thead>
+                <tbody id="yearlyTableBody">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="tool-about" id="about">
+        <h2 data-i18n="about_title">About Retirement Calculator</h2>
+
+        <h3 data-i18n="what_title">What is a Retirement Calculator?</h3>
+        <p data-i18n="what_desc1">A retirement calculator is an essential financial planning tool that helps you estimate how much money you'll have saved by the time you retire. Understanding your projected retirement savings is crucial for making informed decisions about your current spending, saving habits, and investment strategy.</p>
+        <p data-i18n="what_desc2">Our free retirement calculator takes into account your current age, target retirement age, existing savings, monthly contributions, expected investment returns, and inflation rates. This comprehensive approach gives you a realistic picture of your financial future and helps you identify if you're on track to meet your retirement goals.</p>
+
+        <h3 data-i18n="how_title">Understanding the 4% Rule</h3>
+        <p data-i18n="how_desc">The 4% rule is a widely-used retirement planning guideline that suggests you can safely withdraw 4% of your portfolio each year in retirement without running out of money for at least 30 years. Our calculator applies this rule to estimate your monthly retirement income by taking your total retirement savings and multiplying by 0.04, then dividing by 12.</p>
+
+        <h3 data-i18n="inflation_title">Why Inflation Matters</h3>
+        <p data-i18n="inflation_desc">Inflation gradually erodes the purchasing power of money over time. A comfortable retirement lifestyle that costs $50,000 today might require $75,000 or more in 20 years due to inflation. Our calculator shows you both the nominal retirement balance and its inflation-adjusted value in today's dollars, giving you a clearer picture of your actual purchasing power in retirement.</p>
+
+        <h3 data-i18n="planning_title">Retirement Planning Tips</h3>
+        <ul>
+          <li data-i18n="tip1">Start as early as possible: The power of compound interest means that starting at 25 instead of 35 can significantly increase your retirement savings.</li>
+          <li data-i18n="tip2">Take advantage of employer matching: If your employer offers 401(k) matching, always contribute enough to get the full match—it's essentially free money.</li>
+          <li data-i18n="tip3">Maximize tax-advantaged accounts: Traditional IRAs, Roth IRAs, and 401(k)s offer tax benefits that can accelerate your wealth building.</li>
+          <li data-i18n="tip4">Diversify your investments: Don't rely on a single investment type. A mix of stocks, bonds, and other assets can help manage risk.</li>
+          <li data-i18n="tip5">Plan for healthcare costs: Medical expenses often increase in retirement. Consider these costs when planning your retirement budget.</li>
+          <li data-i18n="tip6">Reassess regularly: Your retirement plan should evolve as your life circumstances change. Review your strategy annually or after major life events.</li>
+        </ul>
+
+        <h3 data-i18n="factors_title">Factors That Affect Retirement Savings</h3>
+        <p data-i18n="factors_desc">Several key factors influence how much you'll have saved for retirement: your current age and target retirement age determine your investment time horizon; your monthly contribution amount directly affects your total savings; expected investment returns dramatically impact compound growth; and inflation rates affect the real purchasing power of your savings. Use our calculator to see how adjusting these variables impacts your retirement projections.</p>
+
+        <h3 data-i18n="goals_title">Setting Retirement Goals</h3>
+        <p data-i18n="goals_desc">Financial experts recommend replacing 70-80% of your pre-retirement income during retirement. This is because some expenses (like commuting costs, work clothes, and retirement contributions) decrease, while others (like healthcare and leisure activities) may increase. Use our retirement calculator to determine if your current savings rate will allow you to maintain your desired lifestyle in retirement.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 CalcHub. <span data-i18n="footer_text">Free financial calculators for smarter decisions.</span> <a href="../privacy.html" data-i18n="privacy_policy">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+  <script>window.I18N_PAGE_ID = "retirement-calculator";</script>
+  <script src="../translations.js"></script>
+  <script src="../i18n.js"></script>
+  <script>
+    (function() {
+      var currentAgeInput = document.getElementById('currentAge');
+      var retirementAgeInput = document.getElementById('retirementAge');
+      var currentSavingsInput = document.getElementById('currentSavings');
+      var monthlyContributionInput = document.getElementById('monthlyContribution');
+      var expectedReturnInput = document.getElementById('expectedReturn');
+      var inflationRateInput = document.getElementById('inflationRate');
+      var calculateBtn = document.getElementById('calculateBtn');
+      var emptyState = document.getElementById('emptyState');
+      var resultsContent = document.getElementById('resultsContent');
+      var totalAtRetirementEl = document.getElementById('totalAtRetirement');
+      var totalContribEl = document.getElementById('totalContributions');
+      var investmentGrowthEl = document.getElementById('investmentGrowth');
+      var inflationAdjustedEl = document.getElementById('inflationAdjusted');
+      var monthlyIncomeEl = document.getElementById('monthlyIncome');
+      var yearlyTableBody = document.getElementById('yearlyTableBody');
+      var toggleTableBtn = document.getElementById('toggleTable');
+      var tableWrap = document.getElementById('tableWrap');
+      var tableOpen = false;
+
+      function formatCurrency(num) {
+        var str = Math.abs(num).toFixed(2);
+        var parts = str.split('.');
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        return (num < 0 ? '-' : '') + '$' + parts.join('.');
+      }
+
+      function calculate() {
+        var currentAge = parseInt(currentAgeInput.value) || 0;
+        var retirementAge = parseInt(retirementAgeInput.value) || 0;
+        var currentSavings = parseFloat(currentSavingsInput.value) || 0;
+        var monthlyContribution = parseFloat(monthlyContributionInput.value) || 0;
+        var expectedReturn = parseFloat(expectedReturnInput.value) || 0;
+        var inflationRate = parseFloat(inflationRateInput.value) || 0;
+
+        if (currentAge < 18 || retirementAge <= currentAge || currentSavings < 0 || monthlyContribution < 0 || expectedReturn < 0) {
+          emptyState.style.display = 'block';
+          resultsContent.style.display = 'none';
+          return;
+        }
+
+        var yearsToRetirement = retirementAge - currentAge;
+        var monthsToRetirement = yearsToRetirement * 12;
+        var monthlyRate = expectedReturn / 100 / 12;
+        var monthlyInflation = inflationRate / 100 / 12;
+
+        var totalAtRetirement;
+        if (monthlyRate === 0) {
+          totalAtRetirement = currentSavings + monthlyContribution * monthsToRetirement;
+        } else {
+          totalAtRetirement = currentSavings * Math.pow(1 + monthlyRate, monthsToRetirement) +
+            monthlyContribution * ((Math.pow(1 + monthlyRate, monthsToRetirement) - 1) / monthlyRate);
+        }
+
+        var totalContributions = currentSavings + monthlyContribution * monthsToRetirement;
+        var investmentGrowth = totalAtRetirement - totalContributions;
+
+        var inflationAdjusted;
+        if (monthlyInflation === 0) {
+          inflationAdjusted = totalAtRetirement;
+        } else {
+          inflationAdjusted = totalAtRetirement / Math.pow(1 + monthlyInflation, yearsToRetirement);
+        }
+
+        var monthlyIncome = totalAtRetirement * 0.04 / 12;
+
+        emptyState.style.display = 'none';
+        resultsContent.style.display = 'block';
+
+        totalAtRetirementEl.textContent = formatCurrency(totalAtRetirement);
+        totalContribEl.textContent = formatCurrency(totalContributions);
+        investmentGrowthEl.textContent = formatCurrency(investmentGrowth);
+        inflationAdjustedEl.textContent = formatCurrency(inflationAdjusted);
+        monthlyIncomeEl.textContent = formatCurrency(monthlyIncome);
+
+        yearlyTableBody.innerHTML = '';
+        for (var year = 0; year <= yearsToRetirement; year++) {
+          var age = currentAge + year;
+          var months = year * 12;
+          var balance, contrib;
+
+          if (monthlyRate === 0) {
+            balance = currentSavings + monthlyContribution * months;
+          } else {
+            balance = currentSavings * Math.pow(1 + monthlyRate, months) +
+              monthlyContribution * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate);
+          }
+
+          contrib = currentSavings + monthlyContribution * months;
+          var growth = balance - contrib;
+
+          var row = document.createElement('tr');
+          row.innerHTML =
+            '<td>' + age + '</td>' +
+            '<td>' + formatCurrency(contrib) + '</td>' +
+            '<td>' + formatCurrency(growth) + '</td>' +
+            '<td>' + formatCurrency(balance) + '</td>';
+          yearlyTableBody.appendChild(row);
+        }
+      }
+
+      calculateBtn.addEventListener('click', calculate);
+
+      currentAgeInput.addEventListener('input', calculate);
+      retirementAgeInput.addEventListener('input', calculate);
+      currentSavingsInput.addEventListener('input', calculate);
+      monthlyContributionInput.addEventListener('input', calculate);
+      expectedReturnInput.addEventListener('input', calculate);
+      inflationRateInput.addEventListener('input', calculate);
+
+      toggleTableBtn.addEventListener('click', function() {
+        tableOpen = !tableOpen;
+        if (tableOpen) {
+          tableWrap.classList.add('show');
+          toggleTableBtn.querySelector('.arrow').textContent = '▼';
+          toggleTableBtn.querySelector('span:last-child').textContent = document.querySelector('[data-i18n="hide_table"]') ? document.querySelector('[data-i18n="hide_table"]').textContent : 'Hide Year-by-Year Growth';
+        } else {
+          tableWrap.classList.remove('show');
+          toggleTableBtn.querySelector('.arrow').textContent = '▶';
+          toggleTableBtn.querySelector('span:last-child').textContent = document.querySelector('[data-i18n="show_table"]') ? document.querySelector('[data-i18n="show_table"]').textContent : 'Show Year-by-Year Growth';
+        }
+      });
+
+      calculate();
+    })();
+  </script>
+
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

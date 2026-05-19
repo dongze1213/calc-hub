@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Loan Calculator | Personal Loan Payment & Interest</title>
+  <meta name="description" content="Calculate personal loan payments, total interest, and view a complete payment schedule. Free, instant, and 100% private loan calculator.">
+  <meta name="keywords" content="loan calculator, personal loan calculator, monthly payment calculator, loan interest calculator, payment schedule">
+  <link rel="canonical" href="https://calchub.vercel.app/tools/loan-calculator.html">
+  <meta property="og:url" content="https://calchub.vercel.app/tools/loan-calculator.html">
+  <meta property="og:title" content="Free Loan Calculator | Personal Loan Payment & Interest">
+  <meta property="og:description" content="Calculate personal loan payments, total interest, and view a complete payment schedule. Free, instant, and 100% private.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://calchub.vercel.app/img/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Loan Calculator | Personal Loan Payment & Interest">
+  <meta name="twitter:description" content="Calculate personal loan payments, total interest, and view a complete payment schedule.">
+  <meta name="twitter:image" content="https://calchub.vercel.app/img/og-image.png">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialProduct",
+    "name": "Loan Calculator",
+    "description": "Free personal loan calculator to estimate monthly payments and view payment schedule",
+    "brand": { "@type": "Brand", "name": "CalcHub" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo">
+        <span class="logo-icon">💰</span>
+        <span>CalcHub</span>
+      </a>
+      <nav class="nav">
+        <a href="../index.html#tools" data-i18n="nav_tools">Calculators</a>
+        <a href="../index.html#about" data-i18n="nav_about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container tool-page">
+    <div class="tool-header">
+      <a href="../index.html" class="back-link" data-i18n="back">&larr; Back</a>
+      <h1 data-i18n="title">Loan Calculator</h1>
+      <span class="privacy-note" data-i18n="local_processing">🔒 100% Private Calculations</span>
+    </div>
+
+    <div class="calc-layout">
+      <!-- Input Panel -->
+      <div class="calc-input-panel">
+        <div class="input-group">
+          <label for="loanAmount" data-i18n="loan_amount">Loan Amount</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="text" id="loanAmount" class="input-field" value="25,000" placeholder="25000">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="interestRate" data-i18n="interest_rate">Interest Rate</label>
+          <div class="input-row">
+            <input type="number" id="interestRate" class="input-field" value="8.5" min="0" max="30" step="0.125">
+            <span class="input-suffix">%</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="loanTerm" data-i18n="loan_term">Loan Term</label>
+          <select id="loanTerm" class="input-field">
+            <option value="1">1 year</option>
+            <option value="2">2 years</option>
+            <option value="3">3 years</option>
+            <option value="4">4 years</option>
+            <option value="5" selected>5 years</option>
+            <option value="7">7 years</option>
+            <option value="10">10 years</option>
+          </select>
+        </div>
+
+        <button class="btn-calculate" onclick="calculate()" data-i18n="calculate">Calculate</button>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="calc-results-panel" id="results">
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">🧮</div>
+          <p>Enter your values and click Calculate</p>
+        </div>
+        <div id="resultContent" style="display:none">
+          <div class="result-summary">
+            <div class="result-item highlight">
+              <div class="result-label" data-i18n="monthly_payment">Monthly Payment</div>
+              <div class="result-value" id="monthlyPayment">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label" data-i18n="total_interest">Total Interest</div>
+              <div class="result-value small" id="totalInterest">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label" data-i18n="total_cost">Total Cost</div>
+              <div class="result-value small" id="totalCost">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label" data-i18n="principal_label">Principal</div>
+              <div class="result-value small" id="principalAmount">$0.00</div>
+            </div>
+          </div>
+
+          <button class="amort-toggle" id="scheduleToggle" onclick="toggleSchedule()">
+            <span class="arrow">▶</span>
+            <span data-i18n="show_schedule">Show Payment Schedule</span>
+          </button>
+          <div class="amort-table-wrap" id="scheduleTableWrap">
+            <table class="amort-table">
+              <thead>
+                <tr>
+                  <th data-i18n="month">Month</th>
+                  <th data-i18n="payment_col">Payment</th>
+                  <th data-i18n="principal_col">Principal</th>
+                  <th data-i18n="interest_col">Interest</th>
+                  <th data-i18n="balance_col">Balance</th>
+                </tr>
+              </thead>
+              <tbody id="scheduleTableBody">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="tool-about">
+      <h2 data-i18n="about_title">About Loan Calculator</h2>
+      <p data-i18n="about_desc">Our free loan calculator helps you estimate your monthly loan payment, total interest charges, and view a complete payment schedule. Whether you are considering a personal loan, student loan, or any other installment loan, this tool provides the clarity you need to make informed financial decisions.</p>
+
+      <h3 data-i18n="features_title">Features</h3>
+      <ul>
+        <li data-i18n="feat1">Calculate monthly payments for any loan amount and term</li>
+        <li data-i18n="feat2">View complete payment schedule showing principal vs interest breakdown</li>
+        <li data-i18n="feat3">Compare different loan terms and interest rates instantly</li>
+        <li data-i18n="feat4">100% client-side — your financial data never leaves your browser</li>
+      </ul>
+
+      <h3 data-i18n="what_title">What is a Personal Loan?</h3>
+      <p data-i18n="what_desc">A personal loan is an unsecured loan that you can use for any purpose, from debt consolidation to home improvements. Unlike mortgages or auto loans, personal loans typically do not require collateral. They are repaid in fixed monthly installments over a set period, with interest calculated based on your creditworthiness.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 CalcHub. <span data-i18n="footer_text">Free financial calculators for smarter decisions.</span> <a href="../privacy.html" data-i18n="privacy_policy">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+  <script>window.I18N_PAGE_ID = 'loan-calculator';</script>
+  <script src="../translations.js"></script>
+  <script src="../i18n.js"></script>
+  <script>
+    // Parse number from formatted string
+    function parseNumber(str) {
+      if (!str) return 0;
+      return parseFloat(str.replace(/,/g, '')) || 0;
+    }
+
+    // Format number as currency with commas
+    function formatCurrency(num) {
+      if (isNaN(num) || !isFinite(num)) return '$0.00';
+      return '$' + num.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    // Escape HTML to prevent XSS
+    function escapeHtml(text) {
+      var div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Format number input with commas
+    function formatNumberInput(input) {
+      var value = parseNumber(input.value);
+      if (value > 0) {
+        input.value = value.toLocaleString('en-US');
+      }
+    }
+
+    // Toggle payment schedule table visibility
+    function toggleSchedule() {
+      var wrap = document.getElementById('scheduleTableWrap');
+      var toggle = document.getElementById('scheduleToggle');
+      var span = toggle.querySelector('span:last-child');
+      var arrow = toggle.querySelector('.arrow');
+
+      if (wrap.classList.contains('show')) {
+        wrap.classList.remove('show');
+        toggle.classList.remove('open');
+        arrow.textContent = '\u25B6';
+        span.textContent = '\u00A0\u00A0' + (window.i18nDict && window.i18nDict['show_schedule'] || 'Show Payment Schedule');
+      } else {
+        wrap.classList.add('show');
+        toggle.classList.add('open');
+        arrow.textContent = '\u25BC';
+        span.textContent = '\u00A0\u00A0' + (window.i18nDict && window.i18nDict['hide_schedule'] || 'Hide Payment Schedule');
+      }
+    }
+
+    // Main calculation function
+    function calculate() {
+      var loanAmount = parseNumber(document.getElementById('loanAmount').value);
+      var interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
+      var loanTerm = parseInt(document.getElementById('loanTerm').value, 10) || 5;
+
+      // Validation
+      if (loanAmount <= 0) {
+        alert('Please enter a valid loan amount.');
+        return;
+      }
+      if (interestRate < 0 || interestRate > 30) {
+        alert('Please enter a valid interest rate between 0% and 30%.');
+        return;
+      }
+      if (loanTerm <= 0) {
+        alert('Please select a valid loan term.');
+        return;
+      }
+
+      var annualRate = interestRate / 100;
+      var monthlyRate = annualRate / 12;
+      var numPayments = loanTerm * 12;
+
+      // Calculate monthly payment using amortization formula
+      var monthlyPayment;
+      if (monthlyRate === 0) {
+        monthlyPayment = loanAmount / numPayments;
+      } else {
+        var factor = Math.pow(1 + monthlyRate, numPayments);
+        monthlyPayment = loanAmount * (monthlyRate * factor) / (factor - 1);
+      }
+
+      // Calculate totals
+      var totalCost = monthlyPayment * numPayments;
+      var totalInterest = totalCost - loanAmount;
+
+      // Update display
+      document.getElementById('monthlyPayment').textContent = formatCurrency(monthlyPayment);
+      document.getElementById('totalInterest').textContent = formatCurrency(totalInterest);
+      document.getElementById('totalCost').textContent = formatCurrency(totalCost);
+      document.getElementById('principalAmount').textContent = formatCurrency(loanAmount);
+
+      // Generate payment schedule
+      generatePaymentSchedule(loanAmount, monthlyPayment, monthlyRate);
+
+      // Show results
+      document.getElementById('emptyState').style.display = 'none';
+      document.getElementById('resultContent').style.display = 'block';
+    }
+
+    // Generate payment schedule table
+    function generatePaymentSchedule(principal, monthlyPayment, monthlyRate) {
+      var tbody = document.getElementById('scheduleTableBody');
+      tbody.innerHTML = '';
+
+      var balance = principal;
+      var rows = '';
+
+      for (var month = 1; month <= principal * 100 / 1; month++) {
+        if (balance <= 0) break;
+
+        var interestPayment = balance * monthlyRate;
+        var principalPayment = monthlyPayment - interestPayment;
+
+        // Handle final payment rounding
+        if (principalPayment > balance) {
+          principalPayment = balance;
+          monthlyPayment = principalPayment + interestPayment;
+        }
+
+        balance -= principalPayment;
+        if (balance < 0.01) balance = 0;
+
+        var row = '<tr>' +
+          '<td>' + escapeHtml(String(month)) + '</td>' +
+          '<td>' + escapeHtml(formatCurrency(monthlyPayment)) + '</td>' +
+          '<td>' + escapeHtml(formatCurrency(principalPayment)) + '</td>' +
+          '<td>' + escapeHtml(formatCurrency(interestPayment)) + '</td>' +
+          '<td>' + escapeHtml(formatCurrency(balance)) + '</td>' +
+          '</tr>';
+
+        rows += row;
+
+        // Stop if balance is paid off
+        if (balance <= 0) break;
+      }
+
+      tbody.innerHTML = rows;
+    }
+
+    // Initialize
+    var i18nDict = null;
+    function updateI18nDict() {
+      if (window.I18N_ALL && window.I18N_GET) {
+        var pageId = 'loan-calculator';
+        var lang = localStorage.getItem('calchub-lang') || 'en';
+        i18nDict = window.I18N_GET(pageId, lang);
+      }
+    }
+
+    // Set up event listeners when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+      updateI18nDict();
+
+      // Format loan amount on blur
+      var loanAmountInput = document.getElementById('loanAmount');
+      loanAmountInput.addEventListener('blur', function() {
+        formatNumberInput(this);
+      });
+
+      // Auto-calculate on input changes
+      var inputs = document.querySelectorAll('.calc-input-panel .input-field');
+      for (var i = 0; i < inputs.length; i++) {
+        inputs[i].addEventListener('input', function() {
+          // Only auto-calculate after initial setup
+          if (document.getElementById('resultContent').style.display !== 'none') {
+            calculate();
+          }
+        });
+      }
+
+      // Initial calculation
+      calculate();
+    });
+  </script>
+
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free ROI Calculator | Return on Investment Calculator</title>
+  <meta name="description" content="Calculate return on investment (ROI) for any asset. See net profit, annualized return, and ROI percentage instantly. Free, accurate, 100% private.">
+  <meta name="keywords" content="ROI calculator, return on investment calculator, investment return, annualized return, profit calculator, investment performance">
+  <link rel="canonical" href="https://calchub.vercel.app/tools/roi-calculator.html">
+  <meta property="og:url" content="https://calchub.vercel.app/tools/roi-calculator.html">
+  <meta property="og:title" content="Free ROI Calculator | Return on Investment Calculator">
+  <meta property="og:description" content="Calculate return on investment for any asset. See net profit, annualized return, and ROI percentage. Free, instant, and 100% private.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://calchub.vercel.app/img/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free ROI Calculator | Return on Investment Calculator">
+  <meta name="twitter:description" content="Calculate return on investment for any asset. See net profit, annualized return, and ROI percentage.">
+  <meta name="twitter:image" content="https://calchub.vercel.app/img/og-image.png">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialProduct",
+    "name": "ROI Calculator",
+    "description": "Free ROI calculator to measure return on investment, net profit, and annualized return",
+    "brand": { "@type": "Brand", "name": "CalcHub" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo">
+        <span class="logo-icon">💰</span>
+        <span>CalcHub</span>
+      </a>
+      <nav class="nav">
+        <a href="../index.html#tools" data-i18n="nav_tools">Calculators</a>
+        <a href="../index.html#about" data-i18n="nav_about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container tool-page">
+    <div class="tool-header">
+      <a href="../index.html" class="back-link" data-i18n="back">&larr; Back</a>
+      <h1 data-i18n="title">ROI Calculator</h1>
+      <span class="privacy-note" data-i18n="local_processing">🔒 100% Private Calculations</span>
+    </div>
+
+    <div class="calc-layout">
+      <!-- Input Panel -->
+      <div class="calc-input-panel">
+        <div class="input-group">
+          <label for="investmentAmount" data-i18n="investment_amount">Investment Amount</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="text" id="investmentAmount" class="input-field" value="10,000" placeholder="10000">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="finalValue" data-i18n="final_value">Final Value / Return Amount</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="text" id="finalValue" class="input-field" value="15,000" placeholder="15000">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="holdingPeriod" data-i18n="holding_period">Holding Period</label>
+          <div class="input-row">
+            <input type="number" id="holdingPeriod" class="input-field" value="3" min="0.1" max="100" step="0.5">
+            <span class="input-suffix" data-i18n="years">years</span>
+          </div>
+        </div>
+
+        <button class="btn-calculate" onclick="calculate()" data-i18n="calculate">Calculate</button>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="calc-results-panel" id="results">
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">🧮</div>
+          <p>Enter your values and click Calculate</p>
+        </div>
+        <div id="resultContent" style="display:none">
+          <div class="result-summary">
+            <div class="result-item highlight">
+              <div class="result-label" data-i18n="roi_pct">ROI</div>
+              <div class="result-value" id="roiPct">0%</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label" data-i18n="net_profit">Net Profit/Loss</div>
+              <div class="result-value small" id="netProfit">$0.00</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label" data-i18n="annualized_return">Annualized Return</div>
+              <div class="result-value small" id="annualizedReturn">0%</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label" data-i18n="total_multiplier">Total Multiplier</div>
+              <div class="result-value small" id="totalMultiplier">0x</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="tool-about">
+      <h2 data-i18n="about_title">About ROI Calculator</h2>
+      <p data-i18n="about_desc">Our free ROI calculator helps you measure the profitability of any investment. Return on Investment (ROI) is one of the most widely used financial metrics for evaluating investment performance. Whether you are analyzing stock returns, real estate investments, business ventures, or any other asset, this calculator gives you instant clarity on your investment gains or losses.</p>
+
+      <h3 data-i18n="features_title">Features</h3>
+      <ul>
+        <li data-i18n="feat1">Calculate simple ROI percentage for any investment</li>
+        <li data-i18n="feat2">See net profit or loss in dollar terms</li>
+        <li data-i18n="feat3">Calculate annualized return to compare investments of different holding periods</li>
+        <li data-i18n="feat4">100% client-side — your financial data never leaves your browser</li>
+      </ul>
+
+      <h3 data-i18n="what_title">What is ROI and How Is It Calculated?</h3>
+      <p data-i18n="what_desc">ROI (Return on Investment) measures the gain or loss generated by an investment relative to its cost. The formula is: ROI = (Final Value - Investment Amount) / Investment Amount x 100. For example, if you invest $10,000 and it grows to $15,000, your ROI is 50%. However, ROI does not account for time. That is where annualized return comes in: Annualized Return = (1 + ROI/100)^(1/years) - 1. A 50% ROI over 3 years equals about 14.5% annualized, while 50% over 1 year is 50% annualized. Annualized returns allow you to fairly compare investments held for different periods.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 CalcHub. <span data-i18n="footer_text">Free financial calculators for smarter decisions.</span> <a href="../privacy.html" data-i18n="privacy_policy">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+  <script>window.I18N_PAGE_ID = 'roi-calculator';</script>
+  <script src="../translations.js"></script>
+  <script src="../i18n.js"></script>
+  <script>
+    function parseNumber(str) {
+      if (!str) return 0;
+      return parseFloat(str.replace(/,/g, '')) || 0;
+    }
+
+    function formatCurrency(num) {
+      if (isNaN(num) || !isFinite(num)) return '$0.00';
+      return '$' + num.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    function formatNumberInput(input) {
+      var value = parseNumber(input.value);
+      if (value > 0) {
+        input.value = value.toLocaleString('en-US');
+      }
+    }
+
+    function calculate() {
+      var investmentAmount = parseNumber(document.getElementById('investmentAmount').value);
+      var finalValue = parseNumber(document.getElementById('finalValue').value);
+      var holdingPeriod = parseFloat(document.getElementById('holdingPeriod').value) || 0;
+
+      if (investmentAmount <= 0) {
+        alert('Please enter a valid investment amount greater than zero.');
+        return;
+      }
+      if (finalValue < 0) {
+        alert('Final value cannot be negative.');
+        return;
+      }
+      if (holdingPeriod <= 0) {
+        alert('Please enter a valid holding period greater than zero.');
+        return;
+      }
+
+      var netProfit = finalValue - investmentAmount;
+      var roi = (netProfit / investmentAmount) * 100;
+      var multiplier = finalValue / investmentAmount;
+      var annualizedReturn = (Math.pow(1 + roi / 100, 1 / holdingPeriod) - 1) * 100;
+
+      document.getElementById('roiPct').textContent = roi.toFixed(2) + '%';
+      document.getElementById('netProfit').textContent = formatCurrency(netProfit);
+      document.getElementById('annualizedReturn').textContent = annualizedReturn.toFixed(2) + '%';
+      document.getElementById('totalMultiplier').textContent = multiplier.toFixed(2) + 'x';
+
+      // Color code based on profit/loss
+      var profitEl = document.getElementById('netProfit');
+      if (netProfit >= 0) {
+        profitEl.style.color = 'var(--green)';
+      } else {
+        profitEl.style.color = 'var(--red)';
+      }
+
+      var roiEl = document.getElementById('roiPct');
+      if (roi >= 0) {
+        roiEl.style.color = 'var(--green)';
+      } else {
+        roiEl.style.color = 'var(--red)';
+      }
+
+      document.getElementById('emptyState').style.display = 'none';
+      document.getElementById('resultContent').style.display = 'block';
+    }
+
+    var i18nDict = null;
+    function updateI18nDict() {
+      if (window.I18N_ALL && window.I18N_GET) {
+        var lang = localStorage.getItem('calchub-lang') || 'en';
+        i18nDict = window.I18N_GET('roi-calculator', lang);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      updateI18nDict();
+
+      var currencyInputs = ['investmentAmount', 'finalValue'];
+      for (var i = 0; i < currencyInputs.length; i++) {
+        var el = document.getElementById(currencyInputs[i]);
+        el.addEventListener('blur', function() {
+          formatNumberInput(this);
+        });
+      }
+
+      var inputs = document.querySelectorAll('.calc-input-panel .input-field');
+      for (var i = 0; i < inputs.length; i++) {
+        inputs[i].addEventListener('input', function() {
+          if (document.getElementById('resultContent').style.display !== 'none') {
+            calculate();
+          }
+        });
+      }
+
+      calculate();
+    });
+  </script>
+
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
