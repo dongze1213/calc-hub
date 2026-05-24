@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://calc-hub-2c7.pages.dev/sitemap.xml
