@@ -63,6 +63,30 @@
       </div>
     </section>
 
+    <section class="quick-calc-section" style="max-width:900px;margin:0 auto 2rem;padding:1.5rem;background:#fff;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+      <h2 style="margin:0 0 1rem;font-size:1.1rem;text-align:center;">Quick Compound Interest Calculator</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:end;margin-bottom:1rem;">
+        <div style="flex:1;min-width:150px;">
+          <label style="font-size:0.8rem;color:#666;display:block;margin-bottom:4px;">Principal ($)</label>
+          <input id="qcPrincipal" type="number" value="10000" style="width:100%;padding:8px 12px;border:1px solid #ddd;border-radius:6px;font-size:0.9rem;">
+        </div>
+        <div style="flex:1;min-width:120px;">
+          <label style="font-size:0.8rem;color:#666;display:block;margin-bottom:4px;">Rate (%)</label>
+          <input id="qcRate" type="number" value="5" step="0.1" style="width:100%;padding:8px 12px;border:1px solid #ddd;border-radius:6px;font-size:0.9rem;">
+        </div>
+        <div style="flex:1;min-width:120px;">
+          <label style="font-size:0.8rem;color:#666;display:block;margin-bottom:4px;">Years</label>
+          <input id="qcYears" type="number" value="10" style="width:100%;padding:8px 12px;border:1px solid #ddd;border-radius:6px;font-size:0.9rem;">
+        </div>
+        <button onclick="quickCalc()" style="padding:8px 20px;background:#2563eb;color:#fff;border:none;border-radius:6px;font-size:0.9rem;cursor:pointer;">Calculate</button>
+      </div>
+      <div id="qcResult" style="text-align:center;font-size:1rem;color:#333;">
+        <span style="font-weight:600;">Future Value:</span> <span id="qcFutureVal" style="color:#2563eb;font-weight:700;font-size:1.2rem;">$16,288.95</span>
+        <span style="margin-left:1rem;color:#666;">|</span>
+        <span style="margin-left:1rem;font-weight:600;">Interest Earned:</span> <span id="qcInterestVal" style="color:#16a34a;font-weight:700;">$6,288.95</span>
+      </div>
+    </section>
+
     <section id="tools" class="tools-section">
       <div class="container">
         <h2 data-i18n="all_tools">All Calculators</h2>
@@ -132,6 +156,76 @@
             <p data-i18n="salary_desc">Convert annual salary to hourly, weekly, bi-weekly, and monthly pay with US federal tax estimates.</p>
           </a>
 
+          <a href="./tools/inflation-calculator.html" class="tool-card">
+            <div class="tool-icon">🔥</div>
+            <h3>Inflation Calculator</h3>
+            <p>Calculate how inflation impacts purchasing power over time. See future value of money with year-by-year breakdown.</p>
+            <span class="tool-tag pink">New</span>
+          </a>
+
+          <a href="./tools/tip-calculator.html" class="tool-card">
+            <div class="tool-icon">💵</div>
+            <h3>Tip Calculator</h3>
+            <p>Calculate tips and split bills easily. Quick buttons for 15%, 18%, 20%, 25%. Split between any number of people.</p>
+            <span class="tool-tag blue">Essential</span>
+          </a>
+
+          <a href="./tools/sales-tax-calculator.html" class="tool-card">
+            <div class="tool-icon">🧾</div>
+            <h3>Sales Tax Calculator</h3>
+            <p>Calculate sales tax amount and total price instantly. Enter price before tax and tax rate to get the final cost.</p>
+            <span class="tool-tag pink">New</span>
+          </a>
+
+          <a href="./tools/discount-calculator.html" class="tool-card">
+            <div class="tool-icon">🏷</div>
+            <h3>Discount Calculator</h3>
+            <p>Calculate discount amount and final sale price. See exactly how much you save with percentage or fixed discounts.</p>
+            <span class="tool-tag blue">Essential</span>
+          </a>
+
+          <a href="./tools/break-even-calculator.html" class="tool-card">
+            <div class="tool-icon">📊</div>
+            <h3>Break Even Calculator</h3>
+            <p>Find the exact number of units you need to sell to cover costs. Calculate break-even point and revenue.</p>
+            <span class="tool-tag pink">New</span>
+          </a>
+
+          <a href="./tools/savings-goal-calculator.html" class="tool-card">
+            <div class="tool-icon">🎯</div>
+            <h3>Savings Goal Calculator</h3>
+            <p>Plan how much to save monthly to reach your goal. Includes interest earnings and timeline projections.</p>
+            <span class="tool-tag pink">New</span>
+          </a>
+
+          <a href="./tools/net-worth-calculator.html" class="tool-card">
+            <div class="tool-icon">🏦</div>
+            <h3>Net Worth Calculator</h3>
+            <p>Calculate your net worth by subtracting total liabilities from assets. Track your overall financial health.</p>
+            <span class="tool-tag pink">New</span>
+          </a>
+
+          <a href="./tools/debt-payoff-calculator.html" class="tool-card">
+            <div class="tool-icon">💳</div>
+            <h3>Debt Payoff Calculator</h3>
+            <p>See how long to pay off debt and total interest cost. View monthly amortization schedule with remaining balance.</p>
+            <span class="tool-tag pink">New</span>
+          </a>
+
+          <a href="./tools/auto-lease-calculator.html" class="tool-card">
+            <div class="tool-icon">🚗</div>
+            <h3>Auto Lease Calculator</h3>
+            <p>Calculate monthly lease payments based on MSRP, negotiated price, residual value, and money factor.</p>
+            <span class="tool-tag pink">New</span>
+          </a>
+
+          <a href="./tools/salary-converter.html" class="tool-card">
+            <div class="tool-icon">🔄</div>
+            <h3>Salary Converter</h3>
+            <p>Convert between hourly, daily, weekly, bi-weekly, monthly, and annual salary. Based on standard 40-hour work week.</p>
+            <span class="tool-tag pink">New</span>
+          </a>
+
         </div>
       </div>
     </section>
@@ -183,5 +277,17 @@
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
+  <script>
+    function quickCalc() {
+      var p = parseFloat(document.getElementById('qcPrincipal').value) || 0;
+      var r = (parseFloat(document.getElementById('qcRate').value) || 0) / 100;
+      var t = parseInt(document.getElementById('qcYears').value) || 0;
+      var fv = p * Math.pow(1 + r / 12, 12 * t);
+      var interest = fv - p;
+      document.getElementById('qcFutureVal').textContent = '$' + fv.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+      document.getElementById('qcInterestVal').textContent = '$' + interest.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+    }
+    quickCalc();
+  </script>
 </body>
 </html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="3OxWRmOeMFoUsUXdGtGhTVUvv1oKgkilF_qMHlAojRU" />
+  <title>Free Auto Lease Calculator | CalcHub</title>
+  <meta name="description" content="Calculate your monthly car lease payment. Enter MSRP, negotiated price, residual value, lease term, money factor, and fees to get your exact monthly payment.">
+  <link rel="canonical" href="https://calc-hub-two.vercel.app/tools/auto-lease-calculator">
+  <meta property="og:title" content="Free Auto Lease Calculator | CalcHub">
+  <meta property="og:description" content="Calculate your monthly car lease payment. Enter MSRP, negotiated price, residual value, lease term, money factor, and fees to get your exact monthly payment.">
+  <meta property="og:url" content="https://calc-hub-two.vercel.app/tools/auto-lease-calculator">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialProduct",
+    "name": "Free Auto Lease Calculator",
+    "description": "Calculate your monthly car lease payment. Enter MSRP, negotiated price, residual value, lease term, money factor, and fees to get your exact monthly payment.",
+    "brand": { "@type": "Brand", "name": "CalcHub" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a car lease money factor?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The money factor is the interest rate on a lease, expressed as a decimal. To convert to APR, multiply by 2400. For example, a money factor of 0.00125 equals an APR of 3%." }
+          },          {
+            "@type": "Question",
+            "name": "What is residual value in a lease?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Residual value is the estimated worth of the car at the end of the lease, expressed as a percentage of MSRP. Higher residual values mean lower monthly payments." }
+          },          {
+            "@type": "Question",
+            "name": "What is a good residual value percentage?",
+            "acceptedAnswer": { "@type": "Answer", "text": "For a 36-month lease, a residual value of 50-60% is typical. Luxury cars tend to have higher residuals. Electric vehicles vary widely." }
+          },          {
+            "@type": "Question",
+            "name": "What fees should I expect in a lease?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Common fees include acquisition fee ($300-$900), disposition fee ($300-$500 at lease end), security deposit, and first month payment. Some are negotiable." }
+          }
+      ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo"><span class="logo-icon">💰</span><span>CalcHub</span></a>
+      <nav class="nav">
+        <a href="../index.html#tools">Calculators</a>
+        <a href="../index.html#about">About</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container tool-page">
+    <div class="tool-header">
+      <a href="../index.html" class="back-link">← Back</a>
+      <h1>Free Auto Lease Calculator</h1>
+      <span class="privacy-note">🔒 100% Private Calculations</span>
+    </div>
+    <div class="calc-layout">
+      <div class="calc-input-panel">
+        <div class="input-group">
+          <label for="msrp">MSRP ($)</label>
+          <div class="input-row"><span class="input-prefix">$</span>
+          <input type="number" id="msrp" class="input-field" value="35000" min="0" step="500">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="negPrice">Negotiated Price ($)</label>
+          <div class="input-row"><span class="input-prefix">$</span>
+          <input type="number" id="negPrice" class="input-field" value="32000" min="0" step="500">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="residualPct">Residual Value (%)</label>
+          <div class="input-row">
+            <input type="number" id="residualPct" class="input-field" value="55" min="0" max="100" step="1">
+            <span class="input-suffix">%</span>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="leaseTerm">Lease Term (months)</label>
+          <select id="leaseTerm" class="input-field">
+            <option value="24">24 months</option>
+            <option value="36" selected>36 months</option>
+            <option value="48">48 months</option>
+            <option value="60">60 months</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="moneyFactor">Money Factor</label>
+          <input type="number" id="moneyFactor" class="input-field" value="0.00125" min="0" step="0.00001" style="font-size:14px">
+          <div style="font-size:0.75rem;color:var(--text3);margin-top:4px">APR = Money Factor × 2400 = <span id="aprDisplay">3.0%</span></div>
+        </div>
+        <div class="input-group">
+          <label for="driveOff">Drive-Off Fees ($)</label>
+          <div class="input-row"><span class="input-prefix">$</span>
+          <input type="number" id="driveOff" class="input-field" value="2000" min="0" step="100">
+          </div>
+        </div>
+        <button class="btn-generate" onclick="calcLease()">&#128663; Calculate Lease</button>
+      </div>
+      <div class="calc-results-panel">
+        <div class="result-summary">
+          <div class="result-item highlight">
+            <div class="result-label">Monthly Payment</div>
+            <div class="result-value" id="monthlyPayment">$0.00</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Depreciation Cost</div>
+            <div class="result-value small" id="depCost">$0.00</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Total Lease Cost</div>
+            <div class="result-value small" id="totalLeaseCost">$0.00</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Finance Charge</div>
+            <div class="result-value small" id="financeCharge">$0.00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tool-about">
+      <h2>About Auto Lease Calculator</h2>
+      <p>Understand exactly what you are paying for when leasing a car. Our calculator breaks down the monthly payment into depreciation and finance charges, so you can evaluate lease deals with confidence.</p>
+      <h3>How Leases Work</h3>
+      <p>A lease payment has two components: depreciation (the car's loss in value during the lease) and a finance charge (interest on the lease). The formula is: <strong>Monthly = (Negotiated Price - Residual) / Term + (Negotiated Price + Residual) × Money Factor</strong>.</p>
+      <h3>Features</h3>
+      <ul>
+        <li>Calculate monthly lease payment from key parameters</li>
+        <li>Money factor to APR conversion</li>
+        <li>Breakdown of depreciation cost vs. finance charge</li>
+        <li>Total lease cost including drive-off fees</li>
+      </ul>
+    </div>
+    <div class="tool-about faq-section">
+      <h2>Free Auto Lease Calculator FAQ</h2>
+      <h3>What is a car lease money factor?</h3>
+      <p>The money factor is the interest rate on a lease, expressed as a decimal. To convert to APR, multiply by 2400. For example, a money factor of 0.00125 equals an APR of 3%.</p>
+      <h3>What is residual value in a lease?</h3>
+      <p>Residual value is the estimated worth of the car at the end of the lease, expressed as a percentage of MSRP. Higher residual values mean lower monthly payments.</p>
+      <h3>What is a good residual value percentage?</h3>
+      <p>For a 36-month lease, a residual value of 50-60% is typical. Luxury cars tend to have higher residuals. Electric vehicles vary widely.</p>
+      <h3>What fees should I expect in a lease?</h3>
+      <p>Common fees include acquisition fee ($300-$900), disposition fee ($300-$500 at lease end), security deposit, and first month payment. Some are negotiable.</p>
+    </div>
+  </main>
+  <section class="related-tools" style="max-width:900px;margin:2rem auto;padding:1.5rem;background:var(--bg-secondary,#f8f9fa);border-radius:12px;">
+    <h2 style="margin:0 0 1rem;font-size:1.1rem;">Related Calculators</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <a href="mortgage-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Mortgage Calculator</a>
+      <a href="loan-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Loan Calculator</a>
+      <a href="auto-loan-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Auto Loan Calculator</a>
+      <a href="compound-interest-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Compound Interest Calculator</a>
+      <a href="investment-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Investment Calculator</a>
+      <a href="savings-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Savings Calculator</a>
+    </div>
+  </section>
+  <footer class="footer"><div class="container"><p>&copy; 2025 CalcHub. Free financial calculators for smarter decisions. <a href="../privacy.html">Privacy Policy</a></p></div></footer>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script>
+    function calcLease() {
+      var msrp = parseFloat(document.getElementById('msrp').value) || 0;
+      var neg = parseFloat(document.getElementById('negPrice').value) || 0;
+      var resPct = parseFloat(document.getElementById('residualPct').value) || 0;
+      var term = parseInt(document.getElementById('leaseTerm').value) || 36;
+      var mf = parseFloat(document.getElementById('moneyFactor').value) || 0;
+      var driveOff = parseFloat(document.getElementById('driveOff').value) || 0;
+
+      var apr = mf * 2400;
+      document.getElementById('aprDisplay').textContent = apr.toFixed(2) + '%';
+
+      var residual = msrp * resPct / 100;
+      var depreciation = neg - residual;
+      var monthlyDep = depreciation / term;
+      var monthlyFinance = (neg + residual) * mf;
+      var monthly = monthlyDep + monthlyFinance;
+      var totalLease = monthly * term + driveOff;
+      var financeCharge = monthlyFinance * term;
+
+      document.getElementById('monthlyPayment').textContent = fmt(monthly);
+      document.getElementById('depCost').textContent = fmt(depreciation);
+      document.getElementById('totalLeaseCost').textContent = fmt(totalLease);
+      document.getElementById('financeCharge').textContent = fmt(financeCharge);
+    }
+    function fmt(n) { return '$' + n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+    calcLease();
+  </script>
+</body>
+</html>

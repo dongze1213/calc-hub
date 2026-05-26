@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="3OxWRmOeMFoUsUXdGtGhTVUvv1oKgkilF_qMHlAojRU" />
+  <title>Free Savings Goal Calculator | CalcHub</title>
+  <meta name="description" content="Plan your savings to reach any financial goal. Calculate how long it will take, how much to save monthly, and how much interest you will earn along the way.">
+  <link rel="canonical" href="https://calc-hub-two.vercel.app/tools/savings-goal-calculator">
+  <meta property="og:title" content="Free Savings Goal Calculator | CalcHub">
+  <meta property="og:description" content="Plan your savings to reach any financial goal. Calculate how long it will take, how much to save monthly, and how much interest you will earn along the way.">
+  <meta property="og:url" content="https://calc-hub-two.vercel.app/tools/savings-goal-calculator">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialProduct",
+    "name": "Free Savings Goal Calculator",
+    "description": "Plan your savings to reach any financial goal. Calculate how long it will take, how much to save monthly, and how much interest you will earn along the way.",
+    "brand": { "@type": "Brand", "name": "CalcHub" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How much should I save each month?",
+            "acceptedAnswer": { "@type": "Answer", "text": "A common guideline is the 50/30/20 rule: 50% for needs, 30% for wants, and 20% for savings. But any amount you can consistently save helps — even small amounts add up with compound interest." }
+          },          {
+            "@type": "Question",
+            "name": "How does interest help me reach my savings goal?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Compound interest means your interest earns interest. At 5% APY, $500/month grows to $102,334 in 15 years — $12,334 of which is interest earned." }
+          },          {
+            "@type": "Question",
+            "name": "What is a good savings goal to start with?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Start with an emergency fund of 3-6 months of expenses. Then set goals for specific purchases, a down payment, or retirement. Clear, specific goals are easier to achieve." }
+          },          {
+            "@type": "Question",
+            "name": "Should I save or invest for long-term goals?",
+            "acceptedAnswer": { "@type": "Answer", "text": "For goals 5+ years away, investing in diversified index funds typically outperforms savings accounts. For shorter-term goals, high-yield savings accounts are safer." }
+          }
+      ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo"><span class="logo-icon">💰</span><span>CalcHub</span></a>
+      <nav class="nav">
+        <a href="../index.html#tools">Calculators</a>
+        <a href="../index.html#about">About</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container tool-page">
+    <div class="tool-header">
+      <a href="../index.html" class="back-link">← Back</a>
+      <h1>Free Savings Goal Calculator</h1>
+      <span class="privacy-note">🔒 100% Private Calculations</span>
+    </div>
+    <div class="calc-layout">
+      <div class="calc-input-panel">
+        <div class="input-group">
+          <label for="goalAmount">Savings Goal ($)</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="number" id="goalAmount" class="input-field" value="50000" min="0" step="1000">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="currentSavings">Current Savings ($)</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="number" id="currentSavings" class="input-field" value="5000" min="0" step="500">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="monthlyContrib">Monthly Contribution ($)</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="number" id="monthlyContrib" class="input-field" value="500" min="0" step="50">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="annualRate">Annual Interest Rate (%)</label>
+          <div class="input-row">
+            <input type="number" id="annualRate" class="input-field" value="5" min="0" max="30" step="0.1">
+            <span class="input-suffix">%</span>
+          </div>
+        </div>
+        <button class="btn-generate" onclick="calcGoal()">&#127919; Calculate</button>
+      </div>
+      <div class="calc-results-panel">
+        <div class="result-summary">
+          <div class="result-item highlight">
+            <div class="result-label">Time to Reach Goal</div>
+            <div class="result-value" id="timeToGoal">0 months</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Total Contributed</div>
+            <div class="result-value small" id="totalContrib">$0.00</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Interest Earned</div>
+            <div class="result-value small" id="interestEarned" style="color:var(--green,#28a745)">$0.00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tool-about">
+      <h2>About Savings Goal Calculator</h2>
+      <p>Plan your path to any financial goal — whether it is a vacation, down payment, emergency fund, or any other target. See how long it will take and how much interest you will earn.</p>
+      <h3>Features</h3>
+      <ul>
+        <li>Calculate time needed to reach any savings target</li>
+        <li>Accounts for current savings and monthly contributions</li>
+        <li>Includes compound interest on savings</li>
+        <li>Shows total contributed vs. interest earned breakdown</li>
+      </ul>
+    </div>
+    <div class="tool-about faq-section">
+      <h2>Free Savings Goal Calculator FAQ</h2>
+      <h3>How much should I save each month?</h3>
+      <p>A common guideline is the 50/30/20 rule: 50% for needs, 30% for wants, and 20% for savings. But any amount you can consistently save helps — even small amounts add up with compound interest.</p>
+      <h3>How does interest help me reach my savings goal?</h3>
+      <p>Compound interest means your interest earns interest. At 5% APY, $500/month grows to $102,334 in 15 years — $12,334 of which is interest earned.</p>
+      <h3>What is a good savings goal to start with?</h3>
+      <p>Start with an emergency fund of 3-6 months of expenses. Then set goals for specific purchases, a down payment, or retirement. Clear, specific goals are easier to achieve.</p>
+      <h3>Should I save or invest for long-term goals?</h3>
+      <p>For goals 5+ years away, investing in diversified index funds typically outperforms savings accounts. For shorter-term goals, high-yield savings accounts are safer.</p>
+    </div>
+  </main>
+  <section class="related-tools" style="max-width:900px;margin:2rem auto;padding:1.5rem;background:var(--bg-secondary,#f8f9fa);border-radius:12px;">
+    <h2 style="margin:0 0 1rem;font-size:1.1rem;">Related Calculators</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <a href="mortgage-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Mortgage Calculator</a>
+      <a href="loan-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Loan Calculator</a>
+      <a href="auto-loan-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Auto Loan Calculator</a>
+      <a href="compound-interest-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Compound Interest Calculator</a>
+      <a href="investment-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Investment Calculator</a>
+      <a href="savings-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Savings Calculator</a>
+    </div>
+  </section>
+  <footer class="footer"><div class="container"><p>&copy; 2025 CalcHub. Free financial calculators for smarter decisions. <a href="../privacy.html">Privacy Policy</a></p></div></footer>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script>
+    function calcGoal() {
+      var goal = parseFloat(document.getElementById('goalAmount').value) || 0;
+      var current = parseFloat(document.getElementById('currentSavings').value) || 0;
+      var monthly = parseFloat(document.getElementById('monthlyContrib').value) || 0;
+      var rate = parseFloat(document.getElementById('annualRate').value) || 0;
+      var mr = rate / 100 / 12;
+
+      if (goal <= current) {
+        document.getElementById('timeToGoal').textContent = 'Already reached!';
+        return;
+      }
+      if (monthly <= 0 && mr <= 0) {
+        document.getElementById('timeToGoal').textContent = 'N/A';
+        return;
+      }
+
+      var balance = current;
+      var months = 0;
+      var totalContrib = current;
+      var maxMonths = 1200; // 100 years cap
+
+      while (balance < goal && months < maxMonths) {
+        balance = balance * (1 + mr) + monthly;
+        totalContrib += monthly;
+        months++;
+      }
+
+      var interest = balance - totalContrib;
+
+      if (months < 12) {
+        document.getElementById('timeToGoal').textContent = months + ' months';
+      } else {
+        var y = Math.floor(months / 12);
+        var m = months % 12;
+        document.getElementById('timeToGoal').textContent = y + ' years, ' + m + ' months';
+      }
+      document.getElementById('totalContrib').textContent = fmt(totalContrib);
+      document.getElementById('interestEarned').textContent = fmt(interest);
+    }
+    function fmt(n) { return '$' + n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+    calcGoal();
+  </script>
+</body>
+</html>

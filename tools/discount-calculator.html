@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="3OxWRmOeMFoUsUXdGtGhTVUvv1oKgkilF_qMHlAojRU" />
+  <title>Free Discount Calculator | CalcHub</title>
+  <meta name="description" content="Calculate discounted prices and savings instantly. Support for percentage discounts, fixed amounts, and multiple stacked discounts.">
+  <link rel="canonical" href="https://calc-hub-two.vercel.app/tools/discount-calculator">
+  <meta property="og:title" content="Free Discount Calculator | CalcHub">
+  <meta property="og:description" content="Calculate discounted prices and savings instantly. Support for percentage discounts, fixed amounts, and multiple stacked discounts.">
+  <meta property="og:url" content="https://calc-hub-two.vercel.app/tools/discount-calculator">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialProduct",
+    "name": "Free Discount Calculator",
+    "description": "Calculate discounted prices and savings instantly. Support for percentage discounts, fixed amounts, and multiple stacked discounts.",
+    "brand": { "@type": "Brand", "name": "CalcHub" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do stacked discounts work?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Stacked discounts are applied sequentially, not additively. Two 20% discounts do not equal 40% off — they equal 36% off (0.8 × 0.8 = 0.64)." }
+          },          {
+            "@type": "Question",
+            "name": "Is it better to use a percentage or dollar discount?",
+            "acceptedAnswer": { "@type": "Answer", "text": "It depends on the item price. A $10 off coupon saves more than 15% on items under $66.67. For higher-priced items, percentage discounts usually win." }
+          },          {
+            "@type": "Question",
+            "name": "How do I calculate 30% off in my head?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Find 10% by moving the decimal point left one place, then multiply by 3. For $50: 10% = $5, so 30% = $15. The discounted price is $35." }
+          },          {
+            "@type": "Question",
+            "name": "Do discounts apply before or after tax?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Discounts are applied to the pre-tax price. Sales tax is then calculated on the discounted amount." }
+          }
+      ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo"><span class="logo-icon">💰</span><span>CalcHub</span></a>
+      <nav class="nav">
+        <a href="../index.html#tools">Calculators</a>
+        <a href="../index.html#about">About</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container tool-page">
+    <div class="tool-header">
+      <a href="../index.html" class="back-link">← Back</a>
+      <h1>Free Discount Calculator</h1>
+      <span class="privacy-note">🔒 100% Private Calculations</span>
+    </div>
+    <div class="calc-layout">
+      <div class="calc-input-panel">
+        <div class="input-group">
+          <label for="originalPrice">Original Price ($)</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="number" id="originalPrice" class="input-field" value="150" min="0" step="1" oninput="calcDiscount()">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="discountType">Discount Type</label>
+          <select id="discountType" class="input-field" onchange="calcDiscount()">
+            <option value="percent">Percentage (%)</option>
+            <option value="fixed">Fixed Amount ($)</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="discount1">First Discount</label>
+          <div class="input-row">
+            <span class="input-prefix" id="disc1Prefix">%</span>
+            <input type="number" id="discount1" class="input-field" value="25" min="0" step="1" oninput="calcDiscount()">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="discount2">Second Discount (optional)</label>
+          <div class="input-row">
+            <span class="input-prefix" id="disc2Prefix">%</span>
+            <input type="number" id="discount2" class="input-field" value="" min="0" step="1" oninput="calcDiscount()" placeholder="0">
+          </div>
+        </div>
+      </div>
+      <div class="calc-results-panel">
+        <div class="result-summary">
+          <div class="result-item highlight">
+            <div class="result-label">Final Price</div>
+            <div class="result-value" id="finalPrice">$0.00</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">You Save</div>
+            <div class="result-value small" id="totalSavings" style="color:var(--green,#28a745)">$0.00</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Effective Discount</div>
+            <div class="result-value small" id="effDiscount">0%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tool-about">
+      <h2>About Discount Calculator</h2>
+      <p>Calculate the final price after discounts and see exactly how much you save. Supports percentage and fixed-amount discounts, with optional stacking of multiple discounts.</p>
+      <h3>Features</h3>
+      <ul>
+        <li>Percentage or fixed-amount discounts</li>
+        <li>Stack up to two discounts sequentially</li>
+        <li>Shows effective total discount percentage</li>
+        <li>Real-time calculation as you type</li>
+      </ul>
+    </div>
+    <div class="tool-about faq-section">
+      <h2>Free Discount Calculator FAQ</h2>
+      <h3>How do stacked discounts work?</h3>
+      <p>Stacked discounts are applied sequentially, not additively. Two 20% discounts do not equal 40% off — they equal 36% off (0.8 × 0.8 = 0.64).</p>
+      <h3>Is it better to use a percentage or dollar discount?</h3>
+      <p>It depends on the item price. A $10 off coupon saves more than 15% on items under $66.67. For higher-priced items, percentage discounts usually win.</p>
+      <h3>How do I calculate 30% off in my head?</h3>
+      <p>Find 10% by moving the decimal point left one place, then multiply by 3. For $50: 10% = $5, so 30% = $15. The discounted price is $35.</p>
+      <h3>Do discounts apply before or after tax?</h3>
+      <p>Discounts are applied to the pre-tax price. Sales tax is then calculated on the discounted amount.</p>
+    </div>
+  </main>
+  <section class="related-tools" style="max-width:900px;margin:2rem auto;padding:1.5rem;background:var(--bg-secondary,#f8f9fa);border-radius:12px;">
+    <h2 style="margin:0 0 1rem;font-size:1.1rem;">Related Calculators</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <a href="mortgage-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Mortgage Calculator</a>
+      <a href="loan-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Loan Calculator</a>
+      <a href="auto-loan-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Auto Loan Calculator</a>
+      <a href="compound-interest-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Compound Interest Calculator</a>
+      <a href="investment-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Investment Calculator</a>
+      <a href="savings-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Savings Calculator</a>
+    </div>
+  </section>
+  <footer class="footer"><div class="container"><p>&copy; 2025 CalcHub. Free financial calculators for smarter decisions. <a href="../privacy.html">Privacy Policy</a></p></div></footer>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script>
+    function calcDiscount() {
+      var orig = parseFloat(document.getElementById('originalPrice').value) || 0;
+      var type = document.getElementById('discountType').value;
+      var d1 = parseFloat(document.getElementById('discount1').value) || 0;
+      var d2 = parseFloat(document.getElementById('discount2').value) || 0;
+
+      document.getElementById('disc1Prefix').textContent = type === 'percent' ? '%' : '$';
+      document.getElementById('disc2Prefix').textContent = type === 'percent' ? '%' : '$';
+
+      var price = orig;
+      if (type === 'percent') {
+        price = price * (1 - d1/100);
+        if (d2 > 0) price = price * (1 - d2/100);
+      } else {
+        price = price - d1;
+        if (d2 > 0) price = price - d2;
+      }
+      price = Math.max(0, price);
+      var savings = orig - price;
+      var effPct = orig > 0 ? (savings / orig * 100) : 0;
+
+      document.getElementById('finalPrice').textContent = fmt(price);
+      document.getElementById('totalSavings').textContent = fmt(savings);
+      document.getElementById('effDiscount').textContent = effPct.toFixed(1) + '%';
+    }
+    function fmt(n) { return '$' + n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+    calcDiscount();
+  </script>
+</body>
+</html>

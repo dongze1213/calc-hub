@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="3OxWRmOeMFoUsUXdGtGhTVUvv1oKgkilF_qMHlAojRU" />
+  <title>Free Inflation Calculator | CalcHub</title>
+  <meta name="description" content="Calculate how inflation affects purchasing power over time. Enter any amount and years to see the adjusted value, total inflation, and real purchasing power change.">
+  <link rel="canonical" href="https://calc-hub-two.vercel.app/tools/inflation-calculator">
+  <meta property="og:title" content="Free Inflation Calculator | CalcHub">
+  <meta property="og:description" content="Calculate how inflation affects purchasing power over time. Enter any amount and years to see the adjusted value, total inflation, and real purchasing power change.">
+  <meta property="og:url" content="https://calc-hub-two.vercel.app/tools/inflation-calculator">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialProduct",
+    "name": "Free Inflation Calculator",
+    "description": "Calculate how inflation affects purchasing power over time. Enter any amount and years to see the adjusted value, total inflation, and real purchasing power change.",
+    "brand": { "@type": "Brand", "name": "CalcHub" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the average inflation rate in the US?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The historical average inflation rate in the US is about 3% per year. However, it varies significantly by decade — from under 2% in the 2010s to over 7% in 2022." }
+          },          {
+            "@type": "Question",
+            "name": "How does inflation erode purchasing power?",
+            "acceptedAnswer": { "@type": "Answer", "text": "If inflation is 3%, $100 today will have the purchasing power of about $74 in 10 years. Over 30 years, it drops to about $41. This is why investing is essential." }
+          },          {
+            "@type": "Question",
+            "name": "What is the Consumer Price Index (CPI)?",
+            "acceptedAnswer": { "@type": "Answer", "text": "CPI measures the average change in prices paid by consumers for a basket of goods and services. It is the most widely used indicator of inflation." }
+          },          {
+            "@type": "Question",
+            "name": "Can inflation be negative?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, deflation (negative inflation) occurs when prices fall. This happened during the Great Depression and briefly in 2009. Deflation can be harmful as it discourages spending." }
+          }
+      ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo"><span class="logo-icon">💰</span><span>CalcHub</span></a>
+      <nav class="nav">
+        <a href="../index.html#tools">Calculators</a>
+        <a href="../index.html#about">About</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container tool-page">
+    <div class="tool-header">
+      <a href="../index.html" class="back-link">← Back</a>
+      <h1>Free Inflation Calculator</h1>
+      <span class="privacy-note">🔒 100% Private Calculations</span>
+    </div>
+    <div class="calc-layout">
+      <div class="calc-input-panel">
+        <div class="input-group">
+          <label for="amount">Initial Amount ($)</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="number" id="amount" class="input-field" value="10000" min="0" step="100">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="startYear">Start Year</label>
+          <input type="number" id="startYear" class="input-field" value="2010" min="1900" max="2026">
+        </div>
+        <div class="input-group">
+          <label for="endYear">End Year</label>
+          <input type="number" id="endYear" class="input-field" value="2026" min="1900" max="2050">
+        </div>
+        <div class="input-group">
+          <label for="inflationRate">Average Annual Inflation Rate (%)</label>
+          <div class="input-row">
+            <input type="number" id="inflationRate" class="input-field" value="3" min="0" max="50" step="0.1">
+            <span class="input-suffix">%</span>
+          </div>
+        </div>
+        <button class="btn-generate" onclick="calcInflation()">Calculate</button>
+      </div>
+      <div class="calc-results-panel">
+        <div class="result-summary">
+          <div class="result-item highlight">
+            <div class="result-label">Adjusted Value</div>
+            <div class="result-value" id="adjustedVal">$0.00</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Total Inflation</div>
+            <div class="result-value small" id="totalInflation">0%</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Purchasing Power Lost</div>
+            <div class="result-value small" id="powerLost">$0.00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tool-about">
+      <h2>About Inflation Calculator</h2>
+      <p>Understand how inflation impacts your money over time. Our inflation calculator shows you what your money will be worth in the future, or what past amounts equal in today's dollars.</p>
+      <h3>How It Works</h3>
+      <p>The calculator uses the compound inflation formula: Adjusted Value = Initial Amount / (1 + rate)^years. This shows the real purchasing power of your money after accounting for inflation.</p>
+      <h3>Features</h3>
+      <ul>
+        <li>Calculate future or past purchasing power</li>
+        <li>Customizable inflation rate</li>
+        <li>Shows total inflation percentage and dollar loss</li>
+        <li>Real-time calculation as you type</li>
+      </ul>
+    </div>
+    <div class="tool-about faq-section">
+      <h2>Free Inflation Calculator FAQ</h2>
+      <h3>What is the average inflation rate in the US?</h3>
+      <p>The historical average inflation rate in the US is about 3% per year. However, it varies significantly by decade — from under 2% in the 2010s to over 7% in 2022.</p>
+      <h3>How does inflation erode purchasing power?</h3>
+      <p>If inflation is 3%, $100 today will have the purchasing power of about $74 in 10 years. Over 30 years, it drops to about $41. This is why investing is essential.</p>
+      <h3>What is the Consumer Price Index (CPI)?</h3>
+      <p>CPI measures the average change in prices paid by consumers for a basket of goods and services. It is the most widely used indicator of inflation.</p>
+      <h3>Can inflation be negative?</h3>
+      <p>Yes, deflation (negative inflation) occurs when prices fall. This happened during the Great Depression and briefly in 2009. Deflation can be harmful as it discourages spending.</p>
+    </div>
+  </main>
+  <section class="related-tools" style="max-width:900px;margin:2rem auto;padding:1.5rem;background:var(--bg-secondary,#f8f9fa);border-radius:12px;">
+    <h2 style="margin:0 0 1rem;font-size:1.1rem;">Related Calculators</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <a href="mortgage-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Mortgage Calculator</a>
+      <a href="loan-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Loan Calculator</a>
+      <a href="auto-loan-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Auto Loan Calculator</a>
+      <a href="compound-interest-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Compound Interest Calculator</a>
+      <a href="investment-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Investment Calculator</a>
+      <a href="savings-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Savings Calculator</a>
+    </div>
+  </section>
+  <footer class="footer"><div class="container"><p>&copy; 2025 CalcHub. Free financial calculators for smarter decisions. <a href="../privacy.html">Privacy Policy</a></p></div></footer>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script>
+    function calcInflation() {
+      var amt = parseFloat(document.getElementById('amount').value) || 0;
+      var sy = parseInt(document.getElementById('startYear').value) || 2010;
+      var ey = parseInt(document.getElementById('endYear').value) || 2026;
+      var rate = parseFloat(document.getElementById('inflationRate').value) || 0;
+      var years = ey - sy;
+      if (years <= 0 || amt <= 0) return;
+
+      var adjusted = amt / Math.pow(1 + rate/100, years);
+      var totalInf = ((amt - adjusted) / adjusted * 100);
+      var lost = amt - adjusted;
+
+      document.getElementById('adjustedVal').textContent = fmt(adjusted);
+      document.getElementById('totalInflation').textContent = totalInf.toFixed(1) + '%';
+      document.getElementById('powerLost').textContent = fmt(lost);
+    }
+    function fmt(n) { return '$' + n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+    document.querySelectorAll('.input-field').forEach(function(el){ el.addEventListener('input', calcInflation); });
+    calcInflation();
+  </script>
+</body>
+</html>

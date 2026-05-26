@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="3OxWRmOeMFoUsUXdGtGhTVUvv1oKgkilF_qMHlAojRU" />
+  <title>Free Break Even Calculator | CalcHub</title>
+  <meta name="description" content="Calculate your break-even point in units and revenue. Enter fixed costs, selling price, and variable cost per unit to find when your business becomes profitable.">
+  <link rel="canonical" href="https://calc-hub-two.vercel.app/tools/break-even-calculator">
+  <meta property="og:title" content="Free Break Even Calculator | CalcHub">
+  <meta property="og:description" content="Calculate your break-even point in units and revenue. Enter fixed costs, selling price, and variable cost per unit to find when your business becomes profitable.">
+  <meta property="og:url" content="https://calc-hub-two.vercel.app/tools/break-even-calculator">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialProduct",
+    "name": "Free Break Even Calculator",
+    "description": "Calculate your break-even point in units and revenue. Enter fixed costs, selling price, and variable cost per unit to find when your business becomes profitable.",
+    "brand": { "@type": "Brand", "name": "CalcHub" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the break-even point?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The break-even point is the number of units you must sell (or revenue you must generate) to cover all your costs. Below this point, you lose money; above it, you make a profit." }
+          },          {
+            "@type": "Question",
+            "name": "How is break-even calculated?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Break-even units = Fixed Costs / (Selling Price - Variable Cost per Unit). This is also known as the contribution margin method." }
+          },          {
+            "@type": "Question",
+            "name": "What is contribution margin?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Contribution margin is the selling price minus the variable cost per unit. It represents how much each unit contributes toward covering fixed costs and generating profit." }
+          },          {
+            "@type": "Question",
+            "name": "Why is break-even analysis important?",
+            "acceptedAnswer": { "@type": "Answer", "text": "It helps businesses set pricing, determine sales targets, evaluate profitability of new products, and make informed decisions about cost structure." }
+          }
+      ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo"><span class="logo-icon">💰</span><span>CalcHub</span></a>
+      <nav class="nav">
+        <a href="../index.html#tools">Calculators</a>
+        <a href="../index.html#about">About</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container tool-page">
+    <div class="tool-header">
+      <a href="../index.html" class="back-link">← Back</a>
+      <h1>Free Break Even Calculator</h1>
+      <span class="privacy-note">🔒 100% Private Calculations</span>
+    </div>
+    <div class="calc-layout">
+      <div class="calc-input-panel">
+        <div class="input-group">
+          <label for="fixedCosts">Total Fixed Costs ($)</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="number" id="fixedCosts" class="input-field" value="50000" min="0" step="1000" oninput="calcBreakEven()">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="sellingPrice">Selling Price per Unit ($)</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="number" id="sellingPrice" class="input-field" value="50" min="0" step="1" oninput="calcBreakEven()">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="variableCost">Variable Cost per Unit ($)</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="number" id="variableCost" class="input-field" value="20" min="0" step="1" oninput="calcBreakEven()">
+          </div>
+        </div>
+      </div>
+      <div class="calc-results-panel">
+        <div class="result-summary">
+          <div class="result-item highlight">
+            <div class="result-label">Break-Even Units</div>
+            <div class="result-value" id="beUnits">0</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Break-Even Revenue</div>
+            <div class="result-value small" id="beRevenue">$0.00</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Contribution Margin</div>
+            <div class="result-value small" id="contribMargin">$0.00</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Margin %</div>
+            <div class="result-value small" id="marginPct">0%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tool-about">
+      <h2>About Break Even Calculator</h2>
+      <p>Determine exactly how many units you need to sell to cover your costs. This essential business tool helps with pricing strategy, sales forecasting, and profitability analysis.</p>
+      <h3>The Formula</h3>
+      <p><strong>Break-Even Units = Fixed Costs / (Selling Price - Variable Cost)</strong></p>
+      <p>The difference between selling price and variable cost is called the "contribution margin" — the amount each unit contributes toward covering fixed costs.</p>
+      <h3>Features</h3>
+      <ul>
+        <li>Calculate break-even point in units and revenue</li>
+        <li>Show contribution margin and margin percentage</li>
+        <li>Real-time calculation</li>
+        <li>Clear, actionable business metrics</li>
+      </ul>
+    </div>
+    <div class="tool-about faq-section">
+      <h2>Free Break Even Calculator FAQ</h2>
+      <h3>What is the break-even point?</h3>
+      <p>The break-even point is the number of units you must sell (or revenue you must generate) to cover all your costs. Below this point, you lose money; above it, you make a profit.</p>
+      <h3>How is break-even calculated?</h3>
+      <p>Break-even units = Fixed Costs / (Selling Price - Variable Cost per Unit). This is also known as the contribution margin method.</p>
+      <h3>What is contribution margin?</h3>
+      <p>Contribution margin is the selling price minus the variable cost per unit. It represents how much each unit contributes toward covering fixed costs and generating profit.</p>
+      <h3>Why is break-even analysis important?</h3>
+      <p>It helps businesses set pricing, determine sales targets, evaluate profitability of new products, and make informed decisions about cost structure.</p>
+    </div>
+  </main>
+  <section class="related-tools" style="max-width:900px;margin:2rem auto;padding:1.5rem;background:var(--bg-secondary,#f8f9fa);border-radius:12px;">
+    <h2 style="margin:0 0 1rem;font-size:1.1rem;">Related Calculators</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <a href="mortgage-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Mortgage Calculator</a>
+      <a href="loan-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Loan Calculator</a>
+      <a href="auto-loan-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Auto Loan Calculator</a>
+      <a href="compound-interest-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Compound Interest Calculator</a>
+      <a href="investment-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Investment Calculator</a>
+      <a href="savings-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Savings Calculator</a>
+    </div>
+  </section>
+  <footer class="footer"><div class="container"><p>&copy; 2025 CalcHub. Free financial calculators for smarter decisions. <a href="../privacy.html">Privacy Policy</a></p></div></footer>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script>
+    function calcBreakEven() {
+      var fc = parseFloat(document.getElementById('fixedCosts').value) || 0;
+      var sp = parseFloat(document.getElementById('sellingPrice').value) || 0;
+      var vc = parseFloat(document.getElementById('variableCost').value) || 0;
+      var cm = sp - vc;
+
+      if (cm <= 0) {
+        document.getElementById('beUnits').textContent = 'N/A';
+        document.getElementById('beRevenue').textContent = 'N/A';
+        document.getElementById('contribMargin').textContent = fmt(cm);
+        document.getElementById('marginPct').textContent = sp > 0 ? (cm/sp*100).toFixed(1)+'%' : 'N/A';
+        return;
+      }
+
+      var units = Math.ceil(fc / cm);
+      var revenue = units * sp;
+      var marginPct = (cm / sp * 100);
+
+      document.getElementById('beUnits').textContent = units.toLocaleString();
+      document.getElementById('beRevenue').textContent = fmt(revenue);
+      document.getElementById('contribMargin').textContent = fmt(cm);
+      document.getElementById('marginPct').textContent = marginPct.toFixed(1) + '%';
+    }
+    function fmt(n) { return '$' + n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+    calcBreakEven();
+  </script>
+</body>
+</html>

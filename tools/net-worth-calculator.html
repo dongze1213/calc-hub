@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="3OxWRmOeMFoUsUXdGtGhTVUvv1oKgkilF_qMHlAojRU" />
+  <title>Free Net Worth Calculator | CalcHub</title>
+  <meta name="description" content="Calculate your personal net worth by entering your assets and liabilities. See a clear breakdown of your total assets, total debts, and net financial position.">
+  <link rel="canonical" href="https://calc-hub-two.vercel.app/tools/net-worth-calculator">
+  <meta property="og:title" content="Free Net Worth Calculator | CalcHub">
+  <meta property="og:description" content="Calculate your personal net worth by entering your assets and liabilities. See a clear breakdown of your total assets, total debts, and net financial position.">
+  <meta property="og:url" content="https://calc-hub-two.vercel.app/tools/net-worth-calculator">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialProduct",
+    "name": "Free Net Worth Calculator",
+    "description": "Calculate your personal net worth by entering your assets and liabilities. See a clear breakdown of your total assets, total debts, and net financial position.",
+    "brand": { "@type": "Brand", "name": "CalcHub" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is net worth?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Net worth is the difference between your total assets (what you own) and total liabilities (what you owe). A positive net worth means your assets exceed your debts." }
+          },          {
+            "@type": "Question",
+            "name": "What counts as an asset?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Assets include cash, savings, investments (stocks, bonds, mutual funds), real estate equity, vehicles, retirement accounts, and valuable personal property." }
+          },          {
+            "@type": "Question",
+            "name": "What counts as a liability?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Liabilities include mortgages, auto loans, student loans, credit card balances, personal loans, medical debt, and any other money you owe." }
+          },          {
+            "@type": "Question",
+            "name": "What is a good net worth by age?",
+            "acceptedAnswer": { "@type": "Answer", "text": "A common benchmark is: by 30, net worth = 1x annual income; by 40, 3x; by 50, 6x; by 60, 8x. These are rough guidelines, not strict rules." }
+          }
+      ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo"><span class="logo-icon">💰</span><span>CalcHub</span></a>
+      <nav class="nav">
+        <a href="../index.html#tools">Calculators</a>
+        <a href="../index.html#about">About</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container tool-page">
+    <div class="tool-header">
+      <a href="../index.html" class="back-link">← Back</a>
+      <h1>Free Net Worth Calculator</h1>
+      <span class="privacy-note">🔒 100% Private Calculations</span>
+    </div>
+    <div class="calc-layout">
+      <div class="calc-input-panel">
+        <div style="margin-bottom:16px;padding:8px 12px;background:var(--bg3);border-radius:6px;font-weight:600;font-size:0.9rem">Assets (What You Own)</div>
+        <div class="input-group">
+          <label for="cash">Cash & Savings ($)</label>
+          <div class="input-row"><span class="input-prefix">$</span>
+          <input type="number" id="cash" class="input-field" value="15000" min="0" step="500" oninput="calcNetWorth()"></div>
+        </div>
+        <div class="input-group">
+          <label for="investments">Investments ($)</label>
+          <div class="input-row"><span class="input-prefix">$</span>
+          <input type="number" id="investments" class="input-field" value="50000" min="0" step="1000" oninput="calcNetWorth()"></div>
+        </div>
+        <div class="input-group">
+          <label for="realEstate">Real Estate ($)</label>
+          <div class="input-row"><span class="input-prefix">$</span>
+          <input type="number" id="realEstate" class="input-field" value="300000" min="0" step="5000" oninput="calcNetWorth()"></div>
+        </div>
+        <div class="input-group">
+          <label for="otherAssets">Other Assets ($)</label>
+          <div class="input-row"><span class="input-prefix">$</span>
+          <input type="number" id="otherAssets" class="input-field" value="10000" min="0" step="500" oninput="calcNetWorth()"></div>
+        </div>
+
+        <div style="margin:20px 0 16px;padding:8px 12px;background:var(--bg3);border-radius:6px;font-weight:600;font-size:0.9rem">Liabilities (What You Owe)</div>
+        <div class="input-group">
+          <label for="mortgage">Mortgage ($)</label>
+          <div class="input-row"><span class="input-prefix">$</span>
+          <input type="number" id="mortgage" class="input-field" value="200000" min="0" step="1000" oninput="calcNetWorth()"></div>
+        </div>
+        <div class="input-group">
+          <label for="loans">Other Loans ($)</label>
+          <div class="input-row"><span class="input-prefix">$</span>
+          <input type="number" id="loans" class="input-field" value="25000" min="0" step="500" oninput="calcNetWorth()"></div>
+        </div>
+        <div class="input-group">
+          <label for="creditCards">Credit Card Debt ($)</label>
+          <div class="input-row"><span class="input-prefix">$</span>
+          <input type="number" id="creditCards" class="input-field" value="5000" min="0" step="100" oninput="calcNetWorth()"></div>
+        </div>
+        <div class="input-group">
+          <label for="otherDebt">Other Debt ($)</label>
+          <div class="input-row"><span class="input-prefix">$</span>
+          <input type="number" id="otherDebt" class="input-field" value="0" min="0" step="100" oninput="calcNetWorth()"></div>
+        </div>
+      </div>
+      <div class="calc-results-panel">
+        <div class="result-summary">
+          <div class="result-item">
+            <div class="result-label">Total Assets</div>
+            <div class="result-value small" id="totalAssets" style="color:var(--green,#28a745)">$0.00</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Total Liabilities</div>
+            <div class="result-value small" id="totalLiab" style="color:var(--red,#dc3545)">$0.00</div>
+          </div>
+          <div class="result-item highlight">
+            <div class="result-label">Net Worth</div>
+            <div class="result-value" id="netWorthVal">$0.00</div>
+          </div>
+        </div>
+        <div id="breakdown" style="margin-top:16px"></div>
+      </div>
+    </div>
+    <div class="tool-about">
+      <h2>About Net Worth Calculator</h2>
+      <p>Get a clear picture of your financial health by calculating your net worth — the total value of everything you own minus everything you owe. This is one of the most important metrics in personal finance.</p>
+      <h3>Features</h3>
+      <ul>
+        <li>Enter assets across 4 categories: Cash, Investments, Real Estate, Other</li>
+        <li>Enter liabilities across 4 categories: Mortgage, Loans, Credit Cards, Other</li>
+        <li>Visual asset breakdown with proportional bars</li>
+        <li>Real-time calculation as you type</li>
+      </ul>
+    </div>
+    <div class="tool-about faq-section">
+      <h2>Free Net Worth Calculator FAQ</h2>
+      <h3>What is net worth?</h3>
+      <p>Net worth is the difference between your total assets (what you own) and total liabilities (what you owe). A positive net worth means your assets exceed your debts.</p>
+      <h3>What counts as an asset?</h3>
+      <p>Assets include cash, savings, investments (stocks, bonds, mutual funds), real estate equity, vehicles, retirement accounts, and valuable personal property.</p>
+      <h3>What counts as a liability?</h3>
+      <p>Liabilities include mortgages, auto loans, student loans, credit card balances, personal loans, medical debt, and any other money you owe.</p>
+      <h3>What is a good net worth by age?</h3>
+      <p>A common benchmark is: by 30, net worth = 1x annual income; by 40, 3x; by 50, 6x; by 60, 8x. These are rough guidelines, not strict rules.</p>
+    </div>
+  </main>
+  <section class="related-tools" style="max-width:900px;margin:2rem auto;padding:1.5rem;background:var(--bg-secondary,#f8f9fa);border-radius:12px;">
+    <h2 style="margin:0 0 1rem;font-size:1.1rem;">Related Calculators</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <a href="mortgage-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Mortgage Calculator</a>
+      <a href="loan-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Loan Calculator</a>
+      <a href="auto-loan-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Auto Loan Calculator</a>
+      <a href="compound-interest-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Compound Interest Calculator</a>
+      <a href="investment-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Investment Calculator</a>
+      <a href="savings-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Savings Calculator</a>
+    </div>
+  </section>
+  <footer class="footer"><div class="container"><p>&copy; 2025 CalcHub. Free financial calculators for smarter decisions. <a href="../privacy.html">Privacy Policy</a></p></div></footer>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script>
+    function v(id) { return parseFloat(document.getElementById(id).value) || 0; }
+    function calcNetWorth() {
+      var assets = v('cash') + v('investments') + v('realEstate') + v('otherAssets');
+      var liab = v('mortgage') + v('loans') + v('creditCards') + v('otherDebt');
+      var nw = assets - liab;
+
+      document.getElementById('totalAssets').textContent = fmt(assets);
+      document.getElementById('totalLiab').textContent = fmt(liab);
+
+      var nwEl = document.getElementById('netWorthVal');
+      nwEl.textContent = (nw >= 0 ? '' : '-') + fmt(Math.abs(nw));
+      nwEl.style.color = nw >= 0 ? 'var(--green,#28a745)' : 'var(--red,#dc3545)';
+
+      // Bar breakdown
+      var maxVal = Math.max(assets, liab, 1);
+      var assetNames = [
+        {n:'Cash & Savings', v:v('cash')},
+        {n:'Investments', v:v('investments')},
+        {n:'Real Estate', v:v('realEstate')},
+        {n:'Other', v:v('otherAssets')}
+      ].filter(function(x){return x.v > 0});
+
+      var html = '<div style="font-size:0.85rem;color:var(--text3);margin-bottom:8px">Asset Breakdown</div>';
+      assetNames.forEach(function(a) {
+        var pct = (a.v / assets * 100).toFixed(1);
+        var w = (a.v / maxVal * 100);
+        html += '<div style="margin-bottom:6px"><div style="display:flex;justify-content:space-between;font-size:0.8rem"><span>' + a.n + '</span><span>' + fmt(a.v) + ' (' + pct + '%)</span></div>';
+        html += '<div style="height:8px;background:var(--bg3);border-radius:4px;overflow:hidden"><div style="height:100%;width:' + w + '%;background:var(--green,#28a745);border-radius:4px"></div></div></div>';
+      });
+      document.getElementById('breakdown').innerHTML = html;
+    }
+    function fmt(n) { return '$' + Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+    calcNetWorth();
+  </script>
+</body>
+</html>

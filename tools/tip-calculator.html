@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="3OxWRmOeMFoUsUXdGtGhTVUvv1oKgkilF_qMHlAojRU" />
+  <title>Free Tip Calculator | CalcHub</title>
+  <meta name="description" content="Calculate tips and split bills easily. Preset tip percentages, custom amounts, and per-person splitting. Perfect for dining out with friends.">
+  <link rel="canonical" href="https://calc-hub-two.vercel.app/tools/tip-calculator">
+  <meta property="og:title" content="Free Tip Calculator | CalcHub">
+  <meta property="og:description" content="Calculate tips and split bills easily. Preset tip percentages, custom amounts, and per-person splitting. Perfect for dining out with friends.">
+  <meta property="og:url" content="https://calc-hub-two.vercel.app/tools/tip-calculator">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialProduct",
+    "name": "Free Tip Calculator",
+    "description": "Calculate tips and split bills easily. Preset tip percentages, custom amounts, and per-person splitting. Perfect for dining out with friends.",
+    "brand": { "@type": "Brand", "name": "CalcHub" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the standard tip percentage in the US?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The standard tip in the US is 15-20% of the pre-tax bill. For excellent service, 20-25% is common. Some people tip less for poor service." }
+          },          {
+            "@type": "Question",
+            "name": "Should I tip on the pre-tax or post-tax amount?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Traditionally, tips are calculated on the pre-tax amount. However, many people tip on the total including tax for simplicity." }
+          },          {
+            "@type": "Question",
+            "name": "How do I split a bill with different tip amounts?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Calculate each person's share of the bill (food + drinks), then each person tips on their own share. Our calculator handles equal splits automatically." }
+          },          {
+            "@type": "Question",
+            "name": "Do I need to tip for takeout?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Tipping for takeout is optional but appreciated. 10-15% is a common range. Some people tip nothing for self-service takeout." }
+          }
+      ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo"><span class="logo-icon">💰</span><span>CalcHub</span></a>
+      <nav class="nav">
+        <a href="../index.html#tools">Calculators</a>
+        <a href="../index.html#about">About</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container tool-page">
+    <div class="tool-header">
+      <a href="../index.html" class="back-link">← Back</a>
+      <h1>Free Tip Calculator</h1>
+      <span class="privacy-note">🔒 100% Private Calculations</span>
+    </div>
+    <div class="calc-layout">
+      <div class="calc-input-panel">
+        <div class="input-group">
+          <label for="billAmount">Bill Amount ($)</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="number" id="billAmount" class="input-field" value="85" min="0" step="1">
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Tip Percentage</label>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+            <button onclick="setTip(10)" class="tip-btn" style="flex:1;padding:10px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;cursor:pointer;color:var(--text)">10%</button>
+            <button onclick="setTip(15)" class="tip-btn" style="flex:1;padding:10px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;cursor:pointer;color:var(--text)">15%</button>
+            <button onclick="setTip(18)" class="tip-btn" style="flex:1;padding:10px;background:var(--accent,#534AB7);border:1px solid var(--accent,#534AB7);border-radius:6px;cursor:pointer;color:#fff">18%</button>
+            <button onclick="setTip(20)" class="tip-btn" style="flex:1;padding:10px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;cursor:pointer;color:var(--text)">20%</button>
+            <button onclick="setTip(25)" class="tip-btn" style="flex:1;padding:10px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;cursor:pointer;color:var(--text)">25%</button>
+          </div>
+          <div class="input-row">
+            <input type="number" id="tipPercent" class="input-field" value="18" min="0" max="100" step="1" oninput="calcTip()">
+            <span class="input-suffix">%</span>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="splitPeople">Split Between</label>
+          <div class="input-row">
+            <input type="number" id="splitPeople" class="input-field" value="1" min="1" max="50" step="1" oninput="calcTip()">
+            <span class="input-suffix">people</span>
+          </div>
+        </div>
+      </div>
+      <div class="calc-results-panel">
+        <div class="result-summary">
+          <div class="result-item highlight">
+            <div class="result-label">Tip Amount</div>
+            <div class="result-value" id="tipAmount">$0.00</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Total</div>
+            <div class="result-value small" id="totalAmount">$0.00</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Per Person</div>
+            <div class="result-value small" id="perPerson">$0.00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tool-about">
+      <h2>About Tip Calculator</h2>
+      <p>Quickly calculate tips and split bills among friends. Select from preset tip percentages or enter a custom amount. Perfect for restaurants, bars, and group outings.</p>
+      <h3>Features</h3>
+      <ul>
+        <li>Quick-select preset tip percentages (10%, 15%, 18%, 20%, 25%)</li>
+        <li>Custom tip percentage input</li>
+        <li>Bill splitting for groups of any size</li>
+        <li>Instant per-person calculation</li>
+      </ul>
+    </div>
+    <div class="tool-about faq-section">
+      <h2>Free Tip Calculator FAQ</h2>
+      <h3>What is the standard tip percentage in the US?</h3>
+      <p>The standard tip in the US is 15-20% of the pre-tax bill. For excellent service, 20-25% is common. Some people tip less for poor service.</p>
+      <h3>Should I tip on the pre-tax or post-tax amount?</h3>
+      <p>Traditionally, tips are calculated on the pre-tax amount. However, many people tip on the total including tax for simplicity.</p>
+      <h3>How do I split a bill with different tip amounts?</h3>
+      <p>Calculate each person's share of the bill (food + drinks), then each person tips on their own share. Our calculator handles equal splits automatically.</p>
+      <h3>Do I need to tip for takeout?</h3>
+      <p>Tipping for takeout is optional but appreciated. 10-15% is a common range. Some people tip nothing for self-service takeout.</p>
+    </div>
+  </main>
+  <section class="related-tools" style="max-width:900px;margin:2rem auto;padding:1.5rem;background:var(--bg-secondary,#f8f9fa);border-radius:12px;">
+    <h2 style="margin:0 0 1rem;font-size:1.1rem;">Related Calculators</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <a href="mortgage-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Mortgage Calculator</a>
+      <a href="loan-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Loan Calculator</a>
+      <a href="auto-loan-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Auto Loan Calculator</a>
+      <a href="compound-interest-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Compound Interest Calculator</a>
+      <a href="investment-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Investment Calculator</a>
+      <a href="savings-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Savings Calculator</a>
+    </div>
+  </section>
+  <footer class="footer"><div class="container"><p>&copy; 2025 CalcHub. Free financial calculators for smarter decisions. <a href="../privacy.html">Privacy Policy</a></p></div></footer>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script>
+    function setTip(pct) {
+      document.getElementById('tipPercent').value = pct;
+      document.querySelectorAll('.tip-btn').forEach(function(b){ b.style.background='var(--bg3)'; b.style.color='var(--text)'; b.style.borderColor='var(--border)'; });
+      event.target.style.background = 'var(--accent,#534AB7)';
+      event.target.style.color = '#fff';
+      event.target.style.borderColor = 'var(--accent,#534AB7)';
+      calcTip();
+    }
+    function calcTip() {
+      var bill = parseFloat(document.getElementById('billAmount').value) || 0;
+      var pct = parseFloat(document.getElementById('tipPercent').value) || 0;
+      var people = parseInt(document.getElementById('splitPeople').value) || 1;
+      var tip = bill * pct / 100;
+      var total = bill + tip;
+      var perP = total / people;
+      document.getElementById('tipAmount').textContent = fmt(tip);
+      document.getElementById('totalAmount').textContent = fmt(total);
+      document.getElementById('perPerson').textContent = fmt(perP);
+    }
+    function fmt(n) { return '$' + n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+    document.getElementById('billAmount').addEventListener('input', calcTip);
+    calcTip();
+  </script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="3OxWRmOeMFoUsUXdGtGhTVUvv1oKgkilF_qMHlAojRU" />
+  <title>Free Salary Converter | CalcHub</title>
+  <meta name="description" content="Convert your salary between annual, monthly, bi-weekly, weekly, and hourly rates. Optionally deduct taxes to see gross vs. net pay in all formats.">
+  <link rel="canonical" href="https://calc-hub-two.vercel.app/tools/salary-converter">
+  <meta property="og:title" content="Free Salary Converter | CalcHub">
+  <meta property="og:description" content="Convert your salary between annual, monthly, bi-weekly, weekly, and hourly rates. Optionally deduct taxes to see gross vs. net pay in all formats.">
+  <meta property="og:url" content="https://calc-hub-two.vercel.app/tools/salary-converter">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialProduct",
+    "name": "Free Salary Converter",
+    "description": "Convert your salary between annual, monthly, bi-weekly, weekly, and hourly rates. Optionally deduct taxes to see gross vs. net pay in all formats.",
+    "brand": { "@type": "Brand", "name": "CalcHub" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I convert hourly to annual salary?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Multiply your hourly rate by the number of hours you work per week, then by 52 weeks. For $25/hour at 40 hours/week: $25 × 40 × 52 = $52,000/year." }
+          },          {
+            "@type": "Question",
+            "name": "What is the standard work week in the US?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The standard full-time work week in the US is 40 hours. Some professions and countries have different standards. Part-time workers should use their actual hours." }
+          },          {
+            "@type": "Question",
+            "name": "How accurate is the tax estimate?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The tax estimate is a rough calculation based on a flat percentage. Actual taxes depend on filing status, deductions, credits, and state taxes. Use IRS tax brackets for precise calculations." }
+          },          {
+            "@type": "Question",
+            "name": "What is gross vs. net salary?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Gross salary is your total earnings before any deductions (taxes, insurance, retirement contributions). Net salary (take-home pay) is what you actually receive after all deductions." }
+          }
+      ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo"><span class="logo-icon">💰</span><span>CalcHub</span></a>
+      <nav class="nav">
+        <a href="../index.html#tools">Calculators</a>
+        <a href="../index.html#about">About</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container tool-page">
+    <div class="tool-header">
+      <a href="../index.html" class="back-link">← Back</a>
+      <h1>Free Salary Converter</h1>
+      <span class="privacy-note">🔒 100% Private Calculations</span>
+    </div>
+    <div class="calc-layout">
+      <div class="calc-input-panel">
+        <div class="input-group">
+          <label for="salaryInput">Enter Your Salary</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="number" id="salaryInput" class="input-field" value="75000" min="0" step="1000" oninput="convertSalary()">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="salaryType">Salary Type</label>
+          <select id="salaryType" class="input-field" onchange="convertSalary()">
+            <option value="annual">Annual</option>
+            <option value="monthly">Monthly</option>
+            <option value="biweekly">Bi-Weekly</option>
+            <option value="weekly">Weekly</option>
+            <option value="hourly">Hourly</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="hoursPerWeek">Hours per Week</label>
+          <div class="input-row">
+            <input type="number" id="hoursPerWeek" class="input-field" value="40" min="1" max="168" step="1" oninput="convertSalary()">
+            <span class="input-suffix">hrs</span>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="taxRate">Tax Rate for Net Estimate (%)</label>
+          <div class="input-row">
+            <input type="number" id="taxRate" class="input-field" value="25" min="0" max="99" step="1" oninput="convertSalary()">
+            <span class="input-suffix">%</span>
+          </div>
+          <div style="font-size:0.75rem;color:var(--text3);margin-top:4px">Set to 0 to see gross only</div>
+        </div>
+      </div>
+      <div class="calc-results-panel">
+        <div id="salaryResults">
+          <div style="margin-bottom:12px;font-size:0.9rem;font-weight:600;color:var(--text)">Gross Pay</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px">
+            <div style="background:var(--bg2);padding:12px;border-radius:8px"><div style="font-size:0.8rem;color:var(--text3)">Annual</div><div style="font-size:1.2rem;font-weight:700" id="gAnnual">$0</div></div>
+            <div style="background:var(--bg2);padding:12px;border-radius:8px"><div style="font-size:0.8rem;color:var(--text3)">Monthly</div><div style="font-size:1.2rem;font-weight:700" id="gMonthly">$0</div></div>
+            <div style="background:var(--bg2);padding:12px;border-radius:8px"><div style="font-size:0.8rem;color:var(--text3)">Bi-Weekly</div><div style="font-size:1.2rem;font-weight:700" id="gBiweekly">$0</div></div>
+            <div style="background:var(--bg2);padding:12px;border-radius:8px"><div style="font-size:0.8rem;color:var(--text3)">Weekly</div><div style="font-size:1.2rem;font-weight:700" id="gWeekly">$0</div></div>
+            <div style="background:var(--bg2);padding:12px;border-radius:8px;grid-column:span 2"><div style="font-size:0.8rem;color:var(--text3)">Hourly</div><div style="font-size:1.2rem;font-weight:700" id="gHourly">$0</div></div>
+          </div>
+          <div id="netSection">
+            <div style="margin-bottom:12px;font-size:0.9rem;font-weight:600;color:var(--text)">Net Pay (After Tax)</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <div style="background:var(--bg2);padding:12px;border-radius:8px"><div style="font-size:0.8rem;color:var(--text3)">Annual</div><div style="font-size:1.2rem;font-weight:700" id="nAnnual">$0</div></div>
+              <div style="background:var(--bg2);padding:12px;border-radius:8px"><div style="font-size:0.8rem;color:var(--text3)">Monthly</div><div style="font-size:1.2rem;font-weight:700" id="nMonthly">$0</div></div>
+              <div style="background:var(--bg2);padding:12px;border-radius:8px"><div style="font-size:0.8rem;color:var(--text3)">Bi-Weekly</div><div style="font-size:1.2rem;font-weight:700" id="nBiweekly">$0</div></div>
+              <div style="background:var(--bg2);padding:12px;border-radius:8px"><div style="font-size:0.8rem;color:var(--text3)">Weekly</div><div style="font-size:1.2rem;font-weight:700" id="nWeekly">$0</div></div>
+              <div style="background:var(--bg2);padding:12px;border-radius:8px;grid-column:span 2"><div style="font-size:0.8rem;color:var(--text3)">Hourly</div><div style="font-size:1.2rem;font-weight:700" id="nHourly">$0</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tool-about">
+      <h2>About Salary Converter</h2>
+      <p>Instantly convert your salary between annual, monthly, bi-weekly, weekly, and hourly rates. See both gross and net (after-tax) pay to understand your true earnings.</p>
+      <h3>Features</h3>
+      <ul>
+        <li>Convert between 5 salary formats: annual, monthly, bi-weekly, weekly, hourly</li>
+        <li>Adjust hours per week for accurate hourly conversion</li>
+        <li>Optional tax rate for net pay estimation</li>
+        <li>Real-time conversion as you type</li>
+      </ul>
+    </div>
+    <div class="tool-about faq-section">
+      <h2>Free Salary Converter FAQ</h2>
+      <h3>How do I convert hourly to annual salary?</h3>
+      <p>Multiply your hourly rate by the number of hours you work per week, then by 52 weeks. For $25/hour at 40 hours/week: $25 × 40 × 52 = $52,000/year.</p>
+      <h3>What is the standard work week in the US?</h3>
+      <p>The standard full-time work week in the US is 40 hours. Some professions and countries have different standards. Part-time workers should use their actual hours.</p>
+      <h3>How accurate is the tax estimate?</h3>
+      <p>The tax estimate is a rough calculation based on a flat percentage. Actual taxes depend on filing status, deductions, credits, and state taxes. Use IRS tax brackets for precise calculations.</p>
+      <h3>What is gross vs. net salary?</h3>
+      <p>Gross salary is your total earnings before any deductions (taxes, insurance, retirement contributions). Net salary (take-home pay) is what you actually receive after all deductions.</p>
+    </div>
+  </main>
+  <section class="related-tools" style="max-width:900px;margin:2rem auto;padding:1.5rem;background:var(--bg-secondary,#f8f9fa);border-radius:12px;">
+    <h2 style="margin:0 0 1rem;font-size:1.1rem;">Related Calculators</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <a href="mortgage-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Mortgage Calculator</a>
+      <a href="loan-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Loan Calculator</a>
+      <a href="auto-loan-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Auto Loan Calculator</a>
+      <a href="compound-interest-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Compound Interest Calculator</a>
+      <a href="investment-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Investment Calculator</a>
+      <a href="savings-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Savings Calculator</a>
+    </div>
+  </section>
+  <footer class="footer"><div class="container"><p>&copy; 2025 CalcHub. Free financial calculators for smarter decisions. <a href="../privacy.html">Privacy Policy</a></p></div></footer>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script>
+    function convertSalary() {
+      var val = parseFloat(document.getElementById('salaryInput').value) || 0;
+      var type = document.getElementById('salaryType').value;
+      var hpw = parseFloat(document.getElementById('hoursPerWeek').value) || 40;
+      var tax = parseFloat(document.getElementById('taxRate').value) || 0;
+
+      var annual;
+      switch(type) {
+        case 'annual': annual = val; break;
+        case 'monthly': annual = val * 12; break;
+        case 'biweekly': annual = val * 26; break;
+        case 'weekly': annual = val * 52; break;
+        case 'hourly': annual = val * hpw * 52; break;
+        default: annual = val;
+      }
+
+      var monthly = annual / 12;
+      var biweekly = annual / 26;
+      var weekly = annual / 52;
+      var hourly = annual / (hpw * 52);
+      var taxMult = 1 - tax / 100;
+
+      function f(n) { return '$' + n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+
+      document.getElementById('gAnnual').textContent = f(annual);
+      document.getElementById('gMonthly').textContent = f(monthly);
+      document.getElementById('gBiweekly').textContent = f(biweekly);
+      document.getElementById('gWeekly').textContent = f(weekly);
+      document.getElementById('gHourly').textContent = f(hourly);
+
+      if (tax > 0) {
+        document.getElementById('netSection').style.display = 'block';
+        document.getElementById('nAnnual').textContent = f(annual * taxMult);
+        document.getElementById('nMonthly').textContent = f(monthly * taxMult);
+        document.getElementById('nBiweekly').textContent = f(biweekly * taxMult);
+        document.getElementById('nWeekly').textContent = f(weekly * taxMult);
+        document.getElementById('nHourly').textContent = f(hourly * taxMult);
+      } else {
+        document.getElementById('netSection').style.display = 'none';
+      }
+    }
+    convertSalary();
+  </script>
+</body>
+</html>

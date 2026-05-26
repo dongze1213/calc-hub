@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="3OxWRmOeMFoUsUXdGtGhTVUvv1oKgkilF_qMHlAojRU" />
+  <title>Free Debt Payoff Calculator | CalcHub</title>
+  <meta name="description" content="Calculate how long it will take to pay off your debt and how much interest you will pay. Enter your balance, interest rate, and monthly payment to get a complete payoff plan.">
+  <link rel="canonical" href="https://calc-hub-two.vercel.app/tools/debt-payoff-calculator">
+  <meta property="og:title" content="Free Debt Payoff Calculator | CalcHub">
+  <meta property="og:description" content="Calculate how long it will take to pay off your debt and how much interest you will pay. Enter your balance, interest rate, and monthly payment to get a complete payoff plan.">
+  <meta property="og:url" content="https://calc-hub-two.vercel.app/tools/debt-payoff-calculator">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialProduct",
+    "name": "Free Debt Payoff Calculator",
+    "description": "Calculate how long it will take to pay off your debt and how much interest you will pay. Enter your balance, interest rate, and monthly payment to get a complete payoff plan.",
+    "brand": { "@type": "Brand", "name": "CalcHub" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How is the payoff time calculated?",
+            "acceptedAnswer": { "@type": "Answer", "text": "We use the amortization formula: N = -log(1 - r*P/A) / log(1+r), where P is principal, A is monthly payment, and r is monthly interest rate. This accounts for compound interest on the declining balance." }
+          },          {
+            "@type": "Question",
+            "name": "Should I pay more than the minimum?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. Paying even $50-100 extra per month can save thousands in interest and years of payments. The calculator shows exactly how much you save." }
+          },          {
+            "@type": "Question",
+            "name": "What is the debt avalanche method?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Pay minimums on all debts, but put extra money toward the highest-interest debt first. This minimizes total interest paid. It is mathematically optimal." }
+          },          {
+            "@type": "Question",
+            "name": "What is the debt snowball method?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Pay minimums on all debts, but put extra money toward the smallest balance first. This provides psychological wins that keep you motivated. It may cost more in total interest." }
+          }
+      ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo"><span class="logo-icon">💰</span><span>CalcHub</span></a>
+      <nav class="nav">
+        <a href="../index.html#tools">Calculators</a>
+        <a href="../index.html#about">About</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container tool-page">
+    <div class="tool-header">
+      <a href="../index.html" class="back-link">← Back</a>
+      <h1>Free Debt Payoff Calculator</h1>
+      <span class="privacy-note">🔒 100% Private Calculations</span>
+    </div>
+    <div class="calc-layout">
+      <div class="calc-input-panel">
+        <div class="input-group">
+          <label for="balance">Total Balance ($)</label>
+          <div class="input-row"><span class="input-prefix">$</span>
+          <input type="number" id="balance" class="input-field" value="10000" min="0" step="100">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="intRate">Annual Interest Rate (%)</label>
+          <div class="input-row">
+            <input type="number" id="intRate" class="input-field" value="18" min="0" max="50" step="0.1">
+            <span class="input-suffix">%</span>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="monthlyPay">Monthly Payment ($)</label>
+          <div class="input-row"><span class="input-prefix">$</span>
+          <input type="number" id="monthlyPay" class="input-field" value="300" min="0" step="10">
+          </div>
+        </div>
+        <button class="btn-generate" onclick="calcPayoff()">&#128176; Calculate Payoff</button>
+      </div>
+      <div class="calc-results-panel">
+        <div class="result-summary">
+          <div class="result-item highlight">
+            <div class="result-label">Time to Pay Off</div>
+            <div class="result-value" id="payoffTime">0 months</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Total Paid</div>
+            <div class="result-value small" id="totalPaid">$0.00</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Total Interest</div>
+            <div class="result-value small" id="totalInterest" style="color:var(--red,#dc3545)">$0.00</div>
+          </div>
+        </div>
+        <div style="margin-top:12px">
+          <button class="amort-toggle" id="toggleSchedule" onclick="this.classList.toggle('open');document.getElementById('scheduleWrap').classList.toggle('show')">
+            <span class="arrow">▶</span> Monthly Breakdown
+          </button>
+          <div class="amort-table-wrap" id="scheduleWrap">
+            <table class="amort-table">
+              <thead><tr><th>Month</th><th>Payment</th><th>Interest</th><th>Principal</th><th>Balance</th></tr></thead>
+              <tbody id="breakdownBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tool-about">
+      <h2>About Debt Payoff Calculator</h2>
+      <p>See the complete picture of your debt repayment. Know exactly how long it will take to become debt-free and how much interest you will pay over the life of your debt.</p>
+      <h3>Features</h3>
+      <ul>
+        <li>Calculate payoff time for any debt</li>
+        <li>Show total amount paid vs. total interest</li>
+        <li>Monthly amortization breakdown</li>
+        <li>Warns if your payment is too low to ever pay off the debt</li>
+      </ul>
+    </div>
+    <div class="tool-about faq-section">
+      <h2>Free Debt Payoff Calculator FAQ</h2>
+      <h3>How is the payoff time calculated?</h3>
+      <p>We use the amortization formula: N = -log(1 - r*P/A) / log(1+r), where P is principal, A is monthly payment, and r is monthly interest rate. This accounts for compound interest on the declining balance.</p>
+      <h3>Should I pay more than the minimum?</h3>
+      <p>Absolutely. Paying even $50-100 extra per month can save thousands in interest and years of payments. The calculator shows exactly how much you save.</p>
+      <h3>What is the debt avalanche method?</h3>
+      <p>Pay minimums on all debts, but put extra money toward the highest-interest debt first. This minimizes total interest paid. It is mathematically optimal.</p>
+      <h3>What is the debt snowball method?</h3>
+      <p>Pay minimums on all debts, but put extra money toward the smallest balance first. This provides psychological wins that keep you motivated. It may cost more in total interest.</p>
+    </div>
+  </main>
+  <section class="related-tools" style="max-width:900px;margin:2rem auto;padding:1.5rem;background:var(--bg-secondary,#f8f9fa);border-radius:12px;">
+    <h2 style="margin:0 0 1rem;font-size:1.1rem;">Related Calculators</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <a href="mortgage-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Mortgage Calculator</a>
+      <a href="loan-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Loan Calculator</a>
+      <a href="auto-loan-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Auto Loan Calculator</a>
+      <a href="compound-interest-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Compound Interest Calculator</a>
+      <a href="investment-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Investment Calculator</a>
+      <a href="savings-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Savings Calculator</a>
+    </div>
+  </section>
+  <footer class="footer"><div class="container"><p>&copy; 2025 CalcHub. Free financial calculators for smarter decisions. <a href="../privacy.html">Privacy Policy</a></p></div></footer>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script>
+    function calcPayoff() {
+      var bal = parseFloat(document.getElementById('balance').value) || 0;
+      var apr = parseFloat(document.getElementById('intRate').value) || 0;
+      var mp = parseFloat(document.getElementById('monthlyPay').value) || 0;
+      var mr = apr / 100 / 12;
+
+      if (mp <= bal * mr && mr > 0) {
+        document.getElementById('payoffTime').textContent = 'Never (payment too low)';
+        document.getElementById('totalPaid').textContent = 'N/A';
+        document.getElementById('totalInterest').textContent = 'N/A';
+        return;
+      }
+
+      var months = 0;
+      var totalPaid = 0;
+      var totalInt = 0;
+      var runningBal = bal;
+      var rows = [];
+
+      while (runningBal > 0 && months < 600) {
+        months++;
+        var intPart = runningBal * mr;
+        var prinPart = Math.min(mp - intPart, runningBal);
+        runningBal -= prinPart;
+        totalPaid += mp;
+        totalInt += intPart;
+        if (runningBal < 0.01) runningBal = 0;
+        if (months <= 60 || months % 12 === 0) {
+          rows.push('<tr><td>' + months + '</td><td>' + fmt(mp) + '</td><td>' + fmt(intPart) + '</td><td>' + fmt(prinPart) + '</td><td>' + fmt(runningBal) + '</td></tr>');
+        }
+      }
+
+      var y = Math.floor(months/12), m = months%12;
+      document.getElementById('payoffTime').textContent = y > 0 ? y + 'y ' + m + 'm' : m + ' months';
+      document.getElementById('totalPaid').textContent = fmt(totalPaid);
+      document.getElementById('totalInterest').textContent = fmt(totalInt);
+      document.getElementById('breakdownBody').innerHTML = rows.join('');
+    }
+    function fmt(n) { return '$' + n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+    calcPayoff();
+  </script>
+</body>
+</html>

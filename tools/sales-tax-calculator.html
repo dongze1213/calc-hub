@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="3OxWRmOeMFoUsUXdGtGhTVUvv1oKgkilF_qMHlAojRU" />
+  <title>Free Sales Tax Calculator | CalcHub</title>
+  <meta name="description" content="Calculate sales tax from any amount. Enter price before tax or after tax to find the tax amount, total price, and effective tax rate.">
+  <link rel="canonical" href="https://calc-hub-two.vercel.app/tools/sales-tax-calculator">
+  <meta property="og:title" content="Free Sales Tax Calculator | CalcHub">
+  <meta property="og:description" content="Calculate sales tax from any amount. Enter price before tax or after tax to find the tax amount, total price, and effective tax rate.">
+  <meta property="og:url" content="https://calc-hub-two.vercel.app/tools/sales-tax-calculator">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialProduct",
+    "name": "Free Sales Tax Calculator",
+    "description": "Calculate sales tax from any amount. Enter price before tax or after tax to find the tax amount, total price, and effective tax rate.",
+    "brand": { "@type": "Brand", "name": "CalcHub" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the average sales tax in the US?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The average combined state and local sales tax rate in the US is about 6.5-7.5%. Rates vary from 0% (Oregon, Montana, etc.) to over 10% in some cities." }
+          },          {
+            "@type": "Question",
+            "name": "Is sales tax calculated before or after discounts?",
+            "acceptedAnswer": { "@type": "Answer", "text": "In most US states, sales tax is calculated on the discounted price, not the original price. The tax applies to what you actually pay." }
+          },          {
+            "@type": "Question",
+            "name": "Do online purchases have sales tax?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Since the 2018 Supreme Court ruling (South Dakota v. Wayfair), online sellers must collect sales tax in states where they have economic nexus, which varies by state." }
+          },          {
+            "@type": "Question",
+            "name": "What items are exempt from sales tax?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Common exemptions include groceries, prescription drugs, and medical devices. Exemptions vary significantly by state." }
+          }
+      ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo"><span class="logo-icon">💰</span><span>CalcHub</span></a>
+      <nav class="nav">
+        <a href="../index.html#tools">Calculators</a>
+        <a href="../index.html#about">About</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container tool-page">
+    <div class="tool-header">
+      <a href="../index.html" class="back-link">← Back</a>
+      <h1>Free Sales Tax Calculator</h1>
+      <span class="privacy-note">🔒 100% Private Calculations</span>
+    </div>
+    <div class="calc-layout">
+      <div class="calc-input-panel">
+        <div class="input-group">
+          <label for="calcMode">Calculation Mode</label>
+          <select id="calcMode" class="input-field" onchange="calcTax()">
+            <option value="before">Price Before Tax → Find Total</option>
+            <option value="after">Price After Tax → Find Original</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="price" id="priceLabel">Price Before Tax ($)</label>
+          <div class="input-row">
+            <span class="input-prefix">$</span>
+            <input type="number" id="price" class="input-field" value="100" min="0" step="0.01" oninput="calcTax()">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="taxRate">Tax Rate (%)</label>
+          <div class="input-row">
+            <input type="number" id="taxRate" class="input-field" value="8.25" min="0" max="50" step="0.01" oninput="calcTax()">
+            <span class="input-suffix">%</span>
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Common Tax Rates</label>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <button onclick="document.getElementById('taxRate').value='0';calcTax()" style="padding:6px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;cursor:pointer;color:var(--text);font-size:13px">0%</button>
+            <button onclick="document.getElementById('taxRate').value='5';calcTax()" style="padding:6px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;cursor:pointer;color:var(--text);font-size:13px">5%</button>
+            <button onclick="document.getElementById('taxRate').value='6';calcTax()" style="padding:6px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;cursor:pointer;color:var(--text);font-size:13px">6%</button>
+            <button onclick="document.getElementById('taxRate').value='7.25';calcTax()" style="padding:6px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;cursor:pointer;color:var(--text);font-size:13px">7.25%</button>
+            <button onclick="document.getElementById('taxRate').value='8.25';calcTax()" style="padding:6px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;cursor:pointer;color:var(--text);font-size:13px">8.25%</button>
+            <button onclick="document.getElementById('taxRate').value='10';calcTax()" style="padding:6px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;cursor:pointer;color:var(--text);font-size:13px">10%</button>
+          </div>
+        </div>
+      </div>
+      <div class="calc-results-panel">
+        <div class="result-summary">
+          <div class="result-item highlight">
+            <div class="result-label" id="mainLabel">Total Price</div>
+            <div class="result-value" id="totalPrice">$0.00</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Tax Amount</div>
+            <div class="result-value small" id="taxAmount">$0.00</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Net Price</div>
+            <div class="result-value small" id="netPrice">$0.00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tool-about">
+      <h2>About Sales Tax Calculator</h2>
+      <p>Calculate sales tax instantly in either direction — find the total from a pre-tax price, or work backwards from a post-tax price to find the original amount and tax paid.</p>
+      <h3>Features</h3>
+      <ul>
+        <li>Calculate tax forward (before → after) or backward (after → before)</li>
+        <li>Quick-select common US tax rates</li>
+        <li>Custom tax rate input</li>
+        <li>Real-time calculation</li>
+      </ul>
+    </div>
+    <div class="tool-about faq-section">
+      <h2>Free Sales Tax Calculator FAQ</h2>
+      <h3>What is the average sales tax in the US?</h3>
+      <p>The average combined state and local sales tax rate in the US is about 6.5-7.5%. Rates vary from 0% (Oregon, Montana, etc.) to over 10% in some cities.</p>
+      <h3>Is sales tax calculated before or after discounts?</h3>
+      <p>In most US states, sales tax is calculated on the discounted price, not the original price. The tax applies to what you actually pay.</p>
+      <h3>Do online purchases have sales tax?</h3>
+      <p>Since the 2018 Supreme Court ruling (South Dakota v. Wayfair), online sellers must collect sales tax in states where they have economic nexus, which varies by state.</p>
+      <h3>What items are exempt from sales tax?</h3>
+      <p>Common exemptions include groceries, prescription drugs, and medical devices. Exemptions vary significantly by state.</p>
+    </div>
+  </main>
+  <section class="related-tools" style="max-width:900px;margin:2rem auto;padding:1.5rem;background:var(--bg-secondary,#f8f9fa);border-radius:12px;">
+    <h2 style="margin:0 0 1rem;font-size:1.1rem;">Related Calculators</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <a href="mortgage-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Mortgage Calculator</a>
+      <a href="loan-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Loan Calculator</a>
+      <a href="auto-loan-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Auto Loan Calculator</a>
+      <a href="compound-interest-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Compound Interest Calculator</a>
+      <a href="investment-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Investment Calculator</a>
+      <a href="savings-calculator.html" style="display:inline-block;padding:6px 14px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;text-decoration:none;color:#333;font-size:0.85rem;">Savings Calculator</a>
+    </div>
+  </section>
+  <footer class="footer"><div class="container"><p>&copy; 2025 CalcHub. Free financial calculators for smarter decisions. <a href="../privacy.html">Privacy Policy</a></p></div></footer>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script>
+    function calcTax() {
+      var mode = document.getElementById('calcMode').value;
+      var price = parseFloat(document.getElementById('price').value) || 0;
+      var rate = parseFloat(document.getElementById('taxRate').value) || 0;
+      var tax, net, total;
+
+      if (mode === 'before') {
+        net = price;
+        tax = price * rate / 100;
+        total = price + tax;
+        document.getElementById('priceLabel').textContent = 'Price Before Tax ($)';
+        document.getElementById('mainLabel').textContent = 'Total Price';
+      } else {
+        total = price;
+        net = price / (1 + rate/100);
+        tax = price - net;
+        document.getElementById('priceLabel').textContent = 'Price After Tax ($)';
+        document.getElementById('mainLabel').textContent = 'Net Price (Before Tax)';
+      }
+
+      document.getElementById('totalPrice').textContent = fmt(mode === 'before' ? total : net);
+      document.getElementById('taxAmount').textContent = fmt(tax);
+      document.getElementById('netPrice').textContent = fmt(net);
+    }
+    function fmt(n) { return '$' + n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+    calcTax();
+  </script>
+</body>
+</html>
