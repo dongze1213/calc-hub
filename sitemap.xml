@@ -1,107 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://calc-hub-2c7.pages.dev/</loc>
+    <loc>https://calc-hub-two.vercel.app/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://calc-hub-2c7.pages.dev/tools/mortgage-calculator</loc>
+    <loc>https://calc-hub-two.vercel.app/tools/mortgage-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calc-hub-2c7.pages.dev/tools/loan-calculator</loc>
+    <loc>https://calc-hub-two.vercel.app/tools/loan-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calc-hub-2c7.pages.dev/tools/auto-loan-calculator</loc>
+    <loc>https://calc-hub-two.vercel.app/tools/auto-loan-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calc-hub-2c7.pages.dev/tools/compound-interest-calculator</loc>
+    <loc>https://calc-hub-two.vercel.app/tools/compound-interest-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calc-hub-2c7.pages.dev/tools/investment-calculator</loc>
+    <loc>https://calc-hub-two.vercel.app/tools/investment-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calc-hub-2c7.pages.dev/tools/savings-calculator</loc>
+    <loc>https://calc-hub-two.vercel.app/tools/savings-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calc-hub-2c7.pages.dev/tools/retirement-calculator</loc>
+    <loc>https://calc-hub-two.vercel.app/tools/retirement-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calc-hub-2c7.pages.dev/tools/salary-calculator</loc>
+    <loc>https://calc-hub-two.vercel.app/tools/salary-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calc-hub-2c7.pages.dev/tools/roi-calculator</loc>
+    <loc>https://calc-hub-two.vercel.app/tools/roi-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calc-hub-2c7.pages.dev/tools/credit-card-payoff-calculator</loc>
+    <loc>https://calc-hub-two.vercel.app/tools/credit-card-payoff-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calc-hub-2c7.pages.dev/tools/inflation-calculator</loc>
+    <loc>https://calc-hub-two.vercel.app/tools/inflation-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://calc-hub-2c7.pages.dev/tools/tip-calculator</loc>
+    <loc>https://calc-hub-two.vercel.app/tools/tip-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://calc-hub-2c7.pages.dev/tools/sales-tax-calculator</loc>
+    <loc>https://calc-hub-two.vercel.app/tools/sales-tax-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://calc-hub-2c7.pages.dev/tools/discount-calculator</loc>
+    <loc>https://calc-hub-two.vercel.app/tools/discount-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://calc-hub-2c7.pages.dev/tools/break-even-calculator</loc>
+    <loc>https://calc-hub-two.vercel.app/tools/break-even-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://calc-hub-2c7.pages.dev/tools/savings-goal-calculator</loc>
+    <loc>https://calc-hub-two.vercel.app/tools/savings-goal-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://calc-hub-2c7.pages.dev/tools/net-worth-calculator</loc>
+    <loc>https://calc-hub-two.vercel.app/tools/net-worth-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://calc-hub-2c7.pages.dev/tools/debt-payoff-calculator</loc>
+    <loc>https://calc-hub-two.vercel.app/tools/debt-payoff-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://calc-hub-2c7.pages.dev/tools/auto-lease-calculator</loc>
+    <loc>https://calc-hub-two.vercel.app/tools/auto-lease-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://calc-hub-2c7.pages.dev/tools/salary-converter</loc>
+    <loc>https://calc-hub-two.vercel.app/tools/salary-converter.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
